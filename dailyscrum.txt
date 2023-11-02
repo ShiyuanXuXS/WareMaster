@@ -1,0 +1,12 @@
+2023-11-2
+
+Shiyuan
+1.  Done / not done since last scrum:
+- create a ER diagram
+- create mockups of query and analyse
+2. To do until next Scrum:
+- update db design
+- create db on Azure
+- create repo on git
+3. Need assistance / figure things out
+- ModernWpf/ awesome-dotnet/ awesome-wpf 
