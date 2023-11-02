@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace WareMaster
 {
     /// <summary>
-    /// Query.xaml 的交互逻辑
+    /// Interaction logic for Analize.xaml
     /// </summary>
-    public partial class Query : Window
+    public partial class Analize : Window
     {
-        public Query()
+        public Analize()
         {
             InitializeComponent();
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
