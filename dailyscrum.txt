@@ -20,3 +20,12 @@ Xiaoxing
 3. Need assistance / figure things out
 
 
+2018/02/28 Jing
+1. Done since last scrum
+- update Trello
+- create use case diagram
+2. Plan until next Scrum
+- learn ModernWpf/ awesome-dotnet/ awesome-wpf
+- 
+3. Need assistance / figure things out
+- NA
