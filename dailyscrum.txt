@@ -9,4 +9,14 @@ Shiyuan
 - create db on Azure
 - create repo on git
 3. Need assistance / figure things out
-- ModernWpf/ awesome-dotnet/ awesome-wpf 
+- ModernWpf/ awesome-dotnet/ awesome-wpf
+
+Xiaoxing
+1.  Done / not done since last scrum:
+- create Trello
+- set a database on azure
+2. To do until next Scrum:
+- research on UI library
+3. Need assistance / figure things out
+
+
