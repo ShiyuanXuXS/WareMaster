@@ -38,6 +38,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,8 +61,41 @@
     <Compile Include="Analize.xaml.cs">
       <DependentUpon>Analize.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Category.cs">
+      <DependentUpon>WareMasterDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Item.cs">
+      <DependentUpon>WareMasterDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Query.xaml.cs">
       <DependentUpon>Query.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RoleEnum.cs">
+      <DependentUpon>WareMasterDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Settlement.cs">
+      <DependentUpon>WareMasterDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transaction.cs">
+      <DependentUpon>WareMasterDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>WareMasterDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WareMasterDbContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WareMasterDbContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WareMasterDbContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WareMasterDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WareMasterDbContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WareMasterDbContext.edmx</DependentUpon>
     </Compile>
     <Page Include="Analize.xaml">
       <SubType>Designer</SubType>
@@ -105,17 +140,45 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <EntityDeploy Include="WareMasterDbContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WareMasterDbContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="WareMasterDbContext.edmx.diagram">
+      <DependentUpon>WareMasterDbContext.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EntityFramework">
+      <Version>6.2.0</Version>
+    </PackageReference>
     <PackageReference Include="MahApps.Metro">
       <Version>2.4.10</Version>
     </PackageReference>
     <PackageReference Include="MahApps.Metro.IconPacks">
       <Version>4.11.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Partials\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WareMasterDbContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WareMasterDbContext.edmx</DependentUpon>
+      <LastGenOutput>WareMasterDbContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="WareMasterDbContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WareMasterDbContext.edmx</DependentUpon>
+      <LastGenOutput>WareMasterDbContext.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
