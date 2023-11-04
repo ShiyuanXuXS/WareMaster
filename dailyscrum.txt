@@ -19,6 +19,7 @@ Xiaoxing
 - research on UI library
 3. Need assistance / figure things out
 
+Jing
 1. Done since last scrum
 - update Trello
 - create use case diagram
