@@ -21,7 +21,7 @@ namespace WareMaster
         }
     
         public int id { get; set; }
-        public string Category1 { get; set; }
+        public string Category_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Items { get; set; }

@@ -64,6 +64,10 @@
     <Compile Include="Category.cs">
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Globals.cs" />
+    <Compile Include="InventoryInit.xaml.cs">
+      <DependentUpon>InventoryInit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Item.cs">
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
     </Compile>
@@ -98,6 +102,10 @@
       <DependentUpon>WareMasterDbContext.edmx</DependentUpon>
     </Compile>
     <Page Include="Analize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InventoryInit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

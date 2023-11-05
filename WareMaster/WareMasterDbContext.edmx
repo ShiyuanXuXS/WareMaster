@@ -10,7 +10,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Category" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Category_Name" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Items">
           <Key>
@@ -135,14 +135,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WareMasterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Category1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Items" Relationship="Self.Items_Category" FromRole="Categories" ToRole="Items" />
-        </EntityType>
         <EntityType Name="Item">
           <Key>
             <PropertyRef Name="id" />
@@ -153,9 +145,9 @@
           <Property Name="Unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Category" Relationship="Self.Items_Category" FromRole="Items" ToRole="Categories" />
           <NavigationProperty Name="Transactions" Relationship="Self.item_id" FromRole="Items" ToRole="Transactions" />
           <NavigationProperty Name="Settlements" Relationship="Self.Settlement_Item_Id" FromRole="Items" ToRole="Settlement" />
+          <NavigationProperty Name="Category" Relationship="WareMasterModel.Items_Category" FromRole="Item" ToRole="Category" />
         </EntityType>
         <EntityType Name="Settlement">
           <Key>
@@ -192,20 +184,6 @@
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Transactions" Relationship="Self.user_id" FromRole="Users" ToRole="Transactions" />
         </EntityType>
-        <Association Name="Items_Category">
-          <End Role="Categories" Type="Self.Category" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Items" Type="Self.Item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categories">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Items">
-              <PropertyRef Name="Category_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="item_id">
           <End Role="Items" Type="Self.Item" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -247,15 +225,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="WareMasterEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Items" EntityType="Self.Item" />
           <EntitySet Name="Settlements" EntityType="Self.Settlement" />
           <EntitySet Name="Transactions" EntityType="Self.Transaction" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="Items_Category" Association="Self.Items_Category">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="Items" EntitySet="Items" />
-          </AssociationSet>
           <AssociationSet Name="item_id" Association="Self.item_id">
             <End Role="Items" EntitySet="Items" />
             <End Role="Transactions" EntitySet="Transactions" />
@@ -268,25 +241,44 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Transactions" EntitySet="Transactions" />
           </AssociationSet>
+          <EntitySet Name="Categories" EntityType="WareMasterModel.Category" />
+          <AssociationSet Name="Items_Category" Association="WareMasterModel.Items_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
         </EntityContainer>
         <EnumType Name="RoleEnum">
           <Member Name="USER" Value="0" />
           <Member Name="ADMIN" Value="1" />
         </EnumType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Items" Relationship="WareMasterModel.Items_Category" FromRole="Category" ToRole="Item" />
+        </EntityType>
+        <Association Name="Items_Category">
+          <End Type="WareMasterModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WareMasterModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="WareMasterModelStoreContainer" CdmEntityContainer="WareMasterEntities">
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="WareMasterModel.Category">
-              <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Category1" ColumnName="Category" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="WareMasterModel.Item">
               <MappingFragment StoreEntitySet="Items">
@@ -330,6 +322,14 @@
                 <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="WareMasterModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

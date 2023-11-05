@@ -1,0 +1,43 @@
+﻿<Window x:Class="WareMaster.InventoryInit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WareMaster"
+        mc:Ignorable="d"
+        Title="InventoryInit" Height="450" Width="907">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!-- Alert -->
+        <StackPanel Grid.Row="0" Margin="10">
+            <TextBlock Text="Clicking the 'Initialize' button will delete all inbound and outbound records and settlement data. Please make sure you know what you are doing."
+                   TextWrapping="Wrap"
+                   Foreground="Red"
+                   FontWeight="Bold"
+                   FontSize="20" Height="68" />
+            <Button Content="Initialize" Click="InitializeButton_Click" Width="90" Height="30" />
+        </StackPanel>
+        
+        <ListView Name="LvInit" 
+                  SelectionChanged="LvInit_SelectionChanged"
+                  Margin="0,10,0,10" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Item ID" Width="100" DisplayMemberBinding="{Binding ItemId}" />
+                    <GridViewColumn Header="Item Name" Width="100" DisplayMemberBinding="{Binding ItemName}" />
+                    <GridViewColumn Header="Category Name" Width="100" DisplayMemberBinding="{Binding CategoryName}" />
+                    <GridViewColumn Header="Unit" Width="100" DisplayMemberBinding="{Binding Unit}" />
+                    <GridViewColumn Header="Location" Width="100" DisplayMemberBinding="{Binding Location}" />
+                    <GridViewColumn Header="Description" Width="100" DisplayMemberBinding="{Binding Description}" />
+                    <GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Quantity}" />
+                    <GridViewColumn Header="Total" Width="100" DisplayMemberBinding="{Binding Total}" />
+                    <GridViewColumn Header="Settle Date" Width="100" DisplayMemberBinding="{Binding SettleDate, StringFormat=yyyy-MM-dd}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>

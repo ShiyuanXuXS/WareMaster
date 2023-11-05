@@ -23,6 +23,19 @@ namespace WareMaster
         public MainWindow()
         {
             InitializeComponent();
+            InitializeComponent();
+            Globals.wareMasterEntities = new WareMasterEntities();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InventoryInit inventoryInit = new InventoryInit();
+                inventoryInit.Owner = this;
+                inventoryInit.ShowDialog();
+            }catch (Exception ex) { MessageBox.Show(ex.Message); };
+            
         }
     }
 }
