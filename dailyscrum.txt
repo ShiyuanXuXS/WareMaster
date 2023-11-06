@@ -19,8 +19,7 @@ Xiaoxing
 - research on UI library
 3. Need assistance / figure things out
 
-
-2018/02/28 Jing
+Jing
 1. Done since last scrum
 - update Trello
 - create use case diagram
@@ -29,3 +28,19 @@ Xiaoxing
 - 
 3. Need assistance / figure things out
 - NA
+
+2023-11-3
+
+Shiyuan
+1.  Done / not done since last scrum:
+- created repo on github
+- updated db structure
+- created db on Azure
+2. To do until next Scrum:
+- create entity context
+3. Need assistance / figure things out
+- research MahApps
+
+
+
+
