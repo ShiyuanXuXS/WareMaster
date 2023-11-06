@@ -25,18 +25,35 @@ namespace WareMaster
         public InventoryInit()
         {
             InitializeComponent();
-            LvInit.IsEnabled = !hasTransactions;
             InitializeLvInit();
 
         }
 
+        private void LvInit_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            showEdit();
+        }
         private void LvInit_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            showEdit();
+        }
+
+        private void showEdit()
+        {
+            if (hasTransactions) { 
+                return; 
+            }
+
             if (LvInit.SelectedItem != null)
             {
                 var selectedData = (dynamic)LvInit.SelectedItem;
                 int itemId = selectedData.ItemId;
-                MessageBox.Show(itemId.ToString());
+                InventoryInitEdit editWindow = new InventoryInitEdit(selectedData);
+                editWindow.Closed += (s, args) =>
+                {
+                    InitializeLvInit();
+                };
+                editWindow.ShowDialog();
 
             }
         }
@@ -59,6 +76,7 @@ namespace WareMaster
                                 Quantity = sub != null ? sub.Quantity : 0,
                                 Total = sub != null ? sub.Total : 0,
                                 SettleDate = sub != null ? sub.Settle_Date : DateTime.Now,
+                                SettlementId = sub != null ? sub.id : -1
 
 
                             };
