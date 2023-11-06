@@ -6,7 +6,21 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"      
         mc:Ignorable="d"
         Title="AddEditItemsDialog" Height="450" Width="800">
-    <Grid>
-        
+    <Grid HorizontalAlignment="Center">
+        <Label Content="Id:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="29"/>
+        <TextBox Name="TaskInput" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="74,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="29" />
+        <Label Content="Item Name:" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" Width="75" Height="29"/>
+        <TextBox  VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="74,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="29" />
+        <Label Content="Description:" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Width="75" Height="29"/>
+        <TextBox  VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="74,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="29" />
+        <Label Content="Category:" HorizontalAlignment="Left" Margin="10,149,0,0" VerticalAlignment="Top" Width="75" Height="29"/>
+        <ComboBox SelectedValuePath="Tag" HorizontalAlignment="Left" Margin="74,150,0,0" VerticalAlignment="Top" Width="135" Height="29" SelectedIndex="0" />
+        <Label Content="Unit:" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Width="75" Height="29"/>
+        <ComboBox SelectedValuePath="Tag" HorizontalAlignment="Left" Margin="74,200,0,0" VerticalAlignment="Top" Width="135" Height="29" SelectedIndex="0" />
+        <Label Content="Location:" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" Width="75" Height="29"/>
+        <TextBox  VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="74,250,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="29" />
+
+        <Button Name="BtnSave" IsDefault="True" Content="Save" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Width="92" Click="BtnSave_Click"/>
+        <Button IsCancel="True" Content="Cancel" HorizontalAlignment="Left" Margin="117,350,0,0" VerticalAlignment="Top" Width="92"/>
     </Grid>
 </mah:MetroWindow>

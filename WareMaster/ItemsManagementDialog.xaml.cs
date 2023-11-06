@@ -28,5 +28,17 @@ namespace WareMaster
         {
 
         }
+
+        private void MenuItemAddItems_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AddEditItemsDialog dialog = new AddEditItemsDialog();
+                dialog.Owner = this;
+                dialog.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
     }
+    
 }

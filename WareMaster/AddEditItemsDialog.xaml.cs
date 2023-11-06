@@ -24,5 +24,9 @@ namespace WareMaster
         {
             InitializeComponent();
         }
+       private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
