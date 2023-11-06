@@ -23,5 +23,10 @@ namespace WareMaster
         {
             InitializeComponent();
         }
+
+        private void LvItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

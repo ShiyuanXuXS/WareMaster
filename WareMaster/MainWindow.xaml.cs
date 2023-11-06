@@ -38,5 +38,18 @@ namespace WareMaster
             }catch (Exception ex) { MessageBox.Show(ex.Message); };
             
         }
+
+      
+
+        private void items_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ItemsManagementDialog dialog = new ItemsManagementDialog();
+                dialog.Owner = this;
+                dialog.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
     }
 }

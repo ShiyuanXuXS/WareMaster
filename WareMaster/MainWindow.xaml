@@ -8,6 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Button" HorizontalAlignment="Left" Height="38" Margin="90,113,0,0" VerticalAlignment="Top" Width="137" Click="Button_Click"/>
+        <Button Name="items" Content="Go to items" Height="50" Width="100" Click="items_Click"></Button>
 
     </Grid>
 </mah:MetroWindow>
