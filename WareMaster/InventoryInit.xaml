@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WareMaster"
         mc:Ignorable="d"
-        Title="InventoryInit" Height="450" Width="907">
+        Title="InventoryInit" Height="527" Width="911">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!-- Alert -->
         <StackPanel Grid.Row="0" Margin="10">
@@ -20,7 +21,7 @@
                    FontSize="20" Height="68" />
             <Button Content="Initialize" Click="InitializeButton_Click" Width="90" Height="30" />
         </StackPanel>
-        
+
         <ListView Name="LvInit" 
                   MouseDoubleClick="LvInit_MouseDoubleClick"
                   SelectionChanged="LvInit_SelectionChanged"
@@ -39,6 +40,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10">
+            <Button Content="Print" Click="PrintButton_Click" Width="90" Height="30" Margin="0,0,20,0" />
+            <Button Content="Export" Click="ExportButton_Click" Width="90" Height="30" Margin="0,0,20,0"/>
+        </StackPanel>
     </Grid>
 </Window>
