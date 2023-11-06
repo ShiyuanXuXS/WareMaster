@@ -1,12 +1,16 @@
-﻿<Window x:Class="WareMaster.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WareMaster"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="WareMaster.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+
+        <mah:FontIcon HorizontalAlignment="Left" Margin="213,191,0,0" VerticalAlignment="Top"/>
+        <mah:ToggleSwitch HorizontalAlignment="Left" Height="38" Header="ToggleSwitch" Margin="213,283,0,0" VerticalAlignment="Top" Width="45"/>
+
     </Grid>
 </Window>
