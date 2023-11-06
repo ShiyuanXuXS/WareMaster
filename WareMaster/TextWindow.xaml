@@ -39,7 +39,7 @@
                             DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
                             <Ellipse>
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="/Images/WMLetter.jpg"/>
+                                    <ImageBrush ImageSource="/Img/WMLetter.jpg"/>
                                 </Ellipse.Fill>
                             </Ellipse>
                         </Border>
@@ -105,7 +105,8 @@
                 <Grid Width="300" HorizontalAlignment="Left">
                     <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                                Panel.ZIndex="1" Text="Search here..." 
-                               Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
+                               
+                            Visibility="{Binding ElementName=txtSearch,Path=Text,Converter={StaticResource BoolToVis}}"/>
                     <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}"/>
                     <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
                                            Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
@@ -150,7 +151,7 @@
                 <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
                     <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                                 Panel.ZIndex="1" Text="Search in Items..." 
-                                Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
+                                Visibility="{Binding ElementName=txtSearch,Path=Text,Converter={StaticResource BoolToVis}}"/>
                     <TextBox x:Name="txtFilter" Style="{StaticResource textboxFilter}"/>
 
                 </Grid>
