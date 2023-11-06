@@ -1,0 +1,45 @@
+﻿<Window x:Class="WareMaster.InventoryInitEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="InventoryInitEdit" Height="281" Width="380">
+    <StackPanel Margin="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Item ID:"/>
+                <TextBlock Text="Item Name:"/>
+                <TextBlock Text="Category Name:"/>
+                <TextBlock Text="Unit:"/>
+                <TextBlock Text="Location:"/>
+                <TextBlock Text="Description:"/>
+                <TextBlock Text="Quantity:"/>
+                <TextBlock Text="Total:"/>
+                <TextBlock Text="Settle Date:"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <TextBlock x:Name="ItemIdTextBlock" Text="{Binding selectedData.ItemId}" />
+                <TextBlock x:Name="ItemNameTextBlock" Text="{Binding selectedData.ItemName}" />
+                <TextBlock x:Name="CategoryNameTextBlock" Text="{Binding selectedData.CategoryName}" />
+                <TextBlock x:Name="UnitTextBlock" Text="{Binding selectedData.Unit}" />
+                <TextBlock x:Name="LocationTextBlock" Text="{Binding selectedData.Location}" />
+                <TextBlock x:Name="DescriptionTextBlock" Text="{Binding selectedData.Description}" />
+                <TextBox x:Name="QuantityTextBox"/>
+                <TextBlock x:Name="QuantityErrorTextBlock" Foreground="Red" Text="Quantity error message" Visibility="Collapsed"/>
+                <TextBox x:Name="TotalTextBox"/>
+                <TextBlock x:Name="TotalErrorTextBlock" Foreground="Red" Text="Total error message" Visibility="Collapsed"/>
+                <DatePicker x:Name="SettleDateDatePicker"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Save" Click="SaveButton_Click" Margin="5"/>
+            <Button Content="Cancel" Click="CancelButton_Click" Margin="5"/>
+            <Button Content="Delete" Click="DeleteButton_Click" Margin="5"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

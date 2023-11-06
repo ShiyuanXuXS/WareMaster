@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -51,13 +52,15 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddEditItemsDialog.xaml.cs">
+      <DependentUpon>AddEditItemsDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Analize.xaml.cs">
       <DependentUpon>Analize.xaml</DependentUpon>
     </Compile>
@@ -67,6 +70,9 @@
     <Compile Include="Globals.cs" />
     <Compile Include="InventoryInit.xaml.cs">
       <DependentUpon>InventoryInit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryInitEdit.xaml.cs">
+      <DependentUpon>InventoryInitEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Item.cs">
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
@@ -80,8 +86,8 @@
     <Compile Include="Settlement.cs">
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="TextWindow.xaml.cs">
-      <DependentUpon>TextWindow.xaml</DependentUpon>
+    <Compile Include="testWindow.xaml.cs">
+      <DependentUpon>testWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Transaction.cs">
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
@@ -104,11 +110,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WareMasterDbContext.edmx</DependentUpon>
     </Compile>
+    <Page Include="AddEditItemsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Analize.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InventoryInit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InventoryInitEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,9 +142,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TextWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="testWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +182,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EntityFramework">
-      <Version>6.2.0</Version>
+      <Version>6.4.4</Version>
+    </PackageReference>
+    <PackageReference Include="EPPlus">
+      <Version>7.0.0</Version>
     </PackageReference>
     <PackageReference Include="MahApps.Metro">
       <Version>2.4.10</Version>
@@ -179,6 +196,12 @@
     <PackageReference Include="MahApps.Metro.IconPacks.Material">
       <Version>4.11.0</Version>
     </PackageReference>
+    <PackageReference Include="PresentationFramework">
+      <Version>4.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="PresentationFramework.Aero2">
+      <Version>1.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -187,6 +210,7 @@
     <Folder Include="Partials\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\favicon.ico" />
     <Resource Include="Images\WMLetter.JPG" />
     <Content Include="WareMasterDbContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
