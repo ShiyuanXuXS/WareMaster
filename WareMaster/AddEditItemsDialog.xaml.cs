@@ -22,6 +22,7 @@ namespace WareMaster
     public partial class AddEditItemsDialog : Window
     {
         private Item currItem;
+        private string errorMessage;
 
         public AddEditItemsDialog(Item currItem = null)
         {
@@ -75,7 +76,6 @@ namespace WareMaster
 
         private void ItemNameInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            string errorMessage;
             if (Item.IsItemNameValid(ItemNameInput.Text, out errorMessage))
             {
                 currItem.Itemname = ItemNameInput.Text;
@@ -84,6 +84,33 @@ namespace WareMaster
             {
                 LblErrItemName.Visibility= Visibility.Visible;
                 LblErrItemName.Content = errorMessage;
+            }
+        }
+
+        private void DescriptionInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Item.IsDescriptionValid(DescriptionInput.Text, out errorMessage))
+            {
+                currItem.Description = DescriptionInput.Text;
+            }
+            else
+            {
+                LblErrDescription.Visibility = Visibility.Visible;
+                LblErrDescription.Content = errorMessage;
+            }
+
+        }
+
+        private void CategoryComboBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Item.IsCategoryValid(CategoryComboBox.SelectedItem.ToString(), out errorMessage))
+            {
+                //currItem.Description = CategoryComboBox.SelectedItem;
+            }
+            else
+            {
+                LblErrCategory.Visibility = Visibility.Visible;
+                LblErrCategory.Content = errorMessage;
             }
         }
     }
