@@ -19,6 +19,7 @@ namespace WareMaster
     /// </summary>
     public partial class ItemsManagementDialog : Window
     {
+        
         public ItemsManagementDialog()
         {
             InitializeComponent();
@@ -52,7 +53,14 @@ namespace WareMaster
         }
         private void LvItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Item currItem = LvItems.SelectedItem as Item;
+            AddEditItemsDialog dialog = new AddEditItemsDialog();
+            dialog.Owner = this;
+            if (dialog.ShowDialog() == true)
+            {
+                InitializeLvItems();
+                LblMessage.Text = "Item updated";
+            }
         }
 
         private void MenuItemAddItems_Click(object sender, RoutedEventArgs e)
