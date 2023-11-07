@@ -1,6 +1,6 @@
-﻿using MahApps.Metro.Controls;
+﻿
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +19,38 @@ namespace WareMaster
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    /// 
+    public class ExitKey : ICommand
+    {
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object parameter)
+        {
+            Application.Current.Shutdown();
+        }
+    }
+
+    public class ExitCommandContext
+    {
+        public ICommand ExitCommand
+        {
+            get
+            {
+                return new ExitKey();
+            } 
+        }
+    }
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new ExitCommandContext();
             //InitializeComponent();
             Globals.wareMasterEntities = new WareMasterEntities();
             InitializeLvInit();
@@ -51,6 +78,7 @@ namespace WareMaster
                                 SettlementId = sub != null ? sub.id : -1
                             };
                 DgStorage.ItemsSource = query.ToList();
+                TxblItemCount.Text = query.Count().ToString() + " Items";
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -91,11 +119,47 @@ namespace WareMaster
                 {
                     this.WindowState = WindowState.Maximized;
 
-                    IsMaximized = false;
+                    IsMaximized = true;
                 }
             }
 
         }
 
+        private void MenuItemInventoryInit_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InventoryInit inventoryInit = new InventoryInit();
+                inventoryInit.Owner = this;
+                inventoryInit.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void CommandBindingNew_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void CommandBindingNew_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnManageItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ItemsManagementDialog itemDialog = new ItemsManagementDialog();
+                itemDialog.Owner = this;
+                itemDialog.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
     }
 }
