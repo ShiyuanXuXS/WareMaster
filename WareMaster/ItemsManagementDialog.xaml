@@ -28,9 +28,9 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <ListView Name="LvItems" SelectionMode="Single" DockPanel.Dock="Top" Height="200" Width="566">
+                <ListView Name="LvItems" SelectionMode="Single" SelectionChanged="LvItems_SelectionChanged" DockPanel.Dock="Top" Height="200" Width="566">
                     <ListView.View>
-                        <GridView>
+                        <GridView >
                             <GridViewColumn Header="Item Id" Width="50" DisplayMemberBinding="{Binding ItemId}" />
                             <GridViewColumn Header="Item Name" Width="100" DisplayMemberBinding="{Binding ItemName}" />
                             <GridViewColumn Header="Description" Width="150" DisplayMemberBinding="{Binding Description}" />
@@ -39,13 +39,13 @@
                             <GridViewColumn Header="Location" Width="100" DisplayMemberBinding="{Binding Location}" />
                         </GridView>
                     </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
                 </ListView>
             </StackPanel>
-            <Grid Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Top">
-                
-
-            </Grid>
         </Grid>
-        
     </DockPanel>
 </Window>
