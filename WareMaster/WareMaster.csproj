@@ -210,7 +210,6 @@
     <Folder Include="Partials\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\favicon.ico" />
     <Resource Include="Images\WMLetter.JPG" />
     <Content Include="WareMasterDbContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
