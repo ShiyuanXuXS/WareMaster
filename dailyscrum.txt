@@ -62,13 +62,15 @@ Xiaoxing
 
 Shiyuan
 1.  Done / not done since last scrum:
-- 
-- 
-- 
+- modified database
+- create entities
+- Inventory Initialization window
+- add/update initial inventory window
 2. To do until next Scrum:
-- 
+- export to excel
+- print
 3. Need assistance / figure things out
-- 
+- none
 
 Xiaoxing
 1.  Done / not done since last scrum:
