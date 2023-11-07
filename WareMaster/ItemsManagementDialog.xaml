@@ -28,15 +28,15 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <ListView Name="LvItems" SelectionMode="Single" DockPanel.Dock="Top" Height="200">
+                <ListView Name="LvItems" SelectionMode="Single" DockPanel.Dock="Top" Height="200" Width="566">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Id" Width="25" DisplayMemberBinding="{Binding Id}" />
-                            <GridViewColumn Header="Item Name" Width="100" DisplayMemberBinding="{Binding ClientName}" />
-                            <GridViewColumn Header="Description" Width="150" DisplayMemberBinding="{Binding ClientPostalCode}" />
-                            <GridViewColumn Header="Category" Width="100" DisplayMemberBinding="{Binding ClientPostalCode}" />
-                            <GridViewColumn Header="Unit" Width="60" DisplayMemberBinding="{Binding DeliveryDeadline}" />
-                            <GridViewColumn Header="Location" Width="60" DisplayMemberBinding="{Binding Size}" />
+                            <GridViewColumn Header="Item Id" Width="50" DisplayMemberBinding="{Binding ItemId}" />
+                            <GridViewColumn Header="Item Name" Width="100" DisplayMemberBinding="{Binding ItemName}" />
+                            <GridViewColumn Header="Description" Width="150" DisplayMemberBinding="{Binding Description}" />
+                            <GridViewColumn Header="Category" Width="100" DisplayMemberBinding="{Binding CategoryName}" />
+                            <GridViewColumn Header="Unit" Width="60" DisplayMemberBinding="{Binding Unit}" />
+                            <GridViewColumn Header="Location" Width="100" DisplayMemberBinding="{Binding Location}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

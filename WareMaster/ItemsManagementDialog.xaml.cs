@@ -22,8 +22,34 @@ namespace WareMaster
         public ItemsManagementDialog()
         {
             InitializeComponent();
+            InitializeLvItems();
         }
 
+        private void InitializeLvItems()
+        {
+            try
+            {
+                var query = from item in Globals.wareMasterEntities.Items
+                            join category in Globals.wareMasterEntities.Categories
+                            on item.Category_Id equals category.id
+                            select new
+                            {
+                                ItemId = item.id,
+                                ItemName = item.Itemname,
+                                Description = item.Description != null ? item.Description : string.Empty, 
+                                CategoryName = category.Category_Name,
+                                Unit = item.Unit != null ? item.Unit : string.Empty,
+                                Location = item.Location != null ? item.Location : string.Empty
+                            };
+                LvItems.ItemsSource = query.ToList();
+            }
+            catch (SystemException ex)
+            {
+                MessageBox.Show(this, "Error reading from database\n" + ex.Message, "Fatal error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                Environment.Exit(1);
+            }
+        }
         private void LvItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
