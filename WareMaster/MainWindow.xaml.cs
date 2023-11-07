@@ -125,7 +125,7 @@ namespace WareMaster
 
         }
 
-<<<<<<< Updated upstream
+
         private void MenuItemInventoryInit_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -162,7 +162,7 @@ namespace WareMaster
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
-=======
+
         private void BtnItems_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -174,7 +174,6 @@ namespace WareMaster
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
-    
->>>>>>> Stashed changes
+
     }
 }

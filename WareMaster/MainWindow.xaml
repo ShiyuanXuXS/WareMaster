@@ -86,13 +86,9 @@
                         <Separator Margin="25" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc"/>
 
                         <!--Menu Buttons-->
-                        <StackPanel DockPanel.Dock="Top">
-<<<<<<< Updated upstream
-                            <Button Name="BtnManageItem" Click="BtnManageItem_Click" Style="{StaticResource menuButton}">
-=======
-                            <Button Style="{StaticResource menuButton}" Click="BtnItems_Click">
->>>>>>> Stashed changes
-                                <StackPanel Orientation="Horizontal">
+                            <StackPanel DockPanel.Dock="Top">
+                                <Button Name="BtnManageItem" Click="BtnManageItem_Click" Style="{StaticResource menuButton}">
+                                        <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Tools" Width="15" Height="15"/>
                                     <TextBlock Text="Manage Items"></TextBlock>
                                 </StackPanel>
