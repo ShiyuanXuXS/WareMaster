@@ -50,6 +50,13 @@ Jing
 3. Need assistance / figure things out
 - NA
 
+Xiaoxing
+1.  Done / not done since last scrum:
+- setting for Mahapps Metro Window
+2. To do until next Scrum:
+-  ItemManagementDialog & AddEditDialog xaml
+3. Need assistance / figure things out
+- Mahapps Metro Window can't use if other styles exist
 
 2023-11-6
 
@@ -65,10 +72,10 @@ Shiyuan
 
 Xiaoxing
 1.  Done / not done since last scrum:
-- 
-- 
+- ItemManagementDialog & AddEditDialog xaml
+- ItemManagementDialog listView
 2. To do until next Scrum:
-- 
+- AddEditDialog xaml.cs & search/sort function in ItemManagementDialog
 3. Need assistance / figure things out
 
 Jing
