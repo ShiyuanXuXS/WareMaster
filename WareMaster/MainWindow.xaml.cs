@@ -19,7 +19,7 @@ namespace WareMaster
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
@@ -37,6 +37,19 @@ namespace WareMaster
                 inventoryInit.ShowDialog();
             }catch (Exception ex) { MessageBox.Show(ex.Message); };
             
+        }
+
+      
+
+        private void items_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ItemsManagementDialog dialog = new ItemsManagementDialog();
+                dialog.Owner = this;
+                dialog.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
     }
 }

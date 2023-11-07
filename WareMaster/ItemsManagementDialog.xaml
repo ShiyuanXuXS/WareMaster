@@ -8,55 +8,44 @@
         Title="ItemsManagementDialog" Height="512" Width="784">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Add Items"/>
-            <MenuItem Header="_Sort" Click="MenuItemExit_Click">
+            <MenuItem Header="_Add Items" Click="MenuItemAddItems_Click"/>
+            <MenuItem Header="_Sort">
                 <MenuItem Header="_Sort By Name" />
                 <MenuItem Header="_Sort By Category" />
                 <MenuItem Header="_Sort By Quantity" />
             </MenuItem>
         </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+    <StatusBarItem >
+        <TextBlock Name="LblMessage" Text="Welcome, user!"/>
+    </StatusBarItem>
+</StatusBar>
         <Grid Name="GridMain">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="14*" />
-                <ColumnDefinition Width="7*" />
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <ListView Name="LvItems" SelectionMode="Single" DockPanel.Dock="Top" Height="200">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="15*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <ListView Name="LvItems" SelectionMode="Single" DockPanel.Dock="Top" Height="200" Width="566">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Id" Width="25" DisplayMemberBinding="{Binding Id}" />
-                            <GridViewColumn Header="Item Name" Width="100" DisplayMemberBinding="{Binding ClientName}" />
-                            <GridViewColumn Header="Description" Width="150" DisplayMemberBinding="{Binding ClientPostalCode}" />
-                            <GridViewColumn Header="Category" Width="100" DisplayMemberBinding="{Binding ClientPostalCode}" />
-                            <GridViewColumn Header="Unit" Width="60" DisplayMemberBinding="{Binding DeliveryDeadline}" />
-                            <GridViewColumn Header="Location" Width="60" DisplayMemberBinding="{Binding Size}" />
+                            <GridViewColumn Header="Item Id" Width="50" DisplayMemberBinding="{Binding ItemId}" />
+                            <GridViewColumn Header="Item Name" Width="100" DisplayMemberBinding="{Binding ItemName}" />
+                            <GridViewColumn Header="Description" Width="150" DisplayMemberBinding="{Binding Description}" />
+                            <GridViewColumn Header="Category" Width="100" DisplayMemberBinding="{Binding CategoryName}" />
+                            <GridViewColumn Header="Unit" Width="60" DisplayMemberBinding="{Binding Unit}" />
+                            <GridViewColumn Header="Location" Width="100" DisplayMemberBinding="{Binding Location}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
             </StackPanel>
             <Grid Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Label Content="Id:" HorizontalAlignment="Left" Margin="-14,10,0,0" VerticalAlignment="Top" Width="75" Height="29"/>
-                <TextBox Name="TaskInput" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="74,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="29" />
-                <Label Content="Item Name:" HorizontalAlignment="Left" Margin="-14,59,0,0" VerticalAlignment="Top" Width="75" Height="29"/>
-                <TextBox  VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="74,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="29" />
-                <Label Content="Description:" HorizontalAlignment="Left" Margin="-14,105,0,0" VerticalAlignment="Top" Width="75" Height="29"/>
-                <TextBox  VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="74,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="29" />
-                <Label Content="Category:" HorizontalAlignment="Left" Margin="-14,149,0,0" VerticalAlignment="Top" Width="75" Height="29"/>
-                <ComboBox SelectedValuePath="Tag" HorizontalAlignment="Left" Margin="74,150,0,0" VerticalAlignment="Top" Width="135" Height="29" SelectedIndex="0" />
-                <Label Content="Unit:" HorizontalAlignment="Left" Margin="-14,200,0,0" VerticalAlignment="Top" Width="75" Height="29"/>
-                <ComboBox SelectedValuePath="Tag" HorizontalAlignment="Left" Margin="74,200,0,0" VerticalAlignment="Top" Width="135" Height="29" SelectedIndex="0" />
-                <Label Content="Location:" HorizontalAlignment="Left" Margin="-14,250,0,0" VerticalAlignment="Top" Width="75" Height="29"/>
-                <TextBox  VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="74,250,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="29" />
-
-                <Button Name="BtnSave" IsDefault="True" Content="Save" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top" Width="92" Click="BtnSave_Click"/>
-                <Button IsCancel="True" Content="Cancel" HorizontalAlignment="Left" Margin="117,350,0,0" VerticalAlignment="Top" Width="92"/>
+                
 
             </Grid>
         </Grid>
-        <!--<StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem Height="416">
-                <TextBlock Name="LblMessage" Text="Welcome, user!"/>
-            </StatusBarItem>
-        </StatusBar>-->
+        
     </DockPanel>
 </Window>

@@ -77,6 +77,9 @@
     <Compile Include="Item.cs">
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="ItemsManagementDialog.xaml.cs">
+      <DependentUpon>ItemsManagementDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Query.xaml.cs">
       <DependentUpon>Query.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,10 @@
     <Page Include="InventoryInitEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ItemsManagementDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

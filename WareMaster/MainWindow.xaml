@@ -1,4 +1,4 @@
-﻿<mah:MetroWindow x:Class="WareMaster.MainWindow"
+﻿<Window x:Class="WareMaster.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,6 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Button" HorizontalAlignment="Left" Height="38" Margin="90,113,0,0" VerticalAlignment="Top" Width="137" Click="Button_Click"/>
+        <Button Name="items" Content="Go to items" Height="50" Width="100" Click="items_Click"></Button>
 
     </Grid>
-</mah:MetroWindow>
+</Window>

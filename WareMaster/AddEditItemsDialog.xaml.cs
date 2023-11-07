@@ -18,11 +18,15 @@ namespace WareMaster
     /// <summary>
     /// Interaction logic for AddEditItemsDialog.xaml
     /// </summary>
-    public partial class AddEditItemsDialog : MetroWindow
+    public partial class AddEditItemsDialog : Window
     {
         public AddEditItemsDialog()
         {
             InitializeComponent();
+        }
+       private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
