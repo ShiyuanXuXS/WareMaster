@@ -33,5 +33,11 @@ namespace WareMaster
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Settlement> Settlements { get; set; }
         public virtual Category Category { get; set; }
+
+        public override string ToString()
+        {
+            return $"ID: {id}, Item Name: {Itemname}, Category ID: {Category_Id}, Unit: {Unit}, Location: {Location}, Description: {Description}";
+        }
+
     }
 }

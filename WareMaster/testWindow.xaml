@@ -105,7 +105,7 @@
                 <Grid Width="300" HorizontalAlignment="Left">
                     <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                                Panel.ZIndex="1" Text="Search here..." 
-                               Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
+                               Visibility="{Binding ElementName=txtSearch,Path=Text,Converter={StaticResource BoolToVis}}"/>
                     <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}"/>
                     <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
                                            Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
@@ -150,14 +150,14 @@
                 <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
                     <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                                 Panel.ZIndex="1" Text="Search in Items..." 
-                                Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
+                                Visibility="{Binding ElementName=txtSearch,Path=Text,Converter={StaticResource BoolToVis}}"/>
                     <TextBox x:Name="txtFilter" Style="{StaticResource textboxFilter}"/>
                     
                 </Grid>
                 
                 <!--Members Datagrid-->
 
-                <DataGrid Template="{DynamicResource DataGridTemplate1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Style="{DynamicResource DataGridStyle1}" Grid.Row="5" x:Name="membersDataGrid">
+                <DataGrid Grid.Row="5" x:Name="DgStorage" >
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn CanUserResize="False" Width="auto">
                             <DataGridCheckBoxColumn.HeaderTemplate>
@@ -166,8 +166,8 @@
                                 </DataTemplate>
                             </DataGridCheckBoxColumn.HeaderTemplate>
                         </DataGridCheckBoxColumn>
-                        <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto"/>
-                        <DataGridTemplateColumn Header="Member" IsReadOnly="True" Width="*">
+                        <DataGridTextColumn Header="ID" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding ID}"/>
+                        <!--<DataGridTemplateColumn Header="ID" IsReadOnly="True" Width="*"  Binding="{Binding ID}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -178,13 +178,16 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Position" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Email Address" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Phone Number" IsReadOnly="True" Width="*"/>
+                        </DataGridTemplateColumn>-->
+                        <DataGridTextColumn Header="Item Name" IsReadOnly="True" MinWidth="50" Width="*"  Binding="{Binding ItemName}"/>
+                        <DataGridTextColumn Header="Description" IsReadOnly="True" MinWidth="150" Width="*" Binding="{Binding Description}"/>
+                        <DataGridTextColumn Header="Category" IsReadOnly="True" Width="*" Binding="{Binding Category}"/>
+                        <DataGridTextColumn Header="Unit" IsReadOnly="True" Width="*" Binding="{Binding Unit}"/>
+                        <DataGridTextColumn Header="Quantity" IsReadOnly="True" Width="*" Binding="{Binding Quantity}"/>
+                        <DataGridTextColumn Header="Location" IsReadOnly="True" Width="*" Binding="{Binding Location}"/>
 
-                        <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
+                        <!--<DataGridTemplateColumn Header="Unit" IsReadOnly="True" Width="auto">-->
+                            <!--<DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button Style="{StaticResource gridEditButton}">
@@ -195,8 +198,8 @@
                                         </Button>
                                     </StackPanel>
                                 </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            </DataGridTemplateColumn.CellTemplate>-->
+                        <!--</DataGridTemplateColumn>-->
 
                     </DataGrid.Columns>
                 </DataGrid>

@@ -9,26 +9,26 @@
     <Grid HorizontalAlignment="Center">
         <Label Content="Item Id:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
         <Label Name="ItemId" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="100,10,0,0" Content="-----" VerticalAlignment="Top" Width="96" Height="30" />
-        
+
         <Label Content="Item Name:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
-        <TextBox x:Name="ItemNameInput" MaxLength="200" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="100,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="30" />
-        <Label Name="LblErrItemName"  Content="Item Name must be 1-200 characters long." FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,90,0,0" Width="472"/>
-        
+        <TextBox x:Name="ItemNameInput" LostFocus="ItemNameInput_LostFocus" MaxLength="200" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="100,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="30" />
+        <Label Name="LblErrItemName"  Visibility="Hidden" Content="" FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,90,0,0" Width="472"/>
+
         <Label Content="Description:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
-        <TextBox Name="DescriptionInput" MaxLength="500" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="100,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="60" />
-        <Label Name="LblErrDescription"  Content="Description must be 1-500 characters long, only letters." FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,180,0,0" Width="472"/>
+        <TextBox Name="DescriptionInput" LostFocus="DescriptionInput_LostFocus" MaxLength="500" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="100,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="60" />
+        <Label Name="LblErrDescription" Visibility="Hidden" Content="Description must be 1-500 characters long, only letters." FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,180,0,0" Width="472"/>
 
 
         <Label Content="Category:" HorizontalAlignment="Left" Margin="10,210,0,0" VerticalAlignment="Top" Width="75" Height="30" />
-        <ComboBox x:Name="CategoryComboBox" SelectedValuePath="id" DisplayMemberPath="Category_Name" HorizontalAlignment="Left" Margin="100,210,0,0" VerticalAlignment="Top" Width="160" Height="30" SelectedIndex="0">
+        <ComboBox x:Name="CategoryComboBox" LostFocus="CategoryComboBox_LostFocus" SelectedValuePath="id" DisplayMemberPath="Category_Name" HorizontalAlignment="Left" Margin="100,210,0,0" VerticalAlignment="Top" Width="160" Height="30" SelectedIndex="0">
         </ComboBox>
-        <Label Name="LblErrCategory"  Content="Gategory must be choosed." FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,240,0,0" Width="472"/>
+        <Label Name="LblErrCategory" Visibility="Hidden" Content="Gategory must be choosed." FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,240,0,0" Width="472"/>
 
         <Label Content="Unit:" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
         <ComboBox x:Name="UnitComboBox" SelectedValuePath="Tag" HorizontalAlignment="Left" Margin="100,270,0,0" VerticalAlignment="Top" Width="160" Height="30" SelectedIndex="0" >
-                <ComboBoxItem Content="Box" IsSelected="True">
-                    <ComboBoxItem.Tag>Box</ComboBoxItem.Tag>
-                </ComboBoxItem>
+            <ComboBoxItem Content="Box" IsSelected="True">
+                <ComboBoxItem.Tag>Box</ComboBoxItem.Tag>
+            </ComboBoxItem>
             <ComboBoxItem Content="Piece">
                 <ComboBoxItem.Tag>Piece</ComboBoxItem.Tag>
             </ComboBoxItem>

@@ -36,7 +36,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -70,9 +69,6 @@
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
-    <Compile Include="InventoryChange.xaml.cs">
-      <DependentUpon>InventoryChange.xaml</DependentUpon>
-    </Compile>
     <Compile Include="InventoryInit.xaml.cs">
       <DependentUpon>InventoryInit.xaml</DependentUpon>
     </Compile>
@@ -85,7 +81,7 @@
     <Compile Include="ItemsManagementDialog.xaml.cs">
       <DependentUpon>ItemsManagementDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Partials\Transaction.cs" />
+    <Compile Include="Partials\Item.cs" />
     <Compile Include="Query.xaml.cs">
       <DependentUpon>Query.xaml</DependentUpon>
     </Compile>
@@ -94,9 +90,6 @@
     </Compile>
     <Compile Include="Settlement.cs">
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="testWindow.xaml.cs">
-      <DependentUpon>testWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Transaction.cs">
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
@@ -127,10 +120,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InventoryChange.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="InventoryInit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -158,10 +147,6 @@
     <Page Include="Query.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="testWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -21,11 +21,13 @@ namespace WareMaster
     
     public partial class AddEditItemsDialog : Window
     {
-        Item currItem;
+        private Item currItem;
+        private string errorMessage;
 
         public AddEditItemsDialog(Item currItem = null)
         {
             this.currItem = currItem;
+            Console.WriteLine(currItem);
             InitializeComponent();
             InitializeCategory();
             if (currItem != null) // update, load select values
@@ -63,9 +65,53 @@ namespace WareMaster
             }
             
         }
+
+        
        private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            
 
+            
+        }
+
+        private void ItemNameInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Item.IsItemNameValid(ItemNameInput.Text, out errorMessage))
+            {
+                currItem.Itemname = ItemNameInput.Text;
+            }
+            else
+            {
+                LblErrItemName.Visibility= Visibility.Visible;
+                LblErrItemName.Content = errorMessage;
+            }
+        }
+
+        private void DescriptionInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Item.IsDescriptionValid(DescriptionInput.Text, out errorMessage))
+            {
+                currItem.Description = DescriptionInput.Text;
+            }
+            else
+            {
+                LblErrDescription.Visibility = Visibility.Visible;
+                LblErrDescription.Content = errorMessage;
+            }
+
+        }
+
+        private void CategoryComboBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Item.IsCategoryValid(CategoryComboBox.SelectedItem.ToString(), out errorMessage))
+            {
+                //currItem.Description = CategoryComboBox.SelectedItem;
+            }
+            else
+            {
+                LblErrCategory.Visibility = Visibility.Visible;
+                LblErrCategory.Content = errorMessage;
+            }
         }
     }
 }
