@@ -41,6 +41,44 @@ Shiyuan
 3. Need assistance / figure things out
 - research MahApps
 
+Jing
+1. Done since last scrum
+- add mainWindow
+
+2. Plan until next Scrum
+- working on mainWindow
+3. Need assistance / figure things out
+- NA
+
+
+2023-11-6
+
+Shiyuan
+1.  Done / not done since last scrum:
+- 
+- 
+- 
+2. To do until next Scrum:
+- 
+3. Need assistance / figure things out
+- 
+
+Xiaoxing
+1.  Done / not done since last scrum:
+- 
+- 
+2. To do until next Scrum:
+- 
+3. Need assistance / figure things out
+
+Jing
+1. Done since last scrum
+- working on mainWindow
+
+2. Plan until next Scrum
+- working on mainWindow
+3. Need assistance / figure things out
+- NA
 
 
 
