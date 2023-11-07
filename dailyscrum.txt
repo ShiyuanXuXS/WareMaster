@@ -90,4 +90,37 @@ Jing
 - NA
 
 
+2023-11-7
+
+Shiyuan
+1.  Done / not done since last scrum:
+- 
+- 
+- 
+- 
+2. To do until next Scrum:
+- 
+- 
+3. Need assistance / figure things out
+- none
+
+Xiaoxing
+1.  Done / not done since last scrum:
+- 
+- 
+2. To do until next Scrum:
+- 
+3. Need assistance / figure things out
+
+Jing
+1. Done since last scrum
+- working on mainWindow
+- add menu, add pagination
+2. Plan until next Scrum
+- working on mainWindow, add pagination, add search function
+- add login window
+3. Need assistance / figure things out
+- NA
+
+
 
