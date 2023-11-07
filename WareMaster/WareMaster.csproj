@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -69,6 +70,9 @@
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
+    <Compile Include="InventoryChange.xaml.cs">
+      <DependentUpon>InventoryChange.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InventoryInit.xaml.cs">
       <DependentUpon>InventoryInit.xaml</DependentUpon>
     </Compile>
@@ -81,6 +85,7 @@
     <Compile Include="ItemsManagementDialog.xaml.cs">
       <DependentUpon>ItemsManagementDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Partials\Transaction.cs" />
     <Compile Include="Query.xaml.cs">
       <DependentUpon>Query.xaml</DependentUpon>
     </Compile>
@@ -119,6 +124,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Analize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InventoryChange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,9 +223,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Partials\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\WMLetter.JPG" />
     <Content Include="WareMasterDbContext.Context.tt">

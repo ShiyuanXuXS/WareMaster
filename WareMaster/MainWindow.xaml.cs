@@ -28,7 +28,7 @@ namespace WareMaster
             Globals.wareMasterEntities = new WareMasterEntities();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void InventoryInit_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -48,6 +48,28 @@ namespace WareMaster
                 ItemsManagementDialog dialog = new ItemsManagementDialog();
                 dialog.Owner = this;
                 dialog.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+
+        private void InventoryInbound_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InventoryChange inventoryChange = new InventoryChange("Inbound");
+                inventoryChange.Owner = this;
+                inventoryChange.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+
+        private void InventoryOutbound_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InventoryChange inventoryChange = new InventoryChange("Outbound");
+                inventoryChange.Owner = this;
+                inventoryChange.ShowDialog();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }

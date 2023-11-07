@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Height="38" Margin="90,113,0,0" VerticalAlignment="Top" Width="137" Click="Button_Click"/>
+        <Button x:Name="InventoryInit" Content="InventoryInit" HorizontalAlignment="Left" Height="34" Margin="90,117,0,0" VerticalAlignment="Top" Width="137" Click="InventoryInit_Click"/>
         <Button Name="items" Content="Go to items" Height="50" Width="100" Click="items_Click"></Button>
+        <Button x:Name="InventoryInbound" Content="InventoryInbound" HorizontalAlignment="Left" Height="34" Margin="90,175,0,0" VerticalAlignment="Top" Width="137" Click="InventoryInbound_Click"/>
+        <Button x:Name="InventoryOutbound" Content="InventoryOutbound" HorizontalAlignment="Left" Height="34" Margin="90,231,0,0" VerticalAlignment="Top" Width="137" Click="InventoryOutbound_Click"/>
 
     </Grid>
 </Window>

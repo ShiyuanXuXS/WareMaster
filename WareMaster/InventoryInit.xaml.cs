@@ -118,7 +118,7 @@ namespace WareMaster
 
                 // 创建一个Table用于显示ListView的数据
                 System.Windows.Documents.Table table = new System.Windows.Documents.Table();
-                document.Blocks.Add(table);
+                //document.Blocks.Add(table);
 
                 // Retrieve data from the ListView
                 var data = LvInit.Items;
@@ -156,10 +156,17 @@ namespace WareMaster
                         dataGroup.Rows.Add(dataRow);
                         table.RowGroups.Add(dataGroup);
                     }
+                    document.Blocks.Add(table);
+
+
+                    //document.PageWidth = printDialog.PrintableAreaWidth;
+                    //document.PageHeight = printDialog.PrintableAreaHeight;
+
+
 
                     // Set the print document's page size to fit A4 paper in portrait mode
                     IDocumentPaginatorSource paginator = document;
-                    paginator.DocumentPaginator.PageSize = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
+                    //paginator.DocumentPaginator.PageSize = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
 
                     // Print the document
                     printDialog.PrintDocument(paginator.DocumentPaginator, "ListView Printing");
