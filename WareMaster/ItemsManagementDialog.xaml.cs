@@ -33,7 +33,7 @@ namespace WareMaster
                 var query = from item in Globals.wareMasterEntities.Items
                             join category in Globals.wareMasterEntities.Categories
                             on item.Category_Id equals category.id
-                            select new
+                            select new ViewItem
                             {
                                 ItemId = item.id,
                                 ItemName = item.Itemname,
@@ -51,10 +51,34 @@ namespace WareMaster
                 Environment.Exit(1);
             }
         }
+
+        private class ViewItem
+        {
+            public int ItemId { get; set; }
+            public string ItemName { get; set; }
+            public string CategoryName { get; set; }
+            public string Unit { get; set; }
+            public string Location { get; set; }
+            public string Description { get; set; }
+            public override string ToString()
+            {
+                return $"ItemId: {ItemId}, ItemName: {ItemName}, CategoryName: {CategoryName}, Unit: {Unit}, Location: {Location}, Description: {Description}";
+            }
+        }
+
         private void LvItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Item currItem = LvItems.SelectedItem as Item;
-            AddEditItemsDialog dialog = new AddEditItemsDialog();
+            ViewItem selectedItem = LvItems.SelectedItem as ViewItem;
+            Item currItem = new Item();
+            currItem.id = selectedItem.ItemId;
+            currItem.Itemname = selectedItem.ItemName;
+            currItem.Description    = selectedItem.Description;
+            currItem.Unit = selectedItem.Unit;
+            currItem.Location = selectedItem.Location;
+            currItem.Category_Id = Globals.wareMasterEntities.Items.Where(item => item.id == selectedItem.ItemId).Select(item => item.Category_Id).SingleOrDefault();
+
+            if (currItem == null) return;
+            AddEditItemsDialog dialog = new AddEditItemsDialog(currItem);
             dialog.Owner = this;
             if (dialog.ShowDialog() == true)
             {

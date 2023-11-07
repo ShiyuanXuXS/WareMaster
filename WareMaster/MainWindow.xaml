@@ -87,7 +87,11 @@
 
                         <!--Menu Buttons-->
                         <StackPanel DockPanel.Dock="Top">
+<<<<<<< Updated upstream
                             <Button Name="BtnManageItem" Click="BtnManageItem_Click" Style="{StaticResource menuButton}">
+=======
+                            <Button Style="{StaticResource menuButton}" Click="BtnItems_Click">
+>>>>>>> Stashed changes
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Tools" Width="15" Height="15"/>
                                     <TextBlock Text="Manage Items"></TextBlock>

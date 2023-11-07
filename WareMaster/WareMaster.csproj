@@ -81,6 +81,7 @@
     <Compile Include="ItemsManagementDialog.xaml.cs">
       <DependentUpon>ItemsManagementDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Partials\Item.cs" />
     <Compile Include="Query.xaml.cs">
       <DependentUpon>Query.xaml</DependentUpon>
     </Compile>
@@ -207,9 +208,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Partials\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\WMLetter.JPG" />
     <Content Include="WareMasterDbContext.Context.tt">

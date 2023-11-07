@@ -21,11 +21,12 @@ namespace WareMaster
     
     public partial class AddEditItemsDialog : Window
     {
-        Item currItem;
+        private Item currItem;
 
         public AddEditItemsDialog(Item currItem = null)
         {
             this.currItem = currItem;
+            Console.WriteLine(currItem);
             InitializeComponent();
             InitializeCategory();
             if (currItem != null) // update, load select values
@@ -63,9 +64,27 @@ namespace WareMaster
             }
             
         }
+
+        
        private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            
 
+            
+        }
+
+        private void ItemNameInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string errorMessage;
+            if (Item.IsItemNameValid(ItemNameInput.Text, out errorMessage))
+            {
+                currItem.Itemname = ItemNameInput.Text;
+            }
+            else
+            {
+                LblErrItemName.Visibility= Visibility.Visible;
+                LblErrItemName.Content = errorMessage;
+            }
         }
     }
 }

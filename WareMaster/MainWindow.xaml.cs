@@ -125,6 +125,7 @@ namespace WareMaster
 
         }
 
+<<<<<<< Updated upstream
         private void MenuItemInventoryInit_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -161,5 +162,19 @@ namespace WareMaster
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
+=======
+        private void BtnItems_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ItemsManagementDialog dialog = new ItemsManagementDialog();
+                dialog.Owner = this;
+                Console.WriteLine("item management open");
+                dialog.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+    
+>>>>>>> Stashed changes
     }
 }
