@@ -18,11 +18,54 @@ namespace WareMaster
     /// <summary>
     /// Interaction logic for AddEditItemsDialog.xaml
     /// </summary>
-    public partial class AddEditItemsDialog : MetroWindow
+    
+    public partial class AddEditItemsDialog : Window
     {
-        public AddEditItemsDialog()
+        Item currItem;
+
+        public AddEditItemsDialog(Item currItem = null)
         {
+            this.currItem = currItem;
             InitializeComponent();
+            InitializeCategory();
+            if (currItem != null) // update, load select values
+            {
+                ItemId.Content = currItem.id;
+                ItemNameInput.Text = currItem.Itemname;
+                DescriptionInput.Text = currItem.Description;
+                List<Category> categories = Globals.wareMasterEntities.Categories.ToList();
+                CategoryComboBox.SelectedItem = categories.FirstOrDefault(category => category.id == currItem.Category_Id);
+                foreach (ComboBoxItem item in UnitComboBox.Items)
+                {
+                    if (item.Content.ToString() == currItem.Unit)
+                    {
+                        item.IsSelected = true;
+                        break;
+                    }
+                }
+                LocationInput.Text = currItem.Location;
+            }
+        }
+
+        private void InitializeCategory()
+        {
+            try
+            {
+                List<Category> categories = Globals.wareMasterEntities.Categories.ToList();
+                CategoryComboBox.ItemsSource = categories;
+            }
+            catch (SystemException ex)
+            {
+                MessageBox.Show(this, "Error reading from database\n" + ex.Message, "Fatal error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                // Close();
+                Environment.Exit(1);
+            }
+            
+        }
+       private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
