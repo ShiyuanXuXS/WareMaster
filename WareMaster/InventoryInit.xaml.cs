@@ -28,14 +28,18 @@ namespace WareMaster
     /// </summary>
     public partial class InventoryInit : Window
     {
-        private bool hasTransactions = Globals.wareMasterEntities.Transactions.Any();
+        private bool hasTransactions ;
         public InventoryInit()
         {
             InitializeComponent();
             InitializeLvInit();
+            refreshHasTransactions();
 
         }
-
+        private void refreshHasTransactions()
+        {
+            hasTransactions = Globals.wareMasterEntities.Transactions.Any();
+        }
         private void LvInit_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             showEdit();
@@ -47,7 +51,8 @@ namespace WareMaster
 
         private void showEdit()
         {
-            if (hasTransactions) { 
+            if (hasTransactions) {
+                MessageBox.Show("Inventory change records existing, no longer to initialize the inventory!");
                 return; 
             }
 
@@ -67,6 +72,7 @@ namespace WareMaster
 
         private void InitializeLvInit()
         {
+            
             try
             {
                 var query = from item in Globals.wareMasterEntities.Items
@@ -95,13 +101,19 @@ namespace WareMaster
         private void InitializeButton_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Are you sure you want to delete all inbound and outbound records and settlement data?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
             try
             {
                 Globals.wareMasterEntities.Transactions.RemoveRange(Globals.wareMasterEntities.Transactions);
                 Globals.wareMasterEntities.Settlements.RemoveRange(Globals.wareMasterEntities.Settlements);
                 Globals.wareMasterEntities.SaveChanges();
                 InitializeLvInit();
+                refreshHasTransactions();
+                MessageBox.Show("Inventory Initialized!");
+
             }
             catch (Exception ex)
             {
