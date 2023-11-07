@@ -86,9 +86,6 @@
     <Compile Include="Settlement.cs">
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="testWindow.xaml.cs">
-      <DependentUpon>testWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Transaction.cs">
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
     </Compile>
@@ -141,10 +138,6 @@
     <Page Include="Query.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="testWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -210,7 +203,6 @@
     <Folder Include="Partials\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\favicon.ico" />
     <Resource Include="Images\WMLetter.JPG" />
     <Content Include="WareMasterDbContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
