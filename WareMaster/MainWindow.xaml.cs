@@ -233,6 +233,17 @@ namespace WareMaster
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
 
+        private void BtnManageUser_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                UsersManagementDialog itemDialog = new UsersManagementDialog();
+                itemDialog.Owner = this;
+                itemDialog.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+
         private void BtnPrevPage_Click(object sender, RoutedEventArgs e)
         {
             if (currentPage > 1)
@@ -271,6 +282,7 @@ namespace WareMaster
             }
         }
 
+        
     }
 
     public class ItemViewModel

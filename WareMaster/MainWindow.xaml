@@ -102,7 +102,7 @@
                                         <TextBlock Text="Manage Inventory"></TextBlock>
                                     </StackPanel>
                                 </Button>
-                                <Button Style="{StaticResource menuButton}">
+                                <Button Style="{StaticResource menuButton}" Click="BtnManageUser_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Icon:PackIconMaterial Kind="AccountMultipleOutline" Width="15" Height="15"/>
                                         <TextBlock Text="Manager Users"></TextBlock>
