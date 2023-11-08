@@ -94,13 +94,11 @@ Jing
 
 Shiyuan
 1.  Done / not done since last scrum:
-- 
-- 
-- 
-- 
+- Export initial inventory data to excel
+- Print initial inventory(still need debug)
 2. To do until next Scrum:
-- 
-- 
+- inbound
+- outbound
 3. Need assistance / figure things out
 - none
 
