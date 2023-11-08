@@ -50,7 +50,6 @@ namespace WareMaster
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            //在这里实现：如果LVSettle没有选中项，则提示；如果有选中项，则要求用户确认；如果用户取消则返回，如果用户确认，则删除所有这个日期的Settlements的记录并保存，然后提示操作是否成功
             if (LVSettle.SelectedItem == null)
             {
                 MessageBox.Show("Please select a settlement date to delete.");
@@ -87,6 +86,80 @@ namespace WareMaster
 
         private void Settle_Click(object sender, RoutedEventArgs e)
         {
+            DateTime lastSettleDate = Globals.wareMasterEntities.Settlements
+                .Select(s => s.Settle_Date)
+                .DefaultIfEmpty(DateTime.MinValue)
+                .Max();
+            if ( dpSettleDate.SelectedDate <= lastSettleDate)
+            {
+                MessageBox.Show("Cannot settle on or before the last settlement date.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (MessageBoxResult.No==MessageBox.Show("Do you want to settle inventories?", "Confirmation", MessageBoxButton.YesNo))
+            {
+                return;
+            }
+            
+            foreach (var item in Globals.wareMasterEntities.Items)
+            {
+                // find last settlement of the item
+                Settlement lastSettlement = Globals.wareMasterEntities.Settlements
+                    .Where(s => s.Item_Id == item.id)
+                    .OrderByDescending(s => s.Settle_Date)
+                    .FirstOrDefault();
+
+                if (lastSettlement != null)
+                {
+                    // get sum of transactions
+                    List<Transaction> transactionsAfterLastSettle = Globals.wareMasterEntities.Transactions
+                        .Where(t => t.Item_Id == item.id && t.Transaction_Date > lastSettlement.Settle_Date)
+                        .ToList();
+
+                    int totalQuantity = transactionsAfterLastSettle.Sum(transaction => transaction.Quantity);
+                    decimal totalTotal = transactionsAfterLastSettle.Sum(transaction => transaction.Total);
+
+
+                    // new settlement
+                    Settlement newSettlement = new Settlement
+                    {
+                        Item_Id = item.id,
+                        Settle_Date = dpSettleDate.SelectedDate.Value,
+                        Quantity = lastSettlement.Quantity + totalQuantity,
+                        Total = lastSettlement.Total + totalTotal
+                    };
+                    Globals.wareMasterEntities.Settlements.Add(newSettlement);
+                }
+                else
+                {
+                    //get sum of transactions
+                    List<Transaction> transactionsAfterLastSettle = Globals.wareMasterEntities.Transactions
+                        .Where(t => t.Item_Id == item.id )
+                        .ToList();
+
+                    int totalQuantity = transactionsAfterLastSettle.Sum(transaction => transaction.Quantity);
+                    decimal totalTotal = transactionsAfterLastSettle.Sum(transaction => transaction.Total);
+                    // new settlement
+                    Settlement newSettlement = new Settlement
+                    {
+                        Item_Id = item.id,
+                        Settle_Date = dpSettleDate.SelectedDate.Value,
+                        Quantity = totalQuantity, 
+                        Total = totalTotal 
+                    };
+                    Globals.wareMasterEntities.Settlements.Add(newSettlement);
+                }
+            }
+
+            // save changes
+            try
+            {
+                Globals.wareMasterEntities.SaveChanges();
+                MessageBox.Show("Settlement completed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error settling inventories: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 

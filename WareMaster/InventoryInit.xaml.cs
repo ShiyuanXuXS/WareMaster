@@ -186,7 +186,7 @@ namespace WareMaster
                 }
                 else
                 {
-                    MessageBox.Show("没有要打印的数据");
+                    MessageBox.Show("No Data to print");
                 }
             }
         }
