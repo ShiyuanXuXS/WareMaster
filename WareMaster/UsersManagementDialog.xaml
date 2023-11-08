@@ -74,7 +74,7 @@
                           AutoGenerateColumns="False" SelectionChanged="DgUsers_SelectionChanged" Margin="0,0,10,10">
                         <DataGrid.Columns >
                             <DataGridTextColumn Header="User Id" IsReadOnly="True" MinWidth="50" Width="auto" Binding="{Binding id}" />
-                            <DataGridTextColumn Header="User Name" IsReadOnly="True" MinWidth="100" Binding="{Binding UserName}"/>
+                            <DataGridTextColumn Header="User Name" IsReadOnly="True" MinWidth="100" Binding="{Binding Username}"/>
                             <DataGridTextColumn Header="Role" IsReadOnly="True" MinWidth="150" Binding="{Binding Role}" />
                             <DataGridTextColumn Header="Email" IsReadOnly="True" MinWidth="100" Binding="{Binding Email}" />
                         </DataGrid.Columns>

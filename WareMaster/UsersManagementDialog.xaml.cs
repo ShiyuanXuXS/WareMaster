@@ -36,15 +36,7 @@ namespace WareMaster
         {
             try
             {
-                List<User> allUsers = Globals.wareMasterEntities.Users.ToList();
-                foreach (User user in allUsers)
-                {
-                    Console.WriteLine($"User ID: {user.id}");
-                    Console.WriteLine($"Username: {user.Username}");
-                    Console.WriteLine($"Role: {user.Role}");
-                    Console.WriteLine($"Email: {user.Email}");
-                    Console.WriteLine(); // Add a blank line for separation
-                }
+                allUsers = Globals.wareMasterEntities.Users.ToList();
                 DgUsers.ItemsSource = allUsers;
                 filterUsers = allUsers;
                 TxblItemCount.Text = "Total " + allUsers.Count().ToString() + " Users";
@@ -89,23 +81,16 @@ namespace WareMaster
 
         private void DgUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ViewItem selectedItem = LvItems.SelectedItem as ViewItem;
-            //if (selectedItem == null) return;
-            //Item currItem = new Item();
-            //currItem.id = selectedItem.ItemId;
-            //currItem.Itemname = selectedItem.ItemName;
-            //currItem.Description = selectedItem.Description;
-            //currItem.Unit = selectedItem.Unit;
-            //currItem.Location = selectedItem.Location;
-            //currItem.Category_Id = Globals.wareMasterEntities.Items.Where(item => item.id == selectedItem.ItemId).Select(item => item.Category_Id).SingleOrDefault();
+            User selectedUser = DgUsers.SelectedItem as User;
+            if (selectedUser == null) return;
 
-            //AddEditItemsDialog dialog = new AddEditItemsDialog(currItem);
-            //dialog.Owner = this;
-            //if (dialog.ShowDialog() == true)
-            //{
-            //    InitializeLvItems();
-            //    LblMessage.Text = "Item updated";
-            //}
+            AddEditUsersDialog dialog = new AddEditUsersDialog(selectedUser);
+            dialog.Owner = this;
+            if (dialog.ShowDialog() == true)
+            {
+                InitializeDgUsers();
+                LblMessage.Text = "User updated";
+            }
         }
 
         private void BtnActivities_Click(object sender, RoutedEventArgs e)
@@ -138,18 +123,17 @@ namespace WareMaster
 
         private void MenuItemAddItems_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            //    AddEditItemsDialog dialog = new AddEditItemsDialog();
-            //    dialog.Owner = this;
-            //    //dialog.ShowDialog();
-            //    if (dialog.ShowDialog() == true)
-            //    {
-            //        InitializeLvItems();
-            //        LblMessage.Text = "Item updated";
-            //    }
-            //}
-            //catch (Exception ex) { MessageBox.Show(ex.Message); };
+            try
+            {
+                AddEditUsersDialog dialog = new AddEditUsersDialog();
+                dialog.Owner = this;
+                if (dialog.ShowDialog() == true)
+                {
+                    InitializeDgUsers();
+                    LblMessage.Text = "User added";
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
 
         private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
