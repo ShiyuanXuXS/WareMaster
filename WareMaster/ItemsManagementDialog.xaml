@@ -44,6 +44,12 @@
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
                     </ListView.ItemContainerStyle>
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Update" Click="BtnUpdate_Click" />
+                            <MenuItem Header="Delete" Click="BtnDelete_Click" />
+                        </ContextMenu>
+                    </ListView.ContextMenu>
                 </ListView>
             </StackPanel>
         </Grid>

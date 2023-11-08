@@ -104,10 +104,12 @@ Shiyuan
 
 Xiaoxing
 1.  Done / not done since last scrum:
-- 
-- 
+- AddEditDialog xaml.cs
+- sort/delete function in ItemManagementDialog
+- selftest add/edit/sort
 2. To do until next Scrum:
-- 
+- search box
+- user management dialog & AddEditUser xaml&xaml.cs
 3. Need assistance / figure things out
 
 Jing

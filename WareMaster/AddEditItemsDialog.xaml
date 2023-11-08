@@ -25,7 +25,7 @@
         <Label Name="LblErrCategory" Visibility="Hidden" Content="Gategory must be choosed." FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,240,0,0" Width="472"/>
 
         <Label Content="Unit:" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
-        <ComboBox x:Name="UnitComboBox" SelectedValuePath="Tag" HorizontalAlignment="Left" Margin="100,270,0,0" VerticalAlignment="Top" Width="160" Height="30" SelectedIndex="0" >
+        <ComboBox x:Name="UnitComboBox" LostFocus="UnitComboBox_LostFocus" SelectedValuePath="Tag" HorizontalAlignment="Left" Margin="100,270,0,0" VerticalAlignment="Top" Width="160" Height="30" SelectedIndex="0" >
             <ComboBoxItem Content="Box" IsSelected="True">
                 <ComboBoxItem.Tag>Box</ComboBoxItem.Tag>
             </ComboBoxItem>
@@ -33,11 +33,11 @@
                 <ComboBoxItem.Tag>Piece</ComboBoxItem.Tag>
             </ComboBoxItem>
         </ComboBox>
-        <Label Name="LblErrUnit"  Content="Unit must be choosed." FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,300,0,0" Width="472"/>
+        <Label Name="LblErrUnit" Visibility="Hidden"  Content="Unit must be choosed." FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,300,0,0" Width="472"/>
 
         <Label Content="Location:" HorizontalAlignment="Left" Margin="10,330,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
-        <TextBox Name="LocationInput" MaxLength="200" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="100,330,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="30" />
-        <Label Name="LblErrLocation"  Content="Location must be in the format 'A1 B1'." FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,360,0,0" Width="472"/>
+        <TextBox Name="LocationInput" LostFocus="LocationInput_LostFocus" MaxLength="200" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="100,330,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="30" />
+        <Label Name="LblErrLocation" Visibility="Hidden"  Content="Location must be in the format 'A1 B1'." FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,360,0,0" Width="472"/>
 
         <Button Name="BtnSave" IsDefault="True" Content="Save" HorizontalAlignment="Left" Margin="35,445,0,0" VerticalAlignment="Top" Width="70" Height="20" Click="BtnSave_Click"/>
         <Button IsCancel="True" Content="Cancel" HorizontalAlignment="Left" Margin="200,445,0,0" VerticalAlignment="Top" Width="70" Height="20" RenderTransformOrigin="0.791,-4.445"/>
