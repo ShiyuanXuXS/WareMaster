@@ -177,7 +177,36 @@ namespace WareMaster
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
-
+        private void MenuItemInventoryInbound_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InventoryChange inventoryInbound = new InventoryChange("Inbound");
+                inventoryInbound.Owner = this;
+                inventoryInbound.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+        private void MenuItemInventoryOutbound_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InventoryChange inventoryOutbound = new InventoryChange("Outbound");
+                inventoryOutbound.Owner = this;
+                inventoryOutbound.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+        private void MenuItemInventorySettle_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InventorySettle inventorySettle = new InventorySettle();
+                inventorySettle.Owner = this;
+                inventorySettle.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

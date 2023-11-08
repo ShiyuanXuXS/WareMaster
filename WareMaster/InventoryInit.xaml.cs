@@ -21,6 +21,7 @@ using System.Windows.Shapes;
 using System.Reflection;
 using System.Printing;
 using System.Windows.Markup;
+
 namespace WareMaster
 {
     /// <summary>
@@ -194,6 +195,7 @@ namespace WareMaster
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (var package = new ExcelPackage())
             {
                 var worksheet = package.Workbook.Worksheets.Add("Initial Inventory Data");
