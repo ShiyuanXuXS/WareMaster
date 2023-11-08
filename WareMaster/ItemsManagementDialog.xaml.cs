@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +22,69 @@ namespace WareMaster
     /// </summary>
     public partial class ItemsManagementDialog : Window
     {
-        
+        private int currentPage = 1;
+        private int pageSize = 10;
+        private int totalPage = 0;
+        private List<ViewItem> filterItems = new List<ViewItem>();
+        private List<ViewItem> allItems = new List<ViewItem>();
+
         public ItemsManagementDialog()
         {
             InitializeComponent();
             InitializeLvItems();
+            totalPage = (int)Math.Ceiling((double)allItems.Count / pageSize);
+            for (int i = 0; i < totalPage; i++)
+            {
+                Button newPageButton = new Button()
+                {
+                    Content = i + 1,
+                    Width = 15,
+                    Height = 15,
+                    FontSize = 10,
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
+                newPageButton.Click += NewPageButton_Click;
+                StackPaging.Children.Insert(i + 2, newPageButton);
+            }
+        }
+
+        private void NewPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = (Button)sender;
+            String page = clickedButton.Content.ToString();
+            if (int.TryParse(page, out int currentPage))
+            {
+                DisplayPage(currentPage);
+            }
+            else
+            {
+                MessageBox.Show(this, "Somthing went wrong, will display first page of items.", "error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                DisplayPage(1);
+            }
+        }
+
+        private void BtnPrevPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                DisplayPage(currentPage);
+            }
+        }
+
+        private void BtnNextPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage < totalPage)
+            {
+                currentPage++;
+                DisplayPage(currentPage);
+            }
+        }
+
+        private void DisplayPage(int page)
+        {
+            var itemsToDisplay = filterItems.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            LvItems.ItemsSource = itemsToDisplay;
         }
 
         private void InitializeLvItems()
@@ -39,12 +98,15 @@ namespace WareMaster
                             {
                                 ItemId = item.id,
                                 ItemName = item.Itemname,
-                                Description = item.Description != null ? item.Description : string.Empty, 
+                                Description = item.Description != null ? item.Description : string.Empty,
                                 CategoryName = category.Category_Name,
                                 Unit = item.Unit != null ? item.Unit : string.Empty,
                                 Location = item.Location != null ? item.Location : string.Empty
                             };
-                LvItems.ItemsSource = query.ToList();
+                allItems = query.ToList();
+                LvItems.ItemsSource= allItems;
+                filterItems = allItems;
+                TxblItemCount.Text = "Total " + query.Count().ToString() + " Items";
             }
             catch (SystemException ex)
             {
@@ -73,13 +135,13 @@ namespace WareMaster
             ViewItem selectedItem = LvItems.SelectedItem as ViewItem;
             if (selectedItem == null) return;
             Item currItem = new Item();
-                currItem.id = selectedItem.ItemId;
-                currItem.Itemname = selectedItem.ItemName;
-                currItem.Description = selectedItem.Description;
-                currItem.Unit = selectedItem.Unit;
-                currItem.Location = selectedItem.Location;
-                currItem.Category_Id = Globals.wareMasterEntities.Items.Where(item => item.id == selectedItem.ItemId).Select(item => item.Category_Id).SingleOrDefault();
-            
+            currItem.id = selectedItem.ItemId;
+            currItem.Itemname = selectedItem.ItemName;
+            currItem.Description = selectedItem.Description;
+            currItem.Unit = selectedItem.Unit;
+            currItem.Location = selectedItem.Location;
+            currItem.Category_Id = Globals.wareMasterEntities.Items.Where(item => item.id == selectedItem.ItemId).Select(item => item.Category_Id).SingleOrDefault();
+
             AddEditItemsDialog dialog = new AddEditItemsDialog(currItem);
             dialog.Owner = this;
             if (dialog.ShowDialog() == true)
@@ -114,20 +176,121 @@ namespace WareMaster
         {
             ViewItem selectedItem = LvItems.SelectedItem as ViewItem;
             if (selectedItem == null) return;
-            
-            
+
+
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this item?", "Delete Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
-                {
+            {
                 Item itemToDelete = Globals.wareMasterEntities.Items.SingleOrDefault(item => item.id == selectedItem.ItemId);
-                if(itemToDelete != null)
+                if (itemToDelete != null)
                 {
-                    Globals.wareMasterEntities.Items.Remove(itemToDelete);                 
+                    Globals.wareMasterEntities.Items.Remove(itemToDelete);
                     Globals.wareMasterEntities.SaveChanges();
                     InitializeLvItems();
                 }
             }
         }
+
+        private void MenuItemSortByName_Click(object sender, RoutedEventArgs e)
+        {
+            ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(LvItems.ItemsSource);
+
+            // Check if the view is already sorted by the ItemName column
+            if (view.SortDescriptions.Count > 0 && view.SortDescriptions[0].PropertyName == "ItemName")
+            {
+                // Reverse the sorting direction
+                view.SortDescriptions.Clear();
+            }
+            else
+            {
+                // Sort by the ItemName column in ascending order
+                view.SortDescriptions.Add(new SortDescription("ItemName", ListSortDirection.Ascending));
+            }
+        }
+
+        private void MenuItemSortByCategory_Click(object sender, RoutedEventArgs e)
+        {
+            ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(allItems);
+
+            // Check if the view is already sorted by the Location column
+            if (view.SortDescriptions.Count > 0 && view.SortDescriptions[0].PropertyName == "Location")
+            {
+                // Reverse the sorting direction
+                view.SortDescriptions.Clear();
+            }
+            else
+            {
+                // Sort by the Location column in ascending order
+                view.SortDescriptions.Add(new SortDescription("Location", ListSortDirection.Ascending));
+            }
+        }
+
+        private void MenuItemSortByLocation_Click(object sender, RoutedEventArgs e)
+        {
+            ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(allItems);
+
+            // Check if the view is already sorted by the CategoryName column
+            if (view.SortDescriptions.Count > 0 && view.SortDescriptions[0].PropertyName == "CategoryName")
+            {
+                // Reverse the sorting direction
+                view.SortDescriptions.Clear();
+            }
+            else
+            {
+                // Sort by the CategoryName column in ascending order
+                view.SortDescriptions.Add(new SortDescription("CategoryName", ListSortDirection.Ascending));
+            }
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtFilter.Text == "")
+            {
+                filterItems = allItems;
+                //currentPage = 1;
+                //DisplayPage(currentPage);
+            }
+            else
+            {
+                filterItems = new List<ViewItem>(from item in allItems
+                                                      where item.ItemName.Contains(txtFilter.Text.Trim())
+                                                      select item);
+                //currentPage = 1;
+                //DisplayPage(currentPage);
+            }
+        }
+
+        private bool IsMaximized = false;
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                if (IsMaximized)
+                {
+                    this.WindowState = WindowState.Normal;
+                    this.Width = 1080;
+                    this.Height = 720;
+                    IsMaximized = false;
+                }
+                else
+                {
+                    this.WindowState = WindowState.Maximized;
+                    //GridContent.Height = 920;
+                    IsMaximized = true;
+                }
+            }
+
+        }
+
+
     }
-    
+
 }
