@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -69,15 +71,15 @@ namespace WareMaster
         private void LvItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ViewItem selectedItem = LvItems.SelectedItem as ViewItem;
+            if (selectedItem == null) return;
             Item currItem = new Item();
-            currItem.id = selectedItem.ItemId;
-            currItem.Itemname = selectedItem.ItemName;
-            currItem.Description    = selectedItem.Description;
-            currItem.Unit = selectedItem.Unit;
-            currItem.Location = selectedItem.Location;
-            currItem.Category_Id = Globals.wareMasterEntities.Items.Where(item => item.id == selectedItem.ItemId).Select(item => item.Category_Id).SingleOrDefault();
-
-            if (currItem == null) return;
+                currItem.id = selectedItem.ItemId;
+                currItem.Itemname = selectedItem.ItemName;
+                currItem.Description = selectedItem.Description;
+                currItem.Unit = selectedItem.Unit;
+                currItem.Location = selectedItem.Location;
+                currItem.Category_Id = Globals.wareMasterEntities.Items.Where(item => item.id == selectedItem.ItemId).Select(item => item.Category_Id).SingleOrDefault();
+            
             AddEditItemsDialog dialog = new AddEditItemsDialog(currItem);
             dialog.Owner = this;
             if (dialog.ShowDialog() == true)
@@ -93,9 +95,38 @@ namespace WareMaster
             {
                 AddEditItemsDialog dialog = new AddEditItemsDialog();
                 dialog.Owner = this;
-                dialog.ShowDialog();
+                //dialog.ShowDialog();
+                if (dialog.ShowDialog() == true)
+                {
+                    InitializeLvItems();
+                    LblMessage.Text = "Item updated";
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+
+        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            LvItems_SelectionChanged(LvItems, new SelectionChangedEventArgs(Selector.SelectedEvent, new List<object>(), new List<object>()));
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ViewItem selectedItem = LvItems.SelectedItem as ViewItem;
+            if (selectedItem == null) return;
+            
+            
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this item?", "Delete Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+                {
+                Item itemToDelete = Globals.wareMasterEntities.Items.SingleOrDefault(item => item.id == selectedItem.ItemId);
+                if(itemToDelete != null)
+                {
+                    Globals.wareMasterEntities.Items.Remove(itemToDelete);                 
+                    Globals.wareMasterEntities.SaveChanges();
+                    InitializeLvItems();
+                }
+            }
         }
     }
     
