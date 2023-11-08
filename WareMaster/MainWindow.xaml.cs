@@ -156,6 +156,17 @@ namespace WareMaster
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
+        private void MenuItemInventorySettle_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InventorySettle inventorySettle = new InventorySettle();
+                inventorySettle.Owner = this;
+                inventorySettle.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+        
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

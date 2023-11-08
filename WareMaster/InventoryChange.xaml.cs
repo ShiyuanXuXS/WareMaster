@@ -53,7 +53,7 @@ namespace WareMaster
                 User_Id = user.id,
                 Item_Id=(item!=null)?item.id : 0,
             };
-            ReBound();
+            ReBind();
         }
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
@@ -163,13 +163,13 @@ namespace WareMaster
                 {
                     item = selectedItem;
                     transaction.Item_Id = selectedItem.id;
-                    ReBound();
+                    ReBind();
                 }
 
                 itemListPopup.IsOpen = false;
             }
         }
-        private void ReBound()
+        private void ReBind()
         {
             DataContext = null;
             DataContext = transaction;
