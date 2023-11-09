@@ -14,28 +14,96 @@
     </Window.Resources>
 
     <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-        <Grid Name="GridMain">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Menu Grid.Row="0" >
-                <MenuItem Header="_Add Items" Click="MenuItemAddItems_Click"/>
-                <MenuItem Header="_Sort">
-                    <MenuItem Header="_Sort By Name" Click="MenuItemSortByName_Click"/>
-                    <MenuItem Header="_Sort By Category" Click="MenuItemSortByCategory_Click"/>
-                    <MenuItem Header="_Sort By Location" Click="MenuItemSortByLocation_Click"/>
-                </MenuItem>
-            </Menu>
-
-            <Grid x:Name="GridContent" Grid.Row="1">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <!--Main Section-->
-                <Grid Grid.Column="1" Margin="30,0,20,20" Height="630" VerticalAlignment="Bottom">
+
+            <!-- Left Menu-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <!--<RowDefinition Height="100"/>-->
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!--Menu Icon-->
+                <Button Margin="20,28,0,35" Style="{StaticResource topButton}">
+                    <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="Images/favicon.ico" Width="16" Height="16" Margin="0,0,5,0" />
+            </StackPanel>-->
+                    <Icon:PackIconMaterial Kind="Menu"/>
+                </Button>
+
+                <Button Visibility="Hidden" Content="Button" HorizontalAlignment="Left" Height="34" Margin="78,26,0,0" VerticalAlignment="Top" Width="93"/>
+
+                <Border Grid.Row="1" Background="#FF3E47D0" CornerRadius="0 50 0 30">
+                    <DockPanel>
+                        <!--Menu Logo-->
+                        <Border Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
+                        DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
+                            <Ellipse>
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/Images/WMLetter.jpg"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Border>
+
+                        <!--Menu Titles-->
+                        <TextBlock Text="WareMaster" Foreground="White" FontSize="22" FontWeight="SemiBold"
+                           DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
+                        <TextBlock Name="TbUserName" Text="" Foreground="#d0bfff" FontSize="14" FontWeight="SemiBold"
+                             DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
+
+                        <!--Menu Seprator-->
+                        <Separator Margin="25" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc"/>
+
+                        <!--Menu Buttons-->
+                        <StackPanel DockPanel.Dock="Top">
+                            <Button Name="BtnManageItem" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="ShapePlus" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Category"></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="SwapVerticalBold"  Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Inventory"></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="ChartAreaspline"  Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Analyse"></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="DatabaseArrowRight" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Data Export"></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource menuButton}" Click="BtnToHome_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="home" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Back to Dashboard"></TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                        <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="Logout"  Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Logout"></TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </DockPanel>
+                </Border>
+            </Grid>
+
+            <!--Main Section-->
+                <Grid Grid.Column="1" Margin="30,0,20,20" Height="680" VerticalAlignment="Bottom">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -46,7 +114,15 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <!--Page Title-->
+                <!--Top Buttons-->
+                <Button Grid.Row="0" Style="{StaticResource topButton}" Margin="780,14,0,14" Background="#dcdcdc">
+                    <Icon:PackIconMaterial Kind="Cog"/>
+                </Button>
+                <Button Grid.Row="0" Style="{StaticResource topButton}" Margin="745,14,0,14">
+                    <Icon:PackIconMaterial Kind="Bell"/>
+                </Button>
+
+                <!--Page Title-->
                     <TextBlock Text="Items Management" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
                        HorizontalAlignment="Left" Foreground="#121518"/>
                     <!--Add Button-->
@@ -70,7 +146,7 @@
                     <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
                         <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                             Panel.ZIndex="1" Text="Search in Item Name..." 
-                            Visibility="{Binding ElementName=txtSearch.IsEmpty,Path=Text,Converter={StaticResource BoolToVis}}"/>
+                            Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
                         <TextBox x:Name="txtFilter" TextChanged="txtFilter_TextChanged" Style="{StaticResource textboxFilter}"/>
 
                     </Grid>
@@ -124,6 +200,6 @@
                 </Grid>
 
             </Grid>
-        </Grid>
+       
     </Border>
 </Window>

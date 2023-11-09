@@ -46,6 +46,7 @@ namespace WareMaster
                 newPageButton.Click += NewPageButton_Click;
                 StackPaging.Children.Insert(i + 2, newPageButton);
             }
+            TbUserName.Text = "Terry";
         }
 
         private void NewPageButton_Click(object sender, RoutedEventArgs e)
@@ -191,14 +192,6 @@ namespace WareMaster
             }
         }
 
-        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                this.DragMove();
-            }
-        }
-
         private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (txtFilter.Text == "")
@@ -216,6 +209,14 @@ namespace WareMaster
                 //DisplayPage(currentPage);
             }
             LvItems.ItemsSource = filterItems;
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
         }
 
         private bool IsMaximized = false;
@@ -240,7 +241,19 @@ namespace WareMaster
 
         }
 
-
+        private void BtnToHome_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MainWindow dialog = new MainWindow();
+                dialog.Owner = this;
+                if (dialog.ShowDialog() == true)
+                {
+                    InitializeLvItems();
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
     }
 
 }
