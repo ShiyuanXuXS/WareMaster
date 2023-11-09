@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,31 +22,31 @@ namespace WareMaster
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     /// 
-    public class ExitKey : ICommand
-    {
-        public event EventHandler CanExecuteChanged;
+    //public class ExitKey : ICommand
+    //{
+    //    public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
+    //    public bool CanExecute(object parameter)
+    //    {
+    //        return true;
+    //    }
 
-        public void Execute(object parameter)
-        {
-            Application.Current.Shutdown();
-        }
-    }
+    //    public void Execute(object parameter)
+    //    {
+    //        Application.Current.Shutdown();
+    //    }
+    //}
 
-    public class ExitCommandContext
-    {
-        public ICommand ExitCommand
-        {
-            get
-            {
-                return new ExitKey();
-            } 
-        }
-    }
+    //public class ExitCommandContext
+    //{
+    //    public ICommand ExitCommand
+    //    {
+    //        get
+    //        {
+    //            return new ExitKey();
+    //        } 
+    //    }
+    //}
     public partial class MainWindow : Window
     {
         private int currentPage = 1;
@@ -53,12 +54,14 @@ namespace WareMaster
         private int totalPage = 0;
         private List<ItemViewModel> allItems = new List<ItemViewModel>() ;
         private List<ItemViewModel> filterItems = new List<ItemViewModel>();
+        private WareMasterEntities dbContext;
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ExitCommandContext();
-            //InitializeComponent();
-            Globals.wareMasterEntities = new WareMasterEntities();
+                //this.DataContext = new ExitCommandContext();
+                //InitializeComponent();
+                //Globals.wareMasterEntities = new WareMasterEntities();
+            dbContext = Globals.DbContext;
             InitializeLvInit();
             totalPage = (int)Math.Ceiling((double)allItems.Count / pageSize);
             for (int i = 0; i < totalPage; i++)
@@ -101,8 +104,8 @@ namespace WareMaster
         {
             try
             {
-                var query = from item in Globals.wareMasterEntities.Items
-                            join settlement in Globals.wareMasterEntities.Settlements on item.id equals settlement.Item_Id into gj
+                var query = from item in dbContext.Items
+                            join settlement in dbContext.Settlements on item.id equals settlement.Item_Id into gj
                             from sub in gj.DefaultIfEmpty()
                             select new ItemViewModel
                             {
@@ -282,7 +285,10 @@ namespace WareMaster
             }
         }
 
-        
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //MessageBox.Show("mainwindow closing");
+        }
     }
 
     public class ItemViewModel

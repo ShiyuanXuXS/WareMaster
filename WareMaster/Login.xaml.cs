@@ -1,7 +1,11 @@
-﻿using System.Windows;
+﻿using System.Data.Entity;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System;
 
 namespace WareMaster
 {
@@ -10,9 +14,14 @@ namespace WareMaster
     /// </summary>
     public partial class Login : Window
     {
+        private WareMasterEntities dbContext;
+        public bool IsAuthenticated{get; set;}
+        
         public Login()
         {
             InitializeComponent();
+            dbContext = Globals.DbContext;
+            IsAuthenticated = false;
         }
 
         private void TblName_MouseDown(object sender, MouseButtonEventArgs e)
@@ -52,9 +61,62 @@ namespace WareMaster
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(TxtName.Text) && !string.IsNullOrEmpty(TxtPassword.Password))
+            try
             {
+                if (!string.IsNullOrEmpty(TxtName.Text) && !string.IsNullOrEmpty(TxtPassword.Password))
+                {
+                    string username = TxtName.Text.Trim();
+                    string password = TxtPassword.Password.Trim();
+                    string passwordSaved = "";
+                    int id = 0;
+                    RoleEnum role;
+                    var user = dbContext.Users
+                        .Where(u => u.Username == username)
+                        .Select(u => new
+                        {
+                            u.id,
+                            u.Password,
+                            u.Role
+                        })
+                        .FirstOrDefault(); // Use FirstOrDefault to get a single result or null if not found
+                    if (user==null)
+                    {
+                        TblUsernameErr.Text = "User Name does not exist!";
+                        TblUsernameErr.Visibility = Visibility.Visible;
+                        return;
+                    }
+                    if (user != null)
+                    {
+                        id = user.id;
+                        passwordSaved = user.Password;
+                        role = user.Role;
+                        string hashPassword = SetHashedPassword(password);
+                        if (hashPassword!=passwordSaved)
+                        {
+                            TblPasswordeErr.Text = "Password is no correct!";
+                            TblPasswordeErr.Visibility = Visibility.Visible;
+                            return;
+                        }
+                        IsAuthenticated = true;
+                        Close();
+                    }
+                    
+                }
+            }
+            catch(SystemException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            
+        }
 
+        public string SetHashedPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(password);
+                byte[] hashedBytes = sha256.ComputeHash(bytes);
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
         }
 
@@ -64,6 +126,17 @@ namespace WareMaster
             {
                 this.DragMove();
             }
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void addBUtton_Click(object sender, RoutedEventArgs e)
+        {
+            AddEditUsersDialog adduser = new AddEditUsersDialog();
+            adduser.ShowDialog();
         }
     }
 }

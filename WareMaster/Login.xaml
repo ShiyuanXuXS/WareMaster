@@ -12,6 +12,11 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
+
+        <Button Name="BtnClose" Grid.Column="1" Panel.ZIndex="1" Click="BtnClose_Click"  Style="{StaticResource topButton}" 
+                Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Icon:PackIconMaterial Kind="Close"/>
+        </Button>
         <Border CornerRadius="10 0 0 10">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -27,16 +32,16 @@
                     <Ellipse Margin="50 380 0 0" Width="20" Height="20" Fill="#4ebe"/>
                 </Canvas>
             </Grid>
-            
+
         </Border>
         <Border Background="#ffffff" Grid.Column="1" CornerRadius="0 10 10 0" MouseDown="Border_MouseDown">
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="Sign in" Style="{StaticResource titleText}" Foreground="#3ab1ab"/>
+                <TextBlock Text="Sign in" Style="{StaticResource titleText}" Foreground="#3ab1eb"/>
                 <StackPanel Orientation="Horizontal" Margin="0 20" HorizontalAlignment="Center">
                     <!--social buttons-->
                 </StackPanel>
 
-                <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
+                <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7 75 0" CornerRadius="5">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -46,12 +51,12 @@
                         <TextBlock  x:Name="TblName" MouseDown="TblName_MouseDown" Text="User name" FontSize="14" Grid.Column="1" Panel.ZIndex="1" Margin="10 0 0 0" Foreground="#acb0af" />
                         <TextBox x:Name="TxtName" TextChanged="TxtName_TextChanged" FontSize="14" Grid.Column="1" Margin="10 0 0 0" Foreground="#878787" BorderBrush="Transparent" BorderThickness="1"/>
                         <Icon:PackIconMaterial Kind="Account" Width="15" Height="15" VerticalAlignment="Center"
-                                       Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Left"/>     
+                                       Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Left"/>
                     </Grid>
-                    
                 </Border>
+                <TextBlock x:Name="TblUsernameErr" Text="User Name not right" Foreground="red" Width="281" Margin="70 0 0 10" Visibility="Hidden"/>
 
-                <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
+                <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7 75 0" CornerRadius="5">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -64,8 +69,9 @@
                        Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Left"/>
                     </Grid>
                 </Border>
-
+                <TextBlock x:Name="TblPasswordeErr" Text="Password not right" Foreground="red" Width="281" Margin="70 0 0 10" Visibility="Hidden"/>
                 <Button Content="Sign in" Click="Button_Click" Style="{StaticResource loginButton}"/>
+                <!--<Button Content="add" x:Name="addBUtton" Click="addBUtton_Click" Height="20"/>-->
             </StackPanel>
         </Border>
     </Grid>

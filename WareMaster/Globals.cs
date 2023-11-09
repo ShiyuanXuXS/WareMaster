@@ -9,5 +9,16 @@ namespace WareMaster
     internal class Globals
     {
         static internal WareMasterEntities wareMasterEntities;
+        public static WareMasterEntities DbContext //singleton pattern
+        {
+            get
+            {
+                if (wareMasterEntities == null)
+                {
+                    wareMasterEntities = new WareMasterEntities();
+                }
+                return wareMasterEntities;
+            }
+        }
     }
 }
