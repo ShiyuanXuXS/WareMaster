@@ -88,6 +88,9 @@
     <Compile Include="ItemsManagementDialog.xaml.cs">
       <DependentUpon>ItemsManagementDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Partials\Item.cs" />
     <Compile Include="Partials\Transaction.cs" />
     <Compile Include="Query.xaml.cs">
@@ -147,6 +150,10 @@
     <Page Include="ItemsManagementDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

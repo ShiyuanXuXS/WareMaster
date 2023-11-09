@@ -233,7 +233,50 @@
             <Setter Property="VerticalAlignment" Value="center"/>
         </Style>
 
-        
+        <Style x:Key="titleText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#fffff1"/>
+        </Style>
+
+        <Style x:Key="normalText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="LineHeight" Value="28"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#fffff1"/>
+        </Style>
+
+        <Style x:Key="loginButton" TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="0 20 0 0 "/>
+            <Setter Property="Background" Value="#3ab19b"/>
+            <Setter Property="Foreground" Value="#fdfefe"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="25" BorderThickness="1" BorderBrush="#49b7a3" Padding="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#339685"/>
+                    <Setter Property="Foreground" Value="white"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#2d7a6c"/>
+                    <Setter Property="Foreground" Value="white"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
         <ResourceDictionary x:Key="metro">
             <ResourceDictionary.MergedDictionaries>
                  <!--MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive!--> 
