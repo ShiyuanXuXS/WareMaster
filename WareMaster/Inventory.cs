@@ -26,15 +26,15 @@ namespace WareMaster
     }
     internal class Inventory
     {
-        static DateTime GetFirstSettleDate()
+        static internal DateTime GetFirstSettleDate()
         {
             DateTime firstSettleDate = Globals.wareMasterEntities.Settlements
                 .Select(s => s.Settle_Date)
                 .DefaultIfEmpty(DateTime.MinValue)
                 .Min();
             return firstSettleDate;
-        } 
-        static DateTime GetLastSettleDate()
+        }
+        static internal DateTime GetLastSettleDate()
         {
             DateTime lastSettleDate = Globals.wareMasterEntities.Settlements
                 .Select(s => s.Settle_Date)
@@ -42,7 +42,7 @@ namespace WareMaster
                 .Max();
             return lastSettleDate;
         }
-        static DateTime GetFirstSettleDateByItem(Item item)
+        static internal DateTime GetFirstSettleDateByItem(Item item)
         {
             DateTime firstSettleDate = Globals.wareMasterEntities.Settlements
                 .Where(s => s.Item_Id == item.id)
@@ -51,7 +51,7 @@ namespace WareMaster
                 .Min();
             return firstSettleDate;
         }
-        static DateTime GetLastSettleDateByItem(Item item) {
+        static internal DateTime GetLastSettleDateByItem(Item item) {
             DateTime lastSettleDate = Globals.wareMasterEntities.Settlements
                 .Where(s=>s.Item_Id==item.id)
                 .Select(s => s.Settle_Date)
@@ -61,21 +61,21 @@ namespace WareMaster
         }
 
 
-        static Settlement GetLastSettlementByItem(Item item, DateTime dateBefore)
+        static internal Settlement GetLastSettlementByItem(Item item, DateTime dateBefore)
         {
             return Globals.wareMasterEntities.Settlements
                     .Where(s => s.Item_Id == item.id && s.Settle_Date <=  dateBefore)
                     .OrderByDescending(s => s.Settle_Date)
                     .FirstOrDefault();
         }
-        
-        static List<InventoryData> GetFirstInventories()
+
+        static internal List<InventoryData> GetFirstInventories()
         {
             DateTime firstSettleDate = GetFirstSettleDate();
             return GetAllInventoriesByItem(firstSettleDate);
         }
 
-        static InventoryData GetInventoryByItem(Item item, DateTime dateOfInventory)
+        static internal InventoryData GetInventoryByItem(Item item, DateTime dateOfInventory)
         {
             Settlement latestSettlemnt= GetLastSettlementByItem(item,dateOfInventory);
             InventoryData inventoryData = new InventoryData
@@ -91,7 +91,7 @@ namespace WareMaster
             return inventoryData;
         }
 
-        static InventoryData GetInventoryByCategory(Category category,DateTime dateOfInventory)
+        static internal InventoryData GetInventoryByCategory(Category category,DateTime dateOfInventory)
         {
             List<Item> items = Globals.wareMasterEntities.Items.Where(item=>item.Category_Id == category.id).ToList();
             InventoryData inventoryData = new InventoryData();
@@ -105,7 +105,7 @@ namespace WareMaster
             }
             return inventoryData;
         }
-        static List<InventoryData> GetAllInventoriesByItem(DateTime dateOfInventory)
+        static internal List<InventoryData> GetAllInventoriesByItem(DateTime dateOfInventory)
         {
             List<InventoryData> inventories = new List<InventoryData>();
             List<Item> items=Globals.wareMasterEntities.Items.ToList();
@@ -115,7 +115,7 @@ namespace WareMaster
             }
             return inventories;
         }
-        static List<InventoryData> GetAllInventoriesByCategory(DateTime dateOfInventory)
+        static internal List<InventoryData> GetAllInventoriesByCategory(DateTime dateOfInventory)
         {
             List<InventoryData> inventories=new List<InventoryData>();
             List<Category> categories = Globals.wareMasterEntities.Categories.ToList();
@@ -126,7 +126,7 @@ namespace WareMaster
             return inventories;
         }
 
-        static List<InventoryData> GetInboundsByItem(Item item, DateTime dateBegin, DateTime dateEnd)
+        static internal List<InventoryData> GetInboundsByItem(Item item, DateTime dateBegin, DateTime dateEnd)
         {
             List<Transaction> inbounds = Globals.wareMasterEntities.Transactions
                 .Where(t => t.Item_Id == item.id && t.Quantity > 0 && t.Transaction_Date > dateBegin && t.Transaction_Date <= dateEnd)
@@ -143,7 +143,7 @@ namespace WareMaster
 
             return inventoryList;
         }
-        static List<InventoryData> GetInboundsByCategory(Category category, DateTime dateBegin, DateTime dateEnd)
+        static internal List<InventoryData> GetInboundsByCategory(Category category, DateTime dateBegin, DateTime dateEnd)
         {
             List<Transaction> inbounds = Globals.wareMasterEntities.Transactions
                 .Where(t => t.Item.Category_Id == category.id && t.Quantity > 0 && t.Transaction_Date > dateBegin && t.Transaction_Date <= dateEnd)
@@ -160,7 +160,7 @@ namespace WareMaster
 
             return inventoryList;
         }
-        static InventoryData getSumInboundsByItem(Item item,DateTime dateBegin,DateTime dateEnd)
+        static internal InventoryData getSumInboundsByItem(Item item,DateTime dateBegin,DateTime dateEnd)
         {
             InventoryData inventory=new InventoryData();
             inventory.id = item.id;
@@ -175,7 +175,7 @@ namespace WareMaster
             return inventory;
         }
 
-        static InventoryData GetSumInboundsByCategory(Category category, DateTime dateBegin, DateTime dateEnd)
+        static internal InventoryData GetSumInboundsByCategory(Category category, DateTime dateBegin, DateTime dateEnd)
         {
             List<Item> items = Globals.wareMasterEntities.Items.Where(item=>item.Category_Id==category.id).ToList();
             InventoryData inventory=new InventoryData();
@@ -189,7 +189,7 @@ namespace WareMaster
             return inventory;
         }
 
-        static List<InventoryData> GetOutboundsByItem(Item item, DateTime dateBegin, DateTime dateEnd)
+        static internal List<InventoryData> GetOutboundsByItem(Item item, DateTime dateBegin, DateTime dateEnd)
         {
             List<Transaction> outbounds = Globals.wareMasterEntities.Transactions
                 .Where(t => t.Item_Id == item.id && t.Quantity < 0 && t.Transaction_Date > dateBegin && t.Transaction_Date <= dateEnd)
@@ -206,7 +206,7 @@ namespace WareMaster
 
             return inventoryList;
         }
-        static List<InventoryData> GetOutboundsByCategory(Category category, DateTime dateBegin, DateTime dateEnd)
+        static internal List<InventoryData> GetOutboundsByCategory(Category category, DateTime dateBegin, DateTime dateEnd)
         {
             List<Transaction> outbounds = Globals.wareMasterEntities.Transactions
                 .Where(t => t.Item.Category_Id == category.id && t.Quantity < 0 && t.Transaction_Date > dateBegin && t.Transaction_Date <= dateEnd)
@@ -224,7 +224,7 @@ namespace WareMaster
             return inventoryList;
         }
 
-        static InventoryData getSumOutboundsByItem(Item item, DateTime dateBegin, DateTime dateEnd)
+        static internal InventoryData getSumOutboundsByItem(Item item, DateTime dateBegin, DateTime dateEnd)
         {
             InventoryData inventory = new InventoryData();
             inventory.id = item.id;
@@ -239,7 +239,7 @@ namespace WareMaster
             return inventory;
         }
 
-        static InventoryData GetSumOutboundsByCategory(Category category, DateTime dateBegin, DateTime dateEnd)
+        static internal InventoryData GetSumOutboundsByCategory(Category category, DateTime dateBegin, DateTime dateEnd)
         {
             List<Item> items = Globals.wareMasterEntities.Items.Where(item => item.Category_Id == category.id).ToList();
             InventoryData inventory = new InventoryData();

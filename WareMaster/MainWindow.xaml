@@ -32,12 +32,12 @@
                 </MenuItem>
 
                 <MenuItem Header="Inventory" Height="25" Width="100" FontSize="16">
-                    <MenuItem Header="Inventory Init" Click="MenuItemInventoryInit_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                    <MenuItem Header="Inventory Inbound" Click="MenuItemInventoryInbound_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                    <MenuItem Header="Inventory Outbound" Click="MenuItemInventoryOutbound_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                    <MenuItem Header="Inventory Settle" Click="MenuItemInventorySettle_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                    <MenuItem Header="Initialize" Click="MenuItemInventoryInit_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                    <MenuItem Header="Inbound" Click="MenuItemInventoryInbound_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                    <MenuItem Header="Outbound" Click="MenuItemInventoryOutbound_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                    <MenuItem Header="Settle" Click="MenuItemInventorySettle_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
                 </MenuItem>
-                <MenuItem Header="Query" Height="25" Width="100" FontSize="16"/>
+                <MenuItem Header="Query" Height="25" Width="100" FontSize="16" Click="MenuItemQuery_Click"/>
                 <MenuItem Header="Analyse" Height="25" Width="100" FontSize="16"/>
                 <MenuItem Header="Users" Height="25" Width="100" FontSize="16"/>
                 <MenuItem Name="Exit" InputGestureText="Ctrl+X" Click="Exit_Click" Header="Exit" Height="25" Width="100" FontSize="16"/>

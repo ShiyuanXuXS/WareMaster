@@ -207,6 +207,16 @@ namespace WareMaster
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
+        private void MenuItemQuery_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InventoryQuery inventoryQuery = new InventoryQuery();
+                inventoryQuery.Owner = this;
+                inventoryQuery.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
