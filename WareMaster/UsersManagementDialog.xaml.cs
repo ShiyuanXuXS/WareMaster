@@ -30,6 +30,7 @@ namespace WareMaster
         {
             InitializeComponent();
             InitializeDgUsers();
+            TbUserName.Text = "Terry";
         }
 
         private void InitializeDgUsers()
@@ -90,6 +91,20 @@ namespace WareMaster
                 InitializeDgUsers();
                 LblMessage.Text = "User updated";
             }
+        }
+
+        private void BtnToHome_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MainWindow dialog = new MainWindow();
+                dialog.Owner = this;
+                if (dialog.ShowDialog() == true)
+                {
+                    InitializeDgUsers();
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
 
         private void BtnActivities_Click(object sender, RoutedEventArgs e)
