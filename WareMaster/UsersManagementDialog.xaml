@@ -1,4 +1,4 @@
-﻿<Window x:Class="WareMaster.ItemsManagementDialog"
+﻿<Window x:Class="WareMaster.UsersManagementDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,13 +6,12 @@
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:WareMaster"
         mc:Ignorable="d"
-        Title="ItemsManagementDialog" Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Title="UsersManagementDialog" Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent">
-
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
-
+    
     <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid Name="GridMain">
             <Grid.RowDefinitions>
@@ -21,12 +20,6 @@
             </Grid.RowDefinitions>
 
             <Menu Grid.Row="0" >
-                <MenuItem Header="_Add Items" Click="MenuItemAddItems_Click"/>
-                <MenuItem Header="_Sort">
-                    <MenuItem Header="_Sort By Name" Click="MenuItemSortByName_Click"/>
-                    <MenuItem Header="_Sort By Category" Click="MenuItemSortByCategory_Click"/>
-                    <MenuItem Header="_Sort By Location" Click="MenuItemSortByLocation_Click"/>
-                </MenuItem>
             </Menu>
 
             <Grid x:Name="GridContent" Grid.Row="1">
@@ -47,13 +40,13 @@
                     </Grid.RowDefinitions>
 
                     <!--Page Title-->
-                    <TextBlock Text="Items Management" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                    <TextBlock Text="Users Management" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
                        HorizontalAlignment="Left" Foreground="#121518"/>
                     <!--Add Button-->
                     <Button Style="{StaticResource addButton}" Background="#FF4158D9" Click="MenuItemAddItems_Click">
                         <StackPanel Orientation="Horizontal">
                             <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                            <TextBlock Text="Add New Item"/>
+                            <TextBlock Text="Add New User"/>
                         </StackPanel>
                     </Button>
 
@@ -61,7 +54,7 @@
                     <Separator Grid.Row="3" Height="1" Background="#dae2ea" Margin="0 -1 0 10"/>
 
                     <!--Counter Title-->
-                    <TextBlock Name="TxblItemCount" Text="68 Items" Grid.Row="4" FontSize="18" FontWeight="SemiBold"
+                    <TextBlock Name="TxblItemCount" Text="68 Users" Grid.Row="4" FontSize="18" FontWeight="SemiBold"
                        Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <TextBlock Text="Filter by" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Margin="0 0 215 0"
                         Foreground="#121518" HorizontalAlignment="Right" VerticalAlignment="Center"/>
@@ -69,31 +62,25 @@
                     <!--Filter Textbox-->
                     <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
                         <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                            Panel.ZIndex="1" Text="Search in Item Name..." 
+                            Panel.ZIndex="1" Text="Search in User Name..." 
                             Visibility="{Binding ElementName=txtSearch.IsEmpty,Path=Text,Converter={StaticResource BoolToVis}}"/>
                         <TextBox x:Name="txtFilter" TextChanged="txtFilter_TextChanged" Style="{StaticResource textboxFilter}"/>
 
                     </Grid>
 
                     <!--Members Datagrid-->
-                    <DataGrid Grid.Row="5" x:Name="LvItems" SelectionMode="Single" GridLinesVisibility="None"
+                    <DataGrid Grid.Row="5" x:Name="DgUsers" SelectionMode="Single" GridLinesVisibility="None"
                           HorizontalGridLinesBrush="Aqua" CanUserReorderColumns="False" CanUserAddRows="False" 
-                          AutoGenerateColumns="False" SelectionChanged="LvItems_SelectionChanged" Margin="0,0,10,10">
+                          AutoGenerateColumns="False" SelectionChanged="DgUsers_SelectionChanged" Margin="0,0,10,10">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Header="Item Id" IsReadOnly="True" MinWidth="50" Binding="{Binding ItemId}" />
-                            <DataGridTextColumn Header="Item Name" IsReadOnly="True" MinWidth="100" Binding="{Binding ItemName}"/>
-                            <DataGridTextColumn Header="Description" IsReadOnly="True" MinWidth="150" Binding="{Binding Description}" />
-                            <DataGridTextColumn Header="Category" IsReadOnly="True" MinWidth="100" Binding="{Binding CategoryName}" />
-                            <DataGridTextColumn Header="Unit" IsReadOnly="True" MinWidth="60" Binding="{Binding Unit}" />
-                            <DataGridTextColumn Header="Location" IsReadOnly="True" MinWidth="100" Binding="{Binding Location}" />
+                            <DataGridTextColumn Header="User Id" IsReadOnly="True" MinWidth="50" Width="auto" Binding="{Binding id}" />
+                            <DataGridTextColumn Header="User Name" IsReadOnly="True" MinWidth="100" Binding="{Binding Username}"/>
+                            <DataGridTextColumn Header="Role" IsReadOnly="True" MinWidth="150" Binding="{Binding Role}" />
+                            <DataGridTextColumn Header="Email" IsReadOnly="True" MinWidth="100" Binding="{Binding Email}" />
                         </DataGrid.Columns>
-                        <DataGrid.RowStyle>
-                            <Style TargetType="{x:Type DataGridRow}">
-                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            </Style>
-                        </DataGrid.RowStyle>
                         <DataGrid.ContextMenu>
                             <ContextMenu>
+                                <MenuItem Header="Activities" Click="BtnActivities_Click" />
                                 <MenuItem Header="Update" Click="BtnUpdate_Click" />
                                 <MenuItem Header="Delete" Click="BtnDelete_Click" />
                             </ContextMenu>
@@ -104,7 +91,7 @@
                     <!--Pagination Section-->
                     <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
                     CornerRadius="5" Padding="5" Background="White" Margin="0 10 10 10">
-                        <StackPanel x:Name="StackPaging" Orientation="Horizontal">
+                        <!--<StackPanel x:Name="StackPaging" Orientation="Horizontal">
                             <Button Name="BtnPrevPage" Click="BtnPrevPage_Click" Style="{StaticResource pagingButton}">
                                 <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource pagingButtonIcon}" />
                             </Button>
@@ -113,14 +100,14 @@
                             <Button Name="BtnNextPage" Click="BtnNextPage_Click" Style="{StaticResource pagingButton}">
                                 <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource pagingButtonIcon}" />
                             </Button>
-                        </StackPanel>
+                        </StackPanel>-->
                     </Border>
 
                     <StatusBar Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <StatusBarItem >
-                <TextBlock Name="LblMessage" Text="Welcome, user!"/>
-            </StatusBarItem>
-        </StatusBar>
+                        <StatusBarItem >
+                            <TextBlock Name="LblMessage" Text="Welcome, user!"/>
+                        </StatusBarItem>
+                    </StatusBar>
                 </Grid>
 
             </Grid>

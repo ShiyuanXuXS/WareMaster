@@ -63,6 +63,9 @@
     <Compile Include="AddEditItemsDialog.xaml.cs">
       <DependentUpon>AddEditItemsDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddEditUsersDialog.xaml.cs">
+      <DependentUpon>AddEditUsersDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Analize.xaml.cs">
       <DependentUpon>Analize.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,7 @@
     </Compile>
     <Compile Include="Partials\Item.cs" />
     <Compile Include="Partials\Transaction.cs" />
+    <Compile Include="Partials\User.cs" />
     <Compile Include="Query.xaml.cs">
       <DependentUpon>Query.xaml</DependentUpon>
     </Compile>
@@ -107,6 +111,9 @@
     </Compile>
     <Compile Include="User.cs">
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersManagementDialog.xaml.cs">
+      <DependentUpon>UsersManagementDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="WareMasterDbContext.Context.cs">
       <AutoGen>True</AutoGen>
@@ -126,6 +133,10 @@
     <Page Include="AddEditItemsDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditUsersDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Analize.xaml">
       <SubType>Designer</SubType>
@@ -170,6 +181,10 @@
     <Page Include="Query.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UsersManagementDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
