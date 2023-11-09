@@ -128,10 +128,11 @@
                 </Button>
 
                 <!--Page Title-->
-                    <TextBlock Text="Users Management" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                <TextBlock Text="Users Management" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
                        HorizontalAlignment="Left" Foreground="#121518"/>
-                    <!--Add Button-->
-                    <Button Style="{StaticResource addButton}" Background="#FF4158D9" Click="MenuItemAddItems_Click">
+                    
+                <!--Add Button-->
+                <Button Style="{StaticResource addButton}"  Click="MenuItemAddItems_Click">
                         <StackPanel Orientation="Horizontal">
                             <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
                             <TextBlock Text="Add New User"/>
@@ -157,14 +158,17 @@
                     </Grid>
 
                     <!--Members Datagrid-->
-                    <DataGrid Grid.Row="5" x:Name="DgUsers" SelectionMode="Single" GridLinesVisibility="None"
-                          HorizontalGridLinesBrush="Aqua" CanUserReorderColumns="False" CanUserAddRows="False" 
-                          AutoGenerateColumns="False" SelectionChanged="DgUsers_SelectionChanged" Margin="0,0,10,10">
+                    <DataGrid Grid.Row="5" x:Name="DgUsers"  
+                           SelectionChanged="DgUsers_SelectionChanged" Margin="0,0,10,10" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              Style="{DynamicResource DataGridStyle1}"
+                              RowStyle="{DynamicResource DataGridRowStyle1}">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Header="User Id" IsReadOnly="True" MinWidth="50" Width="auto" Binding="{Binding id}" />
-                            <DataGridTextColumn Header="User Name" IsReadOnly="True" MinWidth="100" Binding="{Binding Username}"/>
-                            <DataGridTextColumn Header="Role" IsReadOnly="True" MinWidth="150" Binding="{Binding Role}" />
-                            <DataGridTextColumn Header="Email" IsReadOnly="True" MinWidth="100" Binding="{Binding Email}" />
+                            <DataGridTextColumn Header="User Id" IsReadOnly="True" Width="*" Binding="{Binding id}" />
+                        <DataGridTextColumn Header="User Name" IsReadOnly="True"  Width="*" Binding="{Binding Username}"/>
+                        <DataGridTextColumn Header="Role" IsReadOnly="True"  Width="*" Binding="{Binding Role}" />
+                        <DataGridTextColumn Header="Email" IsReadOnly="True"  Width="*" Binding="{Binding Email}" />
                         </DataGrid.Columns>
                         <DataGrid.ContextMenu>
                             <ContextMenu>
