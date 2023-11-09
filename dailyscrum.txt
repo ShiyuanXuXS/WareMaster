@@ -155,5 +155,40 @@ Jing
 3. Need assistance / figure things out
 - NA
 
+2023-11-9
+
+Shiyuan
+1.  Done / not done since last scrum:
+- 
+- 
+- 
+2. To do until next Scrum:
+- 
+- 
+3. Need assistance / figure things out
+- none
+
+Xiaoxing
+1.  Done / not done since last scrum:
+- 
+- 
+2. To do until next Scrum:
+- 
+- 
+- 
+- 
+3. Need assistance / figure things out
+- find chart library
+
+Jing
+1. Done since last scrum
+- add Login window
+
+2. Plan until next Scrum
+- fix bugs in mainwindow and login window
+- find solution of installation or backup database.
+3. Need assistance / figure things out
+- NA
+
 
 
