@@ -304,9 +304,20 @@ namespace WareMaster
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closed(object sender, EventArgs e)
         {
-            //MessageBox.Show("mainwindow closing");
+            base.OnClosed(e);
+            App.Current.Shutdown(0);
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void BtnBackup_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 
