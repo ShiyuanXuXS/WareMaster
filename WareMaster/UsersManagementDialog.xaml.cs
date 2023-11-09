@@ -38,7 +38,6 @@ namespace WareMaster
             {
                 allUsers = Globals.wareMasterEntities.Users.ToList();
                 DgUsers.ItemsSource = allUsers;
-                filterUsers = allUsers;
                 TxblItemCount.Text = "Total " + allUsers.Count().ToString() + " Users";
             }
             catch (SystemException ex)
@@ -136,20 +135,22 @@ namespace WareMaster
 
         private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //if (txtFilter.Text == "")
-            //{
-            //    filterItems = allItems;
-            //    //currentPage = 1;
-            //    //DisplayPage(currentPage);
-            //}
-            //else
-            //{
-            //    filterItems = new List<ViewItem>(from item in allItems
-            //                                     where item.ItemName.Contains(txtFilter.Text.Trim())
-            //                                     select item);
-            //    //currentPage = 1;
-            //    //DisplayPage(currentPage);
-            //}
+           
+            if (txtFilter.Text == "")
+            {
+                filterUsers = allUsers;
+                //currentPage = 1;
+                //DisplayPage(currentPage);
+            }
+            else
+            {
+                filterUsers = new List<User>(from user in allUsers
+                                                 where user.Username.ToLower().Contains(txtFilter.Text.Trim().ToLower())
+                                             select user);
+                //currentPage = 1;
+                //DisplayPage(currentPage);
+            }
+            DgUsers.ItemsSource = filterUsers;
         }
     }
 }
