@@ -105,7 +105,6 @@ namespace WareMaster
                             };
                 allItems = query.ToList();
                 LvItems.ItemsSource= allItems;
-                filterItems = allItems;
                 TxblItemCount.Text = "Total " + query.Count().ToString() + " Items";
             }
             catch (SystemException ex)
@@ -161,7 +160,7 @@ namespace WareMaster
                 if (dialog.ShowDialog() == true)
                 {
                     InitializeLvItems();
-                    LblMessage.Text = "Item updated";
+                    LblMessage.Text = "Item added";
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
@@ -186,59 +185,9 @@ namespace WareMaster
                 {
                     Globals.wareMasterEntities.Items.Remove(itemToDelete);
                     Globals.wareMasterEntities.SaveChanges();
+                    LblMessage.Text = "Item deleted";
                     InitializeLvItems();
                 }
-            }
-        }
-
-        private void MenuItemSortByName_Click(object sender, RoutedEventArgs e)
-        {
-            ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(LvItems.ItemsSource);
-
-            // Check if the view is already sorted by the ItemName column
-            if (view.SortDescriptions.Count > 0 && view.SortDescriptions[0].PropertyName == "ItemName")
-            {
-                // Reverse the sorting direction
-                view.SortDescriptions.Clear();
-            }
-            else
-            {
-                // Sort by the ItemName column in ascending order
-                view.SortDescriptions.Add(new SortDescription("ItemName", ListSortDirection.Ascending));
-            }
-        }
-
-        private void MenuItemSortByCategory_Click(object sender, RoutedEventArgs e)
-        {
-            ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(allItems);
-
-            // Check if the view is already sorted by the Location column
-            if (view.SortDescriptions.Count > 0 && view.SortDescriptions[0].PropertyName == "Location")
-            {
-                // Reverse the sorting direction
-                view.SortDescriptions.Clear();
-            }
-            else
-            {
-                // Sort by the Location column in ascending order
-                view.SortDescriptions.Add(new SortDescription("Location", ListSortDirection.Ascending));
-            }
-        }
-
-        private void MenuItemSortByLocation_Click(object sender, RoutedEventArgs e)
-        {
-            ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(allItems);
-
-            // Check if the view is already sorted by the CategoryName column
-            if (view.SortDescriptions.Count > 0 && view.SortDescriptions[0].PropertyName == "CategoryName")
-            {
-                // Reverse the sorting direction
-                view.SortDescriptions.Clear();
-            }
-            else
-            {
-                // Sort by the CategoryName column in ascending order
-                view.SortDescriptions.Add(new SortDescription("CategoryName", ListSortDirection.Ascending));
             }
         }
 
@@ -261,11 +210,12 @@ namespace WareMaster
             else
             {
                 filterItems = new List<ViewItem>(from item in allItems
-                                                      where item.ItemName.Contains(txtFilter.Text.Trim())
-                                                      select item);
+                                                      where item.ItemName.ToLower().Contains(txtFilter.Text.Trim().ToLower())
+                                                 select item);
                 //currentPage = 1;
                 //DisplayPage(currentPage);
             }
+            LvItems.ItemsSource = filterItems;
         }
 
         private bool IsMaximized = false;

@@ -99,8 +99,10 @@
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Partials\Item.cs" />
+    <Compile Include="Partials\ItemInputValidator.cs" />
     <Compile Include="Partials\Transaction.cs" />
     <Compile Include="Partials\User.cs" />
+    <Compile Include="Partials\UserInputValidator.cs" />
     <Compile Include="Query.xaml.cs">
       <DependentUpon>Query.xaml</DependentUpon>
     </Compile>
