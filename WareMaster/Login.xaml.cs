@@ -97,6 +97,8 @@ namespace WareMaster
                             TblPasswordeErr.Visibility = Visibility.Visible;
                             return;
                         }
+                        Globals.Username = username;
+                        Globals.Role = (RoleEnum)role;
                         IsAuthenticated = true;
                         Close();
                     }
