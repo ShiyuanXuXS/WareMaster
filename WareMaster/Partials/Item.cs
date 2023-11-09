@@ -13,7 +13,7 @@ namespace WareMaster
         
         public static bool IsItemNameValid(string itemname, out string error)
         {
-            if (itemname.Length < 1 || itemname.Length > 200)
+            if (itemname.Length < 1 || itemname.Length > 200 || !Regex.IsMatch(itemname, "^[a-zA-Z]+$"))
             {
                 error = "Item Name must be 1-200 characters long, only letters";
                 return false;
@@ -24,9 +24,9 @@ namespace WareMaster
 
         public static bool IsDescriptionValid(string description, out string error)
         {
-            if (description.Length < 1 || description.Length > 500 || !Regex.IsMatch(description, "^[a-zA-Z]+$"))
+            if (description.Length < 1 || description.Length > 500 || !Regex.IsMatch(description, "^[a-zA-Z\\s]+$"))
             {
-                error = "Description must be 1-500 characters long, contain only letters";
+                error = "Description must be 1-500 characters long, contain only letters and/or space";
                 return false;
             }
             error = null;
@@ -57,10 +57,9 @@ namespace WareMaster
 
         public static bool IsLocationValid(string location, out string error)
         {
-            string locationPattern = @"^A\d+\sB\d+$";
-            if (location ==  null || !Regex.IsMatch(location, locationPattern))
+            if (location ==  null || !Regex.IsMatch(location, "^A\\d{1,2}$"))
             {
-                error = "Location must be in the format 'A1 B1'";
+                error = "Location must be in the format 'A1'";
                 return false;
             }
             error = null;

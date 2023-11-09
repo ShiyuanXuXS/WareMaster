@@ -38,7 +38,6 @@ namespace WareMaster
             {
                 allUsers = Globals.wareMasterEntities.Users.ToList();
                 DgUsers.ItemsSource = allUsers;
-                filterUsers = allUsers;
                 TxblItemCount.Text = "Total " + allUsers.Count().ToString() + " Users";
             }
             catch (SystemException ex)
@@ -99,26 +98,24 @@ namespace WareMaster
         }
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            //LvItems_SelectionChanged(LvItems, new SelectionChangedEventArgs(Selector.SelectedEvent, new List<object>(), new List<object>()));
+            DgUsers_SelectionChanged(DgUsers, new SelectionChangedEventArgs(Selector.SelectedEvent, new List<object>(), new List<object>()));
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            //ViewItem selectedItem = LvItems.SelectedItem as ViewItem;
-            //if (selectedItem == null) return;
-
-
-            //MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this item?", "Delete Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            //if (result == MessageBoxResult.Yes)
-            //{
-            //    Item itemToDelete = Globals.wareMasterEntities.Items.SingleOrDefault(item => item.id == selectedItem.ItemId);
-            //    if (itemToDelete != null)
-            //    {
-            //        Globals.wareMasterEntities.Items.Remove(itemToDelete);
-            //        Globals.wareMasterEntities.SaveChanges();
-            //        InitializeLvItems();
-            //    }
-            //}
+            User selectedUser = DgUsers.SelectedItem as User;
+            if (selectedUser == null) return;
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this user?", "Delete Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                User userToDelete = Globals.wareMasterEntities.Users.SingleOrDefault(user => user.id == selectedUser.id);
+                if (userToDelete != null)
+                {
+                    Globals.wareMasterEntities.Users.Remove(userToDelete);
+                    Globals.wareMasterEntities.SaveChanges();
+                    InitializeDgUsers();
+                }
+            }
         }
 
         private void MenuItemAddItems_Click(object sender, RoutedEventArgs e)
@@ -138,20 +135,22 @@ namespace WareMaster
 
         private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //if (txtFilter.Text == "")
-            //{
-            //    filterItems = allItems;
-            //    //currentPage = 1;
-            //    //DisplayPage(currentPage);
-            //}
-            //else
-            //{
-            //    filterItems = new List<ViewItem>(from item in allItems
-            //                                     where item.ItemName.Contains(txtFilter.Text.Trim())
-            //                                     select item);
-            //    //currentPage = 1;
-            //    //DisplayPage(currentPage);
-            //}
+           
+            if (txtFilter.Text == "")
+            {
+                filterUsers = allUsers;
+                //currentPage = 1;
+                //DisplayPage(currentPage);
+            }
+            else
+            {
+                filterUsers = new List<User>(from user in allUsers
+                                                 where user.Username.ToLower().Contains(txtFilter.Text.Trim().ToLower())
+                                             select user);
+                //currentPage = 1;
+                //DisplayPage(currentPage);
+            }
+            DgUsers.ItemsSource = filterUsers;
         }
     }
 }

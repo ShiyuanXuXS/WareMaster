@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using FluentValidation;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -23,11 +24,9 @@ namespace WareMaster
     public partial class AddEditItemsDialog : Window
     {
         Item currItem = new Item();
-        private string errorMessage;
-        List<string> errors = new List<string>();
+        string errorMessage;
         List<Category> categories = Globals.wareMasterEntities.Categories.ToList();
-
-
+        ItemInputValidator validator = new ItemInputValidator();
 
         public AddEditItemsDialog(Item currItem = null)
         {
@@ -63,7 +62,6 @@ namespace WareMaster
             {
                 MessageBox.Show(this, "Error reading from database\n" + ex.Message, "Fatal error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
-                // Close();
                 Environment.Exit(1);
             }
 
@@ -77,10 +75,10 @@ namespace WareMaster
             try
             {
                 if (string.IsNullOrWhiteSpace(ItemNameInput.Text) ||
-    string.IsNullOrWhiteSpace(DescriptionInput.Text) ||
-    string.IsNullOrWhiteSpace(LocationInput.Text) ||
-    CategoryComboBox.SelectedItem == null ||
-    UnitComboBox.SelectedItem == null)
+                    string.IsNullOrWhiteSpace(DescriptionInput.Text) ||
+                    string.IsNullOrWhiteSpace(LocationInput.Text) ||
+                    CategoryComboBox.SelectedItem == null ||
+                    UnitComboBox.SelectedItem == null)
                 {                  
                     throw new ArgumentException("Input incompleted");
                 }
@@ -95,6 +93,12 @@ namespace WareMaster
                     itemToUpdate.Location = LocationInput.Text;
                     itemToUpdate.Unit =(UnitComboBox.SelectedItem as ComboBoxItem)?.Tag as string;
                     Console.WriteLine(currItem);
+                    var result = validator.Validate(itemToUpdate);
+                    if (!result.IsValid)
+                    {
+                        throw new ArgumentException(result.ToString(Environment.NewLine));
+                    }
+
                 }
                 else // add
                 {
@@ -109,6 +113,11 @@ namespace WareMaster
                         Unit = (UnitComboBox.SelectedItem as ComboBoxItem)?.Tag as string
 
                     };
+                    var result = validator.Validate(newItem);
+                    if (!result.IsValid)
+                    {
+                        throw new ArgumentException(result.ToString(Environment.NewLine));
+                    }
                     Console.WriteLine(newItem);
                     Globals.wareMasterEntities.Items.Add(newItem);
                 }

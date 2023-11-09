@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 
 namespace WareMaster
 {
@@ -24,6 +26,50 @@ namespace WareMaster
                 byte[] hashedBytes = sha256.ComputeHash(bytes);
                 Password = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
+        }
+
+        public static bool IsUserNameValid(string username, out string error)
+        {
+            if (username.Length < 5 || username.Length > 45 || !Regex.IsMatch(username, "^[a-zA-Z]+$"))
+            {
+                error = "Username must be 5-45 characters long, only letters";
+                return false;
+            }
+            error = null;
+            return true;
+        }
+
+        public static bool IsPasswordValid(string password, out string error)
+        {
+            if (password.Length < 1 || password.Length > 64 || !Regex.IsMatch(password, "^[a-zA-Z0-9]+$"))
+            {
+                error = "Password must be 1-64 characters long, contain only letters and/or numbers";
+                return false;
+            }
+            error = null;
+            return true;
+        }
+
+        public static bool IsEmailValid(string email, out string error)
+        {
+            if (email.Length < 1 || email.Length > 200)
+            {
+                error = "Email must be valid";
+                return false;
+            }
+            error = null;
+            return true;
+        }
+
+        public static bool IsRoleValid(string role, out string error)
+        {
+            if (role == null)
+            {
+                error = "You must choose a role";
+                return false;
+            }
+            error = null;
+            return true;
         }
     }
 

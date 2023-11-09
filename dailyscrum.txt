@@ -125,23 +125,26 @@ Jing
 
 Shiyuan
 1.  Done / not done since last scrum:
-- 
-- 
+- inbound
+- outbound
+- settle
 2. To do until next Scrum:
-- 
-- 
+- Inventory class for commonly used functions
+- Query window
 3. Need assistance / figure things out
 - none
 
 Xiaoxing
 1.  Done / not done since last scrum:
-- 
-- 
-- 
+- user management and add edit user frontend backend
+- filter/delete user
 2. To do until next Scrum:
-- 
-- 
+- pagination of users/items list
+- duplication check when users/items add/update
+- data export
+- chart
 3. Need assistance / figure things out
+- find chart library
 
 Jing
 1. Done since last scrum
