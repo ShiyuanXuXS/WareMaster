@@ -98,32 +98,32 @@
                             <StackPanel DockPanel.Dock="Top">
                                 <Button Name="BtnManageItem" Click="BtnManageItem_Click" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="Tools" Width="15" Height="15"/>
+                                        <Icon:PackIconMaterial Kind="Tools"  Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Manage Items"></TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="OpenInApp" Width="15" Height="15"/>
+                                        <Icon:PackIconMaterial Kind="OpenInApp" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Manage Inventory"></TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button x:Name="BtnManagerUser" Style="{StaticResource menuButton}" Click="BtnManageUser_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="AccountMultipleOutline" Width="15" Height="15"/>
+                                        <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Manager Users"></TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="book" Width="15" Height="15"/>
+                                        <Icon:PackIconMaterial Kind="book"  Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Manager Categories"></TextBlock>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
                             <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="Logout" Width="15" Height="15"/>
+                                    <Icon:PackIconMaterial Kind="Logout"  Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Logout"></TextBlock>
                                 </StackPanel>
                             </Button>
