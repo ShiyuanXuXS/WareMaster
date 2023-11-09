@@ -73,6 +73,7 @@
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="InventoryChange.xaml.cs">
       <DependentUpon>InventoryChange.xaml</DependentUpon>
     </Compile>
