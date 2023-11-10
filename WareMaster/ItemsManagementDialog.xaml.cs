@@ -1,8 +1,13 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using OfficeOpenXml.Style;
+using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,6 +32,7 @@ namespace WareMaster
         private int totalPage = 0;
         private List<ViewItem> filterItems = new List<ViewItem>();
         private List<ViewItem> allItems = new List<ViewItem>();
+        private string loginUser = Globals.Username;
 
         public ItemsManagementDialog()
         {
@@ -46,7 +52,7 @@ namespace WareMaster
                 newPageButton.Click += NewPageButton_Click;
                 StackPaging.Children.Insert(i + 2, newPageButton);
             }
-            TbUserName.Text = "Terry";
+            TbUserName.Text = loginUser;
         }
 
         private void NewPageButton_Click(object sender, RoutedEventArgs e)
@@ -115,7 +121,7 @@ namespace WareMaster
                 Environment.Exit(1);
             }
         }
-
+        
         private class ViewItem
         {
             public int ItemId { get; set; }
@@ -130,7 +136,90 @@ namespace WareMaster
             }
         }
 
-        private void LvItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BtnAddItems_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AddEditItemsDialog dialog = new AddEditItemsDialog();
+                dialog.Owner = this;
+                //dialog.ShowDialog();
+                if (dialog.ShowDialog() == true)
+                {
+                    InitializeLvItems();
+                    //LblMessage.Text = "Item added";
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+
+        private void BtnExport_Click(object sender, RoutedEventArgs e)
+        {
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Items Data");
+
+                // get data from listview
+                var data = LvItems.Items;
+                if (data.Count <= 0)
+                {
+                    MessageBox.Show("No data to export");
+                    return;
+                }
+                PropertyInfo[] columnTypes = data[0].GetType().GetProperties();
+
+                // write data to excel
+                for (int col = 1; col < columnTypes.Length; col++)
+                {
+                    worksheet.Cells[1, col].Value = columnTypes[col - 1].Name;
+                    for (int row = 2; row < data.Count + 2; row++)
+                    {
+                        PropertyInfo property = columnTypes[col - 1];
+                        var value = property.GetValue(data[row - 2], null);
+                        if (property.PropertyType == typeof(DateTime))
+                        {
+                            worksheet.Cells[row, col].Value = ((DateTime)value).ToString("yyyy-MM-dd");
+                        }
+                        else
+                        {
+                            worksheet.Cells[row, col].Value = value;
+                        }
+                    }
+                }
+                using (var cells = worksheet.Cells[1, 1, 1, columnTypes.Length - 1])
+                {
+                    cells.Style.Font.Bold = true;
+                    cells.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    cells.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
+                    cells.Style.Border.BorderAround(ExcelBorderStyle.Thin);
+                }
+
+                // set column style
+                using (var cells = worksheet.Cells[2, 1, data.Count + 1, columnTypes.Length - 1])
+                {
+                    cells.Style.Border.BorderAround(ExcelBorderStyle.Thin);
+                }
+
+                // set width and height
+                worksheet.Cells.AutoFitColumns();
+
+                // save Excel file
+                var saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "Excel Files|*.xlsx|All Files|*.*",
+                    DefaultExt = "xlsx"
+                };
+
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    var newFile = new FileInfo(saveFileDialog.FileName);
+                    package.SaveAs(newFile);
+                    MessageBox.Show("Data exported successfully!", "Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+
+        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
             ViewItem selectedItem = LvItems.SelectedItem as ViewItem;
             if (selectedItem == null) return;
@@ -147,29 +236,9 @@ namespace WareMaster
             if (dialog.ShowDialog() == true)
             {
                 InitializeLvItems();
-                LblMessage.Text = "Item updated";
+                //LblMessage.Text = "Item updated";
             }
-        }
-
-        private void MenuItemAddItems_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                AddEditItemsDialog dialog = new AddEditItemsDialog();
-                dialog.Owner = this;
-                //dialog.ShowDialog();
-                if (dialog.ShowDialog() == true)
-                {
-                    InitializeLvItems();
-                    LblMessage.Text = "Item added";
-                }
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); };
-        }
-
-        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            LvItems_SelectionChanged(LvItems, new SelectionChangedEventArgs(Selector.SelectedEvent, new List<object>(), new List<object>()));
+            //LvItems_SelectionChanged(LvItems, new SelectionChangedEventArgs(Selector.SelectedEvent, new List<object>(), new List<object>()));
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -186,7 +255,7 @@ namespace WareMaster
                 {
                     Globals.wareMasterEntities.Items.Remove(itemToDelete);
                     Globals.wareMasterEntities.SaveChanges();
-                    LblMessage.Text = "Item deleted";
+                    //LblMessage.Text = "Item deleted";
                     InitializeLvItems();
                 }
             }

@@ -97,6 +97,19 @@ namespace WareMaster
             }
         }
 
+        private bool IsItemnameDuplicate(string itemname, out string error)
+        {
+            // get current itemname list
+            List<string> allNames = Globals.wareMasterEntities.Items.Select(item => item.Itemname).ToList();
+            if(allNames.Contains(itemname))
+            {
+                error = "Itemname must be unique";
+                return false;
+            }
+            error = null;
+            return true;
+        }
+
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -127,7 +140,7 @@ namespace WareMaster
                     var result = validator.Validate(userToUpdate);
                     if(!result.IsValid)
                     {
-                        throw new ArgumentException(result.ToString("~"));
+                        throw new ArgumentException(result.ToString(Environment.NewLine));
                     }
                     Console.WriteLine(currUser);
                 }
@@ -152,7 +165,7 @@ namespace WareMaster
                     var result = validator.Validate(newUser);
                     if (!result.IsValid)
                     {
-                        throw new ArgumentException(result.ToString("~"));
+                        throw new ArgumentException(result.ToString(Environment.NewLine));
                     }
                     Console.WriteLine(newUser);
                     Globals.wareMasterEntities.Users.Add(newUser);

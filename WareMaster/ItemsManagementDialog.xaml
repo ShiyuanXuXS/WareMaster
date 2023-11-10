@@ -79,12 +79,7 @@
                                     <TextBlock Text="Analyse"></TextBlock>
                                 </StackPanel>
                             </Button>
-                            <Button Style="{StaticResource menuButton}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="DatabaseArrowRight" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Data Export"></TextBlock>
-                                </StackPanel>
-                            </Button>
+                          
                             <Button Style="{StaticResource menuButton}" Click="BtnToHome_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="home" Style="{StaticResource menuButtonIcon}"/>
@@ -126,7 +121,7 @@
                 <TextBlock Text="Items Management" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
                        HorizontalAlignment="Left" Foreground="#121518"/>
                 <!--Add Button-->
-                <Button Style="{StaticResource addButton}" Click="MenuItemAddItems_Click">
+                <Button Style="{StaticResource addButton}" Click="BtnAddItems_Click">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
                         <TextBlock Text="Add New Item"/>
@@ -153,8 +148,9 @@
 
                 <!--Members Datagrid-->
                 <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Grid.Row="5" x:Name="LvItems" 
-                          SelectionChanged="LvItems_SelectionChanged" Margin="0,0,10,10" 
-                          RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}">
+                           Margin="0,0,10,10" 
+                          RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                          >
                     
                     <DataGrid.Columns >
                         <DataGridTextColumn Header="Item Id" IsReadOnly="True" Width="*" Binding="{Binding ItemId}" />
@@ -166,14 +162,19 @@
                     </DataGrid.Columns>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Update" Click="BtnUpdate_Click" >
-                                <Icon:PackIconMaterial Kind="PencilOutline"/>
-                            </MenuItem>
+                            <MenuItem Header="Update" Click="BtnUpdate_Click" />
                             <MenuItem Header="Delete" Click="BtnDelete_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
-
+                   
+                <!--Export Data Button-->
+                <Button Style="{StaticResource addButton}" Click="BtnExport_Click" Grid.Row="6" HorizontalAlignment="Left" Margin="0 10 10 10">
+                    <StackPanel Orientation="Horizontal">
+                        <Icon:PackIconMaterial Kind="DatabaseArrowRight" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
+                        <TextBlock Text="Export Data"/>
+                    </StackPanel>
+                </Button>
 
                 <!--Pagination Section-->
                 <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
@@ -190,11 +191,11 @@
                     </StackPanel>
                 </Border>
 
-                <StatusBar Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <!--<StatusBar Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <StatusBarItem >
                         <TextBlock Name="LblMessage" Text="Welcome, user!"/>
                     </StatusBarItem>
-                </StatusBar>
+                </StatusBar>-->
             </Grid>
 
         </Grid>
