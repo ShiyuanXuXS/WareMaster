@@ -24,16 +24,20 @@ namespace WareMaster
     public partial class AddEditUsersDialog : Window
     {
         User currUser = new User();
-        UserInputValidator validator = new UserInputValidator();
         string errorMessage;
+        int index= 0; // add
 
         public AddEditUsersDialog(User currUser = null)
         {
             InitializeComponent();
             
             this.currUser = currUser;
+            
             if (currUser != null) // update, load select values
             {
+                index = 1;
+                Lblpassword.Visibility = Visibility.Collapsed;
+                PasswordInput.Visibility = Visibility.Collapsed;
                 UserId.Content = currUser.id;
                 UsernameInput.Text = currUser.Username;
                 EmailInput.Text = currUser.Email;
@@ -44,7 +48,7 @@ namespace WareMaster
 
         private void UsernameInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (!User.IsUserNameValid(UsernameInput.Text, out errorMessage))
+            if (!User.IsUserNameValid(UsernameInput.Text, index, currUser.id, out errorMessage))
             {
                 LblErrUsername.Visibility = Visibility.Visible;
                 LblErrUsername.Content = errorMessage;
@@ -97,19 +101,6 @@ namespace WareMaster
             }
         }
 
-        private bool IsItemnameDuplicate(string itemname, out string error)
-        {
-            // get current itemname list
-            List<string> allNames = Globals.wareMasterEntities.Items.Select(item => item.Itemname).ToList();
-            if(allNames.Contains(itemname))
-            {
-                error = "Itemname must be unique";
-                return false;
-            }
-            error = null;
-            return true;
-        }
-
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -137,6 +128,7 @@ namespace WareMaster
                     {
                         throw new ArgumentException("Role error");
                     }
+                    var validator = new UserInputValidator(index, currUser.id);
                     var result = validator.Validate(userToUpdate);
                     if(!result.IsValid)
                     {
@@ -162,6 +154,7 @@ namespace WareMaster
                     {
                         throw new ArgumentException("Role error");
                     }
+                    var validator = new UserInputValidator(index, currUser.id);
                     var result = validator.Validate(newUser);
                     if (!result.IsValid)
                     {

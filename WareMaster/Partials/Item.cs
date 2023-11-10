@@ -11,15 +11,19 @@ namespace WareMaster
     public partial class Item
     {
 
-        public static bool IsItemNameValid(string itemname, out string error)
+        public static bool IsItemNameValid(string itemname, int index, int itemid, out string error)
         {
             List<string> allNames = Globals.wareMasterEntities.Items.Select(item => item.Itemname.ToLower()).ToList();
+            List<string> otherNames = Globals.wareMasterEntities.Items
+            .Where(item => item.id != itemid)
+            .Select(item => item.Itemname.ToLower())
+            .ToList();
             if (itemname.Length < 1 || itemname.Length > 200 || !Regex.IsMatch(itemname, "^[a-zA-Z]+$"))
             {
                 error = "Item Name must be 1-200 characters long, only letters";
                 return false;
             }
-            else if (allNames.Contains(itemname.ToLower()))
+            else if (index == 0 && allNames.Contains(itemname.ToLower()) || index == 1 && otherNames.Contains(itemname.ToLower()))  // 0 is add, 1 is edit
             {
                 error = "Itemname must be unique";
                 return false;
@@ -66,6 +70,17 @@ namespace WareMaster
             if (location == null || !Regex.IsMatch(location, "^A\\d{1,2}$"))
             {
                 error = "Location must be in the format 'A1'";
+                return false;
+            }
+            error = null;
+            return true;
+        }
+
+        public static bool IsLocationValid(int location, out string error)
+        {
+            if (location < 0 || location > 50)
+            {
+                error = "Ailse number must be between 1 ~ 50";
                 return false;
             }
             error = null;

@@ -89,12 +89,7 @@ namespace WareMaster
         {
             try
             {
-                MainWindow dialog = new MainWindow();
-                dialog.Owner = this;
-                if (dialog.ShowDialog() == true)
-                {
-                    InitializeDgUsers();
-                }
+                this.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }

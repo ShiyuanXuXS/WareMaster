@@ -83,7 +83,7 @@
                             <Button Style="{StaticResource menuButton}" Click="BtnToHome_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="home" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Back to Dashboard"></TextBlock>
+                                    <TextBlock Text="Dashboard"></TextBlock>
                                 </StackPanel>
                             </Button>
                         </StackPanel>

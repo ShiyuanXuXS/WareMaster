@@ -25,8 +25,8 @@ namespace WareMaster
     {
         Item currItem = new Item();
         string errorMessage;
+        int index = 0;  //add -> 0, edit -> 1
         List<Category> categories = Globals.wareMasterEntities.Categories.ToList();
-        ItemInputValidator validator = new ItemInputValidator();
 
         public AddEditItemsDialog(Item currItem = null)
         {
@@ -36,6 +36,7 @@ namespace WareMaster
             InitializeCategory();
             if (currItem != null) // update, load select values
             {
+                index = 1;
                 ItemId.Content = currItem.id;
                 ItemNameInput.Text = currItem.Itemname;
                 DescriptionInput.Text = currItem.Description;
@@ -48,7 +49,7 @@ namespace WareMaster
                         break;
                     }
                 }
-                LocationInput.Text = currItem.Location;
+                LocationInput.Text = currItem.Location.Substring(1);
             }
         }
 
@@ -64,9 +65,7 @@ namespace WareMaster
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 Environment.Exit(1);
             }
-
         }
-
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
@@ -90,9 +89,10 @@ namespace WareMaster
                     itemToUpdate.Itemname = ItemNameInput.Text;
                     itemToUpdate.Description = DescriptionInput.Text;
                     itemToUpdate.Category_Id = selectedCategory.id;
-                    itemToUpdate.Location = LocationInput.Text;
+                    itemToUpdate.Location = "A" + LocationInput.Text;
                     itemToUpdate.Unit =(UnitComboBox.SelectedItem as ComboBoxItem)?.Tag as string;
                     Console.WriteLine(currItem);
+                    var validator = new ItemInputValidator(index, currItem.id);
                     var result = validator.Validate(itemToUpdate);
                     if (!result.IsValid)
                     {
@@ -109,10 +109,11 @@ namespace WareMaster
                         Description = DescriptionInput.Text,
 
                         Category_Id = selectedCategory.id,
-                        Location = LocationInput.Text,
+                        Location = "A" + LocationInput.Text,
                         Unit = (UnitComboBox.SelectedItem as ComboBoxItem)?.Tag as string
 
                     };
+                    var validator = new ItemInputValidator(index, currItem.id);
                     var result = validator.Validate(newItem);
                     if (!result.IsValid)
                     {
@@ -138,7 +139,8 @@ namespace WareMaster
 
         private void ItemNameInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (!Item.IsItemNameValid(ItemNameInput.Text, out errorMessage))
+           
+            if (!Item.IsItemNameValid(ItemNameInput.Text, index, currItem.id, out errorMessage))
             {
                 LblErrItemName.Visibility = Visibility.Visible;
                 LblErrItemName.Content = errorMessage;
@@ -177,14 +179,22 @@ namespace WareMaster
 
         private void LocationInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (!Item.IsLocationValid(LocationInput.Text, out errorMessage))
+            if (int.TryParse(LocationInput.Text, out int aisle))
             {
-                LblErrLocation.Visibility = Visibility.Visible;
-                LblErrLocation.Content = errorMessage;
+                if (!Item.IsLocationValid(aisle, out errorMessage))
+                {
+                    LblErrLocation.Visibility = Visibility.Visible;
+                    LblErrLocation.Content = errorMessage;
+                }
+                else
+                {
+                    LblErrLocation.Visibility = Visibility.Hidden;
+                }
             }
             else
             {
-                LblErrLocation.Visibility = Visibility.Hidden;
+                LblErrLocation.Visibility = Visibility.Visible;
+                LblErrLocation.Content = "Invalid aisle format. Please enter a valid integer.";
             }
         }
 

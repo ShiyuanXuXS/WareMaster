@@ -28,15 +28,19 @@ namespace WareMaster
             }
         }
 
-        public static bool IsUserNameValid(string username, out string error)
+        public static bool IsUserNameValid(string username, int index, int userid, out string error)
         {
             List<string> allNames = Globals.wareMasterEntities.Users.Select(user => user.Username.ToLower()).ToList();
+            List<string> otherNames = Globals.wareMasterEntities.Users
+            .Where(user => user.id != userid)
+            .Select(user => user.Username.ToLower())
+            .ToList();
             if (username.Length < 5 || username.Length > 45 || !Regex.IsMatch(username, "^[a-zA-Z]+$"))
             {
                 error = "Username must be 5-45 characters long, only letters";
                 return false;
             }
-            else if (allNames.Contains(username.ToLower()))
+            else if (index == 0 && allNames.Contains(username.ToLower()) || index == 1 && otherNames.Contains(username.ToLower()))
             {
                 error = "Username must be unique";
                 return false;

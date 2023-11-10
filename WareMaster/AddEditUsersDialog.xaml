@@ -30,8 +30,8 @@
         </ComboBox>
         <Label Name="LblErrRole" Visibility="Hidden" Content="" FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,210,0,0" Width="472"/>
 
-        <Label Content="Password:" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
-        <TextBox Name="PasswordInput" LostFocus="PasswordInput_LostFocus" MaxLength="500" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="100,250,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Height="30" />
+        <Label Name="Lblpassword" Content="Password:" Visibility="Visible" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
+        <TextBox Name="PasswordInput" Visibility="Visible" LostFocus="PasswordInput_LostFocus" MaxLength="500" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="100,250,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Height="30" />
         <Label Name="LblErrPassword" Visibility="Hidden" Content="" FontSize="10" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,280,0,0" Width="472"/>
 
         <Button Name="BtnSave" IsDefault="True" Content="Save" HorizontalAlignment="Left" Margin="35,445,0,0" VerticalAlignment="Top" Width="70" Height="20" Click="BtnSave_Click"/>

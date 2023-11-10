@@ -24,8 +24,8 @@ namespace WareMaster
     /// </summary>
     public partial class CategoriesManagementDialog : Window
     {
-        private List<Category> filterCategories = new List<Category>();
-        private List<Category> allCategories = new List<Category>();
+        private List<ViewCategory> filterCategories;
+        private List<ViewCategory> allCategories;
         private string loginUser = Globals.Username;
         public CategoriesManagementDialog()
         {
@@ -48,7 +48,7 @@ namespace WareMaster
                                 CategoryName = category.Category_Name,
                                 TotalItems = categoryItems.Count()
                             };
-                allCategories = Globals.wareMasterEntities.Categories.ToList();
+                allCategories = query.ToList();
                 DgCategories.ItemsSource = allCategories;
                 //TxblItemCount.Text = "Total " + query.Count().ToString() + " Items";
             }
@@ -104,12 +104,7 @@ namespace WareMaster
         {
             try
             {
-                MainWindow dialog = new MainWindow();
-                dialog.Owner = this;
-                if (dialog.ShowDialog() == true)
-                {
-                    InitializeDgCategories();
-                }
+                this.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
@@ -192,20 +187,23 @@ namespace WareMaster
                 InitializeDgCategories();
                 //LblMessage.Text = "User updated";
             }
-            //DgUsers_SelectionChanged(DgUsers, new SelectionChangedEventArgs(Selector.SelectedEvent, new List<object>(), new List<object>()));
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            User selectedUser = DgCategories.SelectedItem as User;
-            if (selectedUser == null) return;
+            ViewCategory selectedCategory = DgCategories.SelectedItem as ViewCategory;
+            if (selectedCategory == null) return;
+            if(selectedCategory.TotalItems != 0)
+            {
+                MessageBox.Show("You can't delete a categoty that contains items", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this category?", "Delete Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                User userToDelete = Globals.wareMasterEntities.Users.SingleOrDefault(user => user.id == selectedUser.id);
-                if (userToDelete != null)
+                Category categoryToDelete = Globals.wareMasterEntities.Categories.SingleOrDefault(category => category.id == selectedCategory.CategoryId);
+                if (categoryToDelete != null)
                 {
-                    Globals.wareMasterEntities.Users.Remove(userToDelete);
+                    Globals.wareMasterEntities.Categories.Remove(categoryToDelete);
                     Globals.wareMasterEntities.SaveChanges();
                     InitializeDgCategories();
                 }
@@ -238,9 +236,9 @@ namespace WareMaster
             }
             else
             {
-                filterCategories = new List<Category>(from category in allCategories
-                                                  where category.Category_Name.ToLower().Contains(txtFilter.Text.Trim().ToLower())
-                                             select category);
+                filterCategories = new List<ViewCategory>(from category in allCategories
+                                                      where category.CategoryName.ToLower().Contains(txtFilter.Text.Trim().ToLower())
+                                                      select category);
                 //currentPage = 1;
                 //DisplayPage(currentPage);
             }
