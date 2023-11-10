@@ -166,7 +166,7 @@ Shiyuan
 - Query Summary data
 - Query Transactions data
 3. Need assistance / figure things out
-- none
+- Need User Id in Globals
 
 Xiaoxing
 1.  Done / not done since last scrum:
