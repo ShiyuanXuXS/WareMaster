@@ -152,7 +152,7 @@
                     <DataGrid.Columns >
                         <DataGridTextColumn Header="Category Id" IsReadOnly="True" Width="*" Binding="{Binding CategoryId}" />
                         <DataGridTextColumn Header="Category Name" IsReadOnly="True" Width="*" Binding="{Binding CategoryName}"/>
-                        <!--<DataGridTextColumn Header="Description" IsReadOnly="True" Width="*" Binding="{Binding Description}" />-->
+                        <DataGridTextColumn Header="Total Items" IsReadOnly="True" Width="*" Binding="{Binding TotalItems}" />
                     </DataGrid.Columns>
                     <DataGrid.ContextMenu>
                         <ContextMenu>

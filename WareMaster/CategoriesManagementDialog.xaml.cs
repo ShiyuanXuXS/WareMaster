@@ -39,6 +39,15 @@ namespace WareMaster
         {
             try
             {
+                var query = from category in Globals.wareMasterEntities.Categories
+                            join item in Globals.wareMasterEntities.Items
+                on category.id equals item.Category_Id into categoryItems
+                            select new ViewCategory
+                            {
+                                CategoryId = category.id,
+                                CategoryName = category.Category_Name,
+                                TotalItems = categoryItems.Count()
+                            };
                 allCategories = Globals.wareMasterEntities.Categories.ToList();
                 DgCategories.ItemsSource = allCategories;
                 //TxblItemCount.Text = "Total " + query.Count().ToString() + " Items";
@@ -48,6 +57,18 @@ namespace WareMaster
                 MessageBox.Show(this, "Error reading from database\n" + ex.Message, "Fatal error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 Environment.Exit(1);
+            }
+        }
+
+        private class ViewCategory
+        {
+            public int CategoryId { get; set; }
+            public string CategoryName { get; set; }
+            public int TotalItems { get; set; }
+            
+            public override string ToString()
+            {
+                return $"CategoryId: {CategoryId}, CategoryName: {CategoryName}, TotalItems: {TotalItems}";
             }
         }
 

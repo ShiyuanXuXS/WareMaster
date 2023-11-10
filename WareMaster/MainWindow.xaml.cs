@@ -254,6 +254,16 @@ namespace WareMaster
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
+        private void BtnManageCategory_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                CategoriesManagementDialog itemDialog = new CategoriesManagementDialog();
+                itemDialog.Owner = this;
+                itemDialog.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
 
         private void BtnManageUser_Click(object sender, RoutedEventArgs e)
         {
