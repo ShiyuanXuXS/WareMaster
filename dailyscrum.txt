@@ -170,13 +170,15 @@ Shiyuan
 
 Xiaoxing
 1.  Done / not done since last scrum:
-- 
-- 
+- duplication check when users/items add/update
+- data export
+- find char library lives chart
+- reset password
+- update item/user crud UI
 2. To do until next Scrum:
-- 
-- 
-- 
-- 
+- add/edit UI
+- category crud
+- analyse Window
 3. Need assistance / figure things out
 - find chart library
 
