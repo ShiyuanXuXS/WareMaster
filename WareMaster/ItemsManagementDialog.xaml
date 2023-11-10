@@ -23,9 +23,6 @@
             <Menu Grid.Row="0" >
                 <MenuItem Header="_Add Items" Click="MenuItemAddItems_Click"/>
                 <MenuItem Header="_Sort">
-                    <MenuItem Header="_Sort By Name" Click="MenuItemSortByName_Click"/>
-                    <MenuItem Header="_Sort By Category" Click="MenuItemSortByCategory_Click"/>
-                    <MenuItem Header="_Sort By Location" Click="MenuItemSortByLocation_Click"/>
                 </MenuItem>
             </Menu>
 
