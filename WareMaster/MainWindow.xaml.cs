@@ -52,12 +52,21 @@ namespace WareMaster
         private int currentPage = 1;
         private int pageSize = 10;
         private int totalPage = 0;
+        private RoleEnum role;
         private List<ItemViewModel> allItems = new List<ItemViewModel>() ;
         private List<ItemViewModel> filterItems = new List<ItemViewModel>();
         private WareMasterEntities dbContext;
         public MainWindow()
         {
             InitializeComponent();
+            if (Globals.Role==RoleEnum.ADMIN)
+            {
+                BtnManagerUser.IsEnabled = true;
+            }
+            else
+            {
+                BtnManagerUser.IsEnabled=false;
+            }
                 //this.DataContext = new ExitCommandContext();
                 //InitializeComponent();
                 //Globals.wareMasterEntities = new WareMasterEntities();
@@ -295,9 +304,20 @@ namespace WareMaster
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closed(object sender, EventArgs e)
         {
-            //MessageBox.Show("mainwindow closing");
+            base.OnClosed(e);
+            App.Current.Shutdown(0);
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void BtnBackup_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

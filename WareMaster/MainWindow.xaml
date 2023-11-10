@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Title="MainWindow" Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        AllowsTransparency="True" Background="Transparent" Closing="Window_Closing"
+        AllowsTransparency="True" Background="Transparent" Closed="Window_Closed"
        >
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -25,23 +25,29 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Menu Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#eff2f7" Foreground="#121518">
-                <MenuItem Header="Items" Height="25" Width="100" FontSize="16">
-                    <MenuItem Command="New" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                    <MenuItem Header="Update" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                </MenuItem>
+            <Grid Grid.Row="0">
+                <Menu VerticalAlignment="Center" HorizontalAlignment="Center" Background="#eff2f7" Foreground="#121518">
+                    <MenuItem Header="Items" Height="25" Width="100" FontSize="16">
+                        <MenuItem Command="New" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                        <MenuItem Header="Update" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                    </MenuItem>
 
-                <MenuItem Header="Inventory" Height="25" Width="100" FontSize="16">
-                    <MenuItem Header="Initialize" Click="MenuItemInventoryInit_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                    <MenuItem Header="Inbound" Click="MenuItemInventoryInbound_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                    <MenuItem Header="Outbound" Click="MenuItemInventoryOutbound_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                    <MenuItem Header="Settle" Click="MenuItemInventorySettle_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                </MenuItem>
-                <MenuItem Header="Query" Height="25" Width="100" FontSize="16" Click="MenuItemQuery_Click"/>
-                <MenuItem Header="Analyse" Height="25" Width="100" FontSize="16"/>
-                <MenuItem Header="Users" Height="25" Width="100" FontSize="16"/>
-                <MenuItem Name="Exit" InputGestureText="Ctrl+X" Click="Exit_Click" Header="Exit" Height="25" Width="100" FontSize="16"/>
-            </Menu>
+                    <MenuItem Header="Inventory" Height="25" Width="100" FontSize="16">
+                        <MenuItem Header="Initialize" Click="MenuItemInventoryInit_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                        <MenuItem Header="Inbound" Click="MenuItemInventoryInbound_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                        <MenuItem Header="Outbound" Click="MenuItemInventoryOutbound_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                        <MenuItem Header="Settle" Click="MenuItemInventorySettle_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                    </MenuItem>
+                    <MenuItem Header="Query" Height="25" Width="100" FontSize="16" Click="MenuItemQuery_Click"/>
+                    <MenuItem Header="Analyse" Height="25" Width="100" FontSize="16"/>
+                    <MenuItem Header="Users" Height="25" Width="100" FontSize="16"/>
+                    <MenuItem Name="Exit" InputGestureText="Ctrl+X" Click="Exit_Click" Header="Exit" Height="25" Width="100" FontSize="16"/>
+                </Menu>
+                <Button Name="BtnClose" Grid.Column="1" Panel.ZIndex="1" Click="BtnClose_Click"  Style="{StaticResource topButton}" 
+                        Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Icon:PackIconMaterial Kind="Close"/>
+                </Button>
+            </Grid>
             <Grid x:Name="GridContent" Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
@@ -92,32 +98,32 @@
                             <StackPanel DockPanel.Dock="Top">
                                 <Button Name="BtnManageItem" Click="BtnManageItem_Click" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="Tools" Width="15" Height="15"/>
+                                        <Icon:PackIconMaterial Kind="Tools"  Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Manage Items"></TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="OpenInApp" Width="15" Height="15"/>
+                                        <Icon:PackIconMaterial Kind="OpenInApp" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Manage Inventory"></TextBlock>
                                     </StackPanel>
                                 </Button>
-                                <Button Style="{StaticResource menuButton}" Click="BtnManageUser_Click">
+                                <Button x:Name="BtnManagerUser" Style="{StaticResource menuButton}" Click="BtnManageUser_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="AccountMultipleOutline" Width="15" Height="15"/>
+                                        <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Manager Users"></TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="book" Width="15" Height="15"/>
+                                        <Icon:PackIconMaterial Kind="book"  Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Manager Categories"></TextBlock>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
                             <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="Logout" Width="15" Height="15"/>
+                                    <Icon:PackIconMaterial Kind="Logout"  Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Logout"></TextBlock>
                                 </StackPanel>
                             </Button>
@@ -158,10 +164,10 @@
                     <TextBlock Text="Current Storage" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0,20,0,10"
                        HorizontalAlignment="Left" Foreground="#121518" Grid.RowSpan="3"/>
                     <!--Add Button-->
-                    <Button Style="{StaticResource addButton}" Background="#FF4158D9" Margin="0,24,0,4" Grid.Row="1">
+                    <Button x:Name="BtnBackup" Click="BtnBackup_Click" Style="{StaticResource addButton}" Background="#FF4158D9" Margin="0,24,0,4" Grid.Row="1">
                         <StackPanel Orientation="Horizontal">
-                            <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                            <TextBlock Text="Add New Item"/>
+                            <Icon:PackIconMaterial Kind="BackupRestore" VerticalAlignment="Center" Width="14" Height="14" Margin="0 1 8 0"/>
+                            <TextBlock Text="Backup database"/>
                         </StackPanel>
                     </Button>
 
@@ -241,7 +247,7 @@
 
                     <!--Pagination Section-->
                     <Border Grid.Row="6" HorizontalAlignment="Left" BorderBrush="#dee4ec" BorderThickness="1"
-                    CornerRadius="5" Padding="5" Background="White" Margin="730,10,0,10" >
+                    CornerRadius="5" Padding="5" Background="White" Margin="730,10,0,10" Width="250" >
                         <StackPanel x:Name="StackPaging" Orientation="Horizontal">
                             <Button Name="BtnPrevPage" Click="BtnPrevPage_Click" Style="{StaticResource pagingButton}">
                                 <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource pagingButtonIcon}" />

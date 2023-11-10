@@ -8,6 +8,10 @@ namespace WareMaster
 {
     internal class Globals
     {
+        public static string Username {  get; set; }
+        
+        public static RoleEnum Role { get; set; }
+
         static internal WareMasterEntities wareMasterEntities;
         public static WareMasterEntities DbContext //singleton pattern
         {
@@ -20,5 +24,6 @@ namespace WareMaster
                 return wareMasterEntities;
             }
         }
+
     }
 }
