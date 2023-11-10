@@ -114,7 +114,7 @@
                                         <TextBlock Text="Manager Users"></TextBlock>
                                     </StackPanel>
                                 </Button>
-                                <Button Style="{StaticResource menuButton}">
+                                <Button Style="{StaticResource menuButton}" Click="BtnManageCategory_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Icon:PackIconMaterial Kind="book"  Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Manager Categories"></TextBlock>
