@@ -5,48 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WareMaster"
         mc:Ignorable="d"
-        Title="InventoryInit" Height="527" Width="911">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <!-- Alert -->
-        <StackPanel Grid.Row="0" Margin="10">
-            <TextBlock Text="Clicking the 'Initialize' button will delete all inbound and outbound records and settlement data. Please make sure you know what you are doing."
-                   TextWrapping="Wrap"
-                   Foreground="Red"
-                   FontWeight="Bold"
-                   FontSize="20" Height="68" />
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,0,0" Grid.ColumnSpan="2">
-                <Label Content="Initialize date" Margin="20,0,0,0"/>
-                <DatePicker Name="DatePickerInit" Width="200" Margin="20,0,0,0"/>
-                <Button Content="Initialize" Click="InitializeButton_Click" Width="90" Height="30" Margin="20,0,0,0"/>
-            </StackPanel>
-        </StackPanel>
+        Title="InventoryInit" Height="527" Width="911"
+        WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+	<Border  Background="#ccffff" CornerRadius="15" >
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<!-- Alert -->
+			<StackPanel Grid.Row="0" Margin="10">
+				<TextBlock Text="Clicking the 'Initialize' button will delete all inbound and outbound records and settlement data. Please make sure you know what you are doing."
+					   TextWrapping="Wrap"
+					   FontWeight="Bold"
+					   FontSize="20" Height="68" FontFamily="Times New Roman" >
+					<TextBlock.Foreground>
+						<SolidColorBrush Color="#FFC71313"/>
+					</TextBlock.Foreground>
+					<TextBlock.FocusVisualStyle>
+						<Style/>
+					</TextBlock.FocusVisualStyle>
+				</TextBlock>
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,0,0" Grid.ColumnSpan="2">
+					<Label Content="Initialize date" Margin="20,0,0,0"/>
+					<DatePicker Name="DatePickerInit" Width="200" Margin="20,0,0,0"/>
+					<Button Content="Initialize" Style="{StaticResource addButton}" Click="InitializeButton_Click" Width="90" Height="30" Margin="20,0,0,0"/>
+				</StackPanel>
+			</StackPanel>
 
-        <ListView Name="LvInit" 
-                  MouseDoubleClick="LvInit_MouseDoubleClick"
-                  SelectionChanged="LvInit_SelectionChanged"
-                  Margin="0,10,0,10" Grid.Row="1">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Item ID" Width="100" DisplayMemberBinding="{Binding ItemId}" />
-                    <GridViewColumn Header="Item Name" Width="100" DisplayMemberBinding="{Binding ItemName}" />
-                    <GridViewColumn Header="Category Name" Width="100" DisplayMemberBinding="{Binding CategoryName}" />
-                    <GridViewColumn Header="Unit" Width="100" DisplayMemberBinding="{Binding Unit}" />
-                    <GridViewColumn Header="Location" Width="100" DisplayMemberBinding="{Binding Location}" />
-                    <GridViewColumn Header="Description" Width="100" DisplayMemberBinding="{Binding Description}" />
-                    <GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Quantity}" />
-                    <GridViewColumn Header="Total" Width="100" DisplayMemberBinding="{Binding Total}" />
-                    <GridViewColumn Header="Initial Date" Width="100" DisplayMemberBinding="{Binding SettleDate, StringFormat=yyyy-MM-dd}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10">
-            <Button Content="Print" Click="PrintButton_Click" Width="90" Height="30" Margin="0,0,20,0" />
-            <Button Content="Export" Click="ExportButton_Click" Width="90" Height="30" Margin="0,0,20,0"/>
-        </StackPanel>
-    </Grid>
+			<ListView Name="LvInit"
+					  MouseDoubleClick="LvInit_MouseDoubleClick"
+					  SelectionChanged="LvInit_SelectionChanged"
+					  Margin="0,10,0,10" Grid.Row="1">
+				<ListView.View>
+					<GridView>
+						<GridViewColumn Header="Item ID" Width="100" DisplayMemberBinding="{Binding ItemId}" />
+						<GridViewColumn Header="Item Name" Width="100" DisplayMemberBinding="{Binding ItemName}" />
+						<GridViewColumn Header="Category Name" Width="100" DisplayMemberBinding="{Binding CategoryName}" />
+						<GridViewColumn Header="Unit" Width="100" DisplayMemberBinding="{Binding Unit}" />
+						<GridViewColumn Header="Location" Width="100" DisplayMemberBinding="{Binding Location}" />
+						<GridViewColumn Header="Description" Width="100" DisplayMemberBinding="{Binding Description}" />
+						<GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Quantity}" />
+						<GridViewColumn Header="Total" Width="100" DisplayMemberBinding="{Binding Total}" />
+						<GridViewColumn Header="Initial Date" Width="100" DisplayMemberBinding="{Binding SettleDate, StringFormat=yyyy-MM-dd}" />
+					</GridView>
+				</ListView.View>
+			</ListView>
+			<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10">
+				<Button Content="Print" Style="{StaticResource addButton}" Click="PrintButton_Click" Width="90" Height="30" Margin="0,0,20,0" />
+				<Button Content="Export" Style="{StaticResource addButton}" Click="ExportButton_Click" Width="90" Height="30" Margin="0,0,20,0"/>
+				<Button Content="Close" Style="{StaticResource addButton}" Click="CloseButton_Click" Width="90" Height="30" Margin="0,0,20,0"/>
+			</StackPanel>
+		</Grid>
+	</Border>
 </Window>

@@ -3,39 +3,43 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
 
-        Title="Settlement Window" Height="400" Width="600">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        Title="Settlement Window" Height="400" Width="600"
+        WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Border  Background="#ccffff" CornerRadius="15" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <!-- Left side (List of settlement dates) -->
-        <ListView x:Name="LVSettle" Grid.Column="0" SelectionMode="Single">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Settle_Date" Width="200"  />
-                </GridView>
-            </ListView.View>
-        </ListView>
+            <!-- Left side (List of settlement dates) -->
+            <ListView x:Name="LVSettle" Grid.Column="0" SelectionMode="Single" Margin="10,10,0,10">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Settle_Date" Width="200"  />
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
-        <!-- Right side (Input and buttons) -->
-        <StackPanel Grid.Column="1" Margin="20">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,0,0" Grid.ColumnSpan="2">
-                <Label Content="Number of Records:"/>
-                <TextBox x:Name="txtNumber" VerticalAlignment="Center" Text="5" Width="52" />
+            <!-- Right side (Input and buttons) -->
+            <StackPanel Grid.Column="1" Margin="20">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,0,0" Grid.ColumnSpan="2">
+                    <Label Content="Number of Records:"/>
+                    <TextBox x:Name="txtNumber" VerticalAlignment="Center" Text="5" Width="52" />
+                </StackPanel>
+
+                <Button Content="Get Settlement History" Style="{StaticResource addButton}" Click="GetSettleHistory_Click" Margin="0,20,0,0" Height="30" HorizontalAlignment="Center"/>
+                <Button Content="Delete" Style="{StaticResource addButton}" Click="Delete_Click" Margin="0,10,0,0" Height="30" HorizontalAlignment="Center"/>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,50,0,0" Grid.ColumnSpan="2">
+                    <Label Content="Settle Date:" Margin="0,10,0,0"/>
+                    <DatePicker x:Name="dpSettleDate" SelectedDate="{x:Static sys:DateTime.Now}" Margin="0,10,0,0" />
+                </StackPanel>
+
+                <Button Content="Settle" Style="{StaticResource addButton}" Click="Settle_Click" Margin="0,10,0,0" Height="30" HorizontalAlignment="Center"/>
+                <Button Content="Cancel" Style="{StaticResource addButton}" Click="Cancel_Click" Margin="0,10,0,0" Height="30" HorizontalAlignment="Center"/>
             </StackPanel>
-
-            <Button Content="Get Settlement History" Click="GetSettleHistory_Click" Margin="0,20,0,0" Height="30"/>
-            <Button Content="Delete" Click="Delete_Click" Margin="0,10,0,0" Height="30"/>
-
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,50,0,0" Grid.ColumnSpan="2">
-                <Label Content="Settle Date:" Margin="0,10,0,0"/>
-                <DatePicker x:Name="dpSettleDate" SelectedDate="{x:Static sys:DateTime.Now}" Margin="0,10,0,0" />
-            </StackPanel>
-
-            <Button Content="Settle" Click="Settle_Click" Margin="0,10,0,0" Height="30"/>
-            <Button Content="Cancel" Click="Cancel_Click" Margin="0,10,0,0" Height="30"/>
-        </StackPanel>
-    </Grid>
+        </Grid>
+    </Border>
 </Window>

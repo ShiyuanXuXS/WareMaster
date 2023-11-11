@@ -244,13 +244,11 @@ namespace WareMaster
                     cells.Style.Border.BorderAround(ExcelBorderStyle.Thin);
                 }
 
-                // 设置数据单元格的样式
                 using (var cells = worksheet.Cells[2, 1, data.Count + 1, columnTypes.Length-1])
                 {
                     cells.Style.Border.BorderAround(ExcelBorderStyle.Thin);
                 }
 
-                // 自适应列宽
                 worksheet.Cells.AutoFitColumns();
 
                 // save Excel file
@@ -267,7 +265,19 @@ namespace WareMaster
                     MessageBox.Show("Data exported successfully!", "Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
+
+        }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
         }
 
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

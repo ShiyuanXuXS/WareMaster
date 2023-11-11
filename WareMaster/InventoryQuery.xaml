@@ -55,8 +55,8 @@
                     <Label x:Name="lblTo" Content="To:" Grid.Row="4" Grid.Column="0" Margin="0,10,0,10" Visibility="Hidden" />
                     <DatePicker x:Name="DateEnd" Grid.Row="4" Grid.Column="1" Margin="0,10,0,10" Visibility="Hidden" />
 
-                    <Button Content="Query" x:Name="QueryButton"  Style="{StaticResource addButton}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Margin="5,16,0,-4" Width="90" Click="QueryButton_Click" />
-                    <Button Content="Close" x:Name="CloseButton" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="46,16,0,-4" Width="90" Click="CloseButton_Click" />
+                    <Button Content="Query" x:Name="QueryButton"  Style="{StaticResource addButton}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"  Width="90" Click="QueryButton_Click" />
+                    <Button Content="Close" x:Name="CloseButton" Style="{StaticResource addButton}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="center"  Width="90" Click="CloseButton_Click" />
 
                 </Grid>
             </Border>
