@@ -16,7 +16,7 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Button Name="BtnClose" Grid.Column="1" Panel.ZIndex="1" Click="BtnClose_Click"  Style="{StaticResource topButton}" 
-Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right">
+                        Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Close"/>
                 </Button>
             </Grid>
@@ -27,15 +27,21 @@ Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlig
                 </Grid.ColumnDefinitions>
 
                 <Border Name="LeftBorder" Margin="10" Padding="5"  CornerRadius="5">
-                    <Grid Grid.Column="0"  >
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="250"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid  Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <!--<RowDefinition Height="Auto"/>-->
+                            <!--<RowDefinition Height="Auto"/>-->
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4*"/>
@@ -68,12 +74,26 @@ Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlig
                         <Label x:Name="lblTo" Content="To:" Grid.Row="4" Grid.Column="0" Margin="0,10,0,10" Visibility="Hidden" />
                         <DatePicker x:Name="DateEnd" Grid.Row="4" Grid.Column="1" Margin="0,10,0,10" Visibility="Hidden" />
 
-                        <Button Content="Query" x:Name="QueryButton"  Style="{StaticResource addButton}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"  Width="90" Click="QueryButton_Click" />
+                        <!--<Button Content="Query" x:Name="QueryButton"  Style="{StaticResource addButton}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"  Width="90" Click="QueryButton_Click" />
                         <Button Content="Export" x:Name="ExportButton"  Style="{StaticResource addButton}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left"  Width="90" Click="ExportButton_Click" Height="35" VerticalAlignment="Top" />
-                        <Button Content="Close" x:Name="CloseButton" Style="{StaticResource addButton}" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right"  Width="90" Click="CloseButton_Click" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                        <Button Content="Close" x:Name="CloseButton" Style="{StaticResource addButton}" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right"  Width="90" Click="CloseButton_Click" VerticalAlignment="Center" VerticalContentAlignment="Center" />-->
 
                     </Grid>
+                        <Grid Grid.Row="1">
+                            <Button Content="Query" x:Name="QueryButton"  Style="{StaticResource addButton}"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Click="QueryButton_Click" />
+                            <Button Content="Export" x:Name="ExportButton"  Style="{StaticResource addButton}"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="90" Click="ExportButton_Click" Height="35"  />
+                            <Button Content="Print" x:Name="PrintButton"  Style="{StaticResource addButton}"  HorizontalAlignment="Right" VerticalAlignment="Top" Width="90" Click="PrintButton_Click" Height="35"  />
+
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Button Content="Close" x:Name="CloseButton" Style="{StaticResource addButton}"  HorizontalAlignment="Right" VerticalAlignment="Top" Width="90" Click="CloseButton_Click"  />
+
+                        </Grid>
+                    </Grid>
+                    
                 </Border>
+                
+                
                 <Border Name="RightBorder" Grid.Column="1"  Margin="10" Padding="5"  CornerRadius="5">
                     <Grid Grid.Column="1">
                         <DataGrid x:Name="DataGridResult" AutoGenerateColumns="True" IsReadOnly="True">

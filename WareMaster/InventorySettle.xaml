@@ -10,12 +10,22 @@
     <Border  Background="#87C4FF" CornerRadius="15" >
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
+                <Border Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
+                        DockPanel.Dock="Bottom" HorizontalAlignment="Left" Margin="20 0 0 0">
+                    <Ellipse>
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/Images/WMLetter.jpg"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Border>
+                <TextBlock Text="Inventory Settlement" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0,0,0,10"
+                           HorizontalAlignment="Center" Foreground="#121518" Width="350"/>
                 <Button Name="BtnClose" Grid.Column="1" Panel.ZIndex="1" Click="BtnClose_Click"  Style="{StaticResource topButton}" 
-Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right">
+                        Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Close"/>
                 </Button>
             </Grid>
