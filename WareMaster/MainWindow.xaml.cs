@@ -185,13 +185,22 @@ namespace WareMaster
             }
 
         }
+        //private void MenuItemDataBackup_Click(object sender, RoutedEventArgs e)
+        //{
 
+        //}
+        //private void MenuItemDataRecory_Click(object sender, RoutedEventArgs e)
+        //{
+
+        //}
         private void MenuItemInventoryInit_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 InventoryInit inventoryInit = new InventoryInit();
                 inventoryInit.Owner = this;
+                inventoryInit.Left = this.Left + (this.Width - inventoryInit.Width) / 2;
+                inventoryInit.Top = this.Top + (this.Height - inventoryInit.Height) / 2;
                 inventoryInit.ShowDialog();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
@@ -202,6 +211,8 @@ namespace WareMaster
             {
                 InventoryChange inventoryInbound = new InventoryChange("Inbound");
                 inventoryInbound.Owner = this;
+                inventoryInbound.Left = this.Left + (this.Width - inventoryInbound.Width) / 2;
+                inventoryInbound.Top = this.Top + (this.Height - inventoryInbound.Height) / 2;
                 inventoryInbound.ShowDialog();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
@@ -212,6 +223,8 @@ namespace WareMaster
             {
                 InventoryChange inventoryOutbound = new InventoryChange("Outbound");
                 inventoryOutbound.Owner = this;
+                inventoryOutbound.Left = this.Left + (this.Width - inventoryOutbound.Width) / 2;
+                inventoryOutbound.Top = this.Top + (this.Height - inventoryOutbound.Height) / 2;
                 inventoryOutbound.ShowDialog();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
@@ -222,6 +235,8 @@ namespace WareMaster
             {
                 InventorySettle inventorySettle = new InventorySettle();
                 inventorySettle.Owner = this;
+                inventorySettle.Left = this.Left + (this.Width - inventorySettle.Width) / 2;
+                inventorySettle.Top = this.Top + (this.Height - inventorySettle.Height) / 2;
                 inventorySettle.ShowDialog();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
@@ -232,6 +247,8 @@ namespace WareMaster
             {
                 InventoryQuery inventoryQuery = new InventoryQuery();
                 inventoryQuery.Owner = this;
+                inventoryQuery.Left = this.Left + (this.Width - inventoryQuery.Width) / 2;
+                inventoryQuery.Top = this.Top + (this.Height - inventoryQuery.Height) / 2;
                 inventoryQuery.ShowDialog();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };

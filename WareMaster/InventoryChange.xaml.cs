@@ -38,6 +38,7 @@ namespace WareMaster
                 Password = "password",
                 Email = "test@email.com"
             };//for test only, to be switched to logged user
+            user = Globals.wareMasterEntities.Users.FirstOrDefault(u => u.Username == Globals.Username);
 
             TransactionInit();
             
@@ -87,6 +88,16 @@ namespace WareMaster
             else
             {
                 totalValidation.Text = "";
+            }
+            DateTime lastSettleDate=Inventory.GetLastSettleDate();
+            if (transaction.Transaction_Date <= lastSettleDate)
+            {
+                datelValidation.Text = "Transaction date must be later than the latest settle date.";
+                isValid=false;
+            }
+            else
+            {
+                datelValidation.Text = "";
             }
             if (!isValid)
             {
@@ -186,6 +197,12 @@ namespace WareMaster
             quantityValidation.Text = "";
             totalValidation.Text = "";
         }
-
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
     }
 }

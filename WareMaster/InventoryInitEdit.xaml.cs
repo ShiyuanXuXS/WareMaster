@@ -199,6 +199,13 @@ namespace WareMaster
                 MessageBox.Show("An error occurred while deleting settlement data: " + ex.Message);
             }
         }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
     }
 
 }

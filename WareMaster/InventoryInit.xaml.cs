@@ -33,6 +33,8 @@ namespace WareMaster
         public InventoryInit()
         {
             InitializeComponent();
+            DateTime initDate = Inventory.GetFirstSettleDate();
+            DatePickerInit.SelectedDate = initDate != DateTime.MinValue ? initDate : DateTime.Now.Date;
             InitializeLvInit();
             refreshHasTransactions();
 
@@ -66,6 +68,9 @@ namespace WareMaster
                 {
                     InitializeLvInit();
                 };
+                editWindow.Owner = this;
+                editWindow.Left = this.Left + (this.Width - editWindow.Width) / 2;
+                editWindow.Top = this.Top + (this.Height - editWindow.Height) / 2;
                 editWindow.ShowDialog();
 
             }
@@ -73,12 +78,15 @@ namespace WareMaster
 
         private void InitializeLvInit()
         {
-            
+            DateTime initDate = Inventory.GetFirstSettleDate();
+            initDate = initDate != DateTime.MinValue ? initDate :(DateTime) DatePickerInit.SelectedDate;
+
             try
             {
                 var query = from item in Globals.wareMasterEntities.Items
                             join settlement in Globals.wareMasterEntities.Settlements on item.id equals settlement.Item_Id into gj
                             from sub in gj.DefaultIfEmpty()
+                            where sub == null || sub.Settle_Date == DatePickerInit.SelectedDate
                             select new
                             {
                                 ItemId = item.id,
@@ -89,12 +97,14 @@ namespace WareMaster
                                 Description = item.Description != null ? item.Description : string.Empty,
                                 Quantity = sub != null ? sub.Quantity : 0,
                                 Total = sub != null ? sub.Total : 0,
-                                SettleDate = sub != null ? sub.Settle_Date : DateTime.Now,
+                                SettleDate = DatePickerInit.SelectedDate,
                                 SettlementId = sub != null ? sub.id : -1
 
 
                             };
                 LvInit.ItemsSource = query.ToList();
+
+                //LvInit.ItemsSource=Inventory.GetFirstInventories();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -234,13 +244,11 @@ namespace WareMaster
                     cells.Style.Border.BorderAround(ExcelBorderStyle.Thin);
                 }
 
-                // 设置数据单元格的样式
                 using (var cells = worksheet.Cells[2, 1, data.Count + 1, columnTypes.Length-1])
                 {
                     cells.Style.Border.BorderAround(ExcelBorderStyle.Thin);
                 }
 
-                // 自适应列宽
                 worksheet.Cells.AutoFitColumns();
 
                 // save Excel file
@@ -257,7 +265,19 @@ namespace WareMaster
                     MessageBox.Show("Data exported successfully!", "Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
+
+        }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
         }
 
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
