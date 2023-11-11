@@ -326,7 +326,7 @@ namespace WareMaster
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            base.OnClosed(e);
+            //base.OnClosed(e);
             App.Current.Shutdown(0);
         }
 

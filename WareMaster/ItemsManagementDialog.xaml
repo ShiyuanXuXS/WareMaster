@@ -15,11 +15,15 @@
 
     <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
+            <Button Name="BtnClose" Grid.Column="1" Panel.ZIndex="1" Click="BtnClose_Click"  Style="{StaticResource topButton}" 
+        Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Icon:PackIconMaterial Kind="Close"/>
+            </Button>
             <!-- Left Menu-->
             <Grid>
                 <Grid.RowDefinitions>
