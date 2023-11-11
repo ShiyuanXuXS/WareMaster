@@ -168,6 +168,7 @@ namespace WareMaster
 
             return inventoryList;
         }
+
         static internal InventoryData GetSumInboundsByItem(Item item,DateTime dateBegin,DateTime dateEnd)
         {
             InventoryData inventory=new InventoryData();

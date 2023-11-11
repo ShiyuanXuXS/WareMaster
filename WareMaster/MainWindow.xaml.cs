@@ -265,7 +265,7 @@ namespace WareMaster
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
 
-        private void MenuItemUpdateItem_Click_1(object sender, RoutedEventArgs e)
+        private void MenuItemUpdateItem_Click(object sender, RoutedEventArgs e)
         {
             ItemViewModel selectedItem = DgStorage.SelectedItem as ItemViewModel;
             if (selectedItem == null) return;
