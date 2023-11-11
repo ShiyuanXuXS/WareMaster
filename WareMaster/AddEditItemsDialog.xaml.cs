@@ -37,7 +37,7 @@ namespace WareMaster
             if (currItem != null) // update, load select values
             {
                 index = 1;
-                ItemId.Content = currItem.id;
+                ItemId.Text = currItem.id.ToString();
                 ItemNameInput.Text = currItem.Itemname;
                 DescriptionInput.Text = currItem.Description;
                 CategoryComboBox.SelectedItem = categories.FirstOrDefault(category => category.id == currItem.Category_Id);
@@ -50,6 +50,14 @@ namespace WareMaster
                     }
                 }
                 LocationInput.Text = currItem.Location.Substring(1);
+            }
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
             }
         }
 
@@ -143,7 +151,7 @@ namespace WareMaster
             if (!Item.IsItemNameValid(ItemNameInput.Text, index, currItem.id, out errorMessage))
             {
                 LblErrItemName.Visibility = Visibility.Visible;
-                LblErrItemName.Content = errorMessage;
+                LblErrItemName.Text = errorMessage;
             }
             else
             {
@@ -156,7 +164,7 @@ namespace WareMaster
             if (!Item.IsDescriptionValid(DescriptionInput.Text, out errorMessage))
             {
                 LblErrDescription.Visibility = Visibility.Visible;
-                LblErrDescription.Content = errorMessage;
+                LblErrDescription.Text = errorMessage;
             }
             else
             {
@@ -169,7 +177,7 @@ namespace WareMaster
             if (!Item.IsCategoryValid(CategoryComboBox.SelectedItem.ToString(), out errorMessage))
             {
                 LblErrCategory.Visibility = Visibility.Visible;
-                LblErrCategory.Content = errorMessage;
+                LblErrCategory.Text = errorMessage;
             }
             else
             {
@@ -184,7 +192,7 @@ namespace WareMaster
                 if (!Item.IsLocationValid(aisle, out errorMessage))
                 {
                     LblErrLocation.Visibility = Visibility.Visible;
-                    LblErrLocation.Content = errorMessage;
+                    LblErrLocation.Text = errorMessage;
                 }
                 else
                 {
@@ -194,7 +202,7 @@ namespace WareMaster
             else
             {
                 LblErrLocation.Visibility = Visibility.Visible;
-                LblErrLocation.Content = "Invalid aisle format. Please enter a valid integer.";
+                LblErrLocation.Text = "Invalid aisle format. Please enter a valid integer.";
             }
         }
 
@@ -203,7 +211,7 @@ namespace WareMaster
             if (!Item.IsUnitValid(UnitComboBox.SelectedItem.ToString(), out errorMessage))
             {
                 LblErrUnit.Visibility = Visibility.Visible;
-                LblErrUnit.Content = errorMessage;
+                LblErrUnit.Text = errorMessage;
             }
             else
             {
