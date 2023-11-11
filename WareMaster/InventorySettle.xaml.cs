@@ -38,6 +38,7 @@ namespace WareMaster
         }
         private void GetSettleHistory_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             if (int.TryParse(txtNumber.Text, out int numOfRecords) && numOfRecords>0)
             {
                 ShowSettletDates(numOfRecords);
@@ -46,10 +47,12 @@ namespace WareMaster
             {
                 MessageBox.Show("Please enter a valid number of records.");
             }
+            Mouse.OverrideCursor = null;
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             if (LVSettle.SelectedItem == null)
             {
                 MessageBox.Show("Please select a settlement date to delete.");
@@ -82,10 +85,13 @@ namespace WareMaster
             {
                 MessageBox.Show("Error deleting settlement: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            Mouse.OverrideCursor = null;
         }
 
         private void Settle_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
+
             DateTime lastSettleDate = Globals.wareMasterEntities.Settlements
                 .Select(s => s.Settle_Date)
                 .DefaultIfEmpty(DateTime.MinValue)
@@ -154,15 +160,26 @@ namespace WareMaster
             try
             {
                 Globals.wareMasterEntities.SaveChanges();
+                if (int.TryParse(txtNumber.Text, out int numOfRecords) && numOfRecords > 0)
+                {
+                    ShowSettletDates(numOfRecords);
+                }
+                else
+                {
+                    ShowSettletDates(5);
+                }
                 MessageBox.Show("Settlement completed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error settling inventories: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
+            Mouse.OverrideCursor = null;
         }
-
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

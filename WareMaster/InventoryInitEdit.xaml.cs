@@ -43,7 +43,10 @@ namespace WareMaster
         {
             this.Close();
         }
-
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             //validate
@@ -101,6 +104,7 @@ namespace WareMaster
                 {
                     InsertNewSettlementData();
                     MessageBox.Show("New settlement data inserted successfully.");
+                    this.Close();
                 }
                 catch (Exception ex)
                 {
@@ -114,6 +118,7 @@ namespace WareMaster
                 {
                     UpdateSettlementData(idToSave);
                     MessageBox.Show("Settlement data updated successfully.");
+                    this.Close();
                 }
                 catch (Exception ex)
                 {
@@ -135,7 +140,9 @@ namespace WareMaster
 
             Globals.wareMasterEntities.Settlements.Add(newSettlement);
 
+            Mouse.OverrideCursor = Cursors.Wait;
             Globals.wareMasterEntities.SaveChanges();
+            Mouse.OverrideCursor = null;
         }
 
         private void UpdateSettlementData(int id)
@@ -148,7 +155,9 @@ namespace WareMaster
                 settlementToUpdate.Total = Convert.ToDecimal(TotalTextBox.Text);
                 settlementToUpdate.Settle_Date = SettleDateDatePicker.SelectedDate ?? DateTime.Now;
 
+                Mouse.OverrideCursor = Cursors.Wait;
                 Globals.wareMasterEntities.SaveChanges();
+                Mouse.OverrideCursor = null;
 
             }
         }
@@ -185,7 +194,9 @@ namespace WareMaster
                 if (settlementToDelete != null)
                 {
                     Globals.wareMasterEntities.Settlements.Remove(settlementToDelete);
-                    Globals.wareMasterEntities.SaveChanges(); 
+                    Mouse.OverrideCursor = Cursors.Wait;
+                    Globals.wareMasterEntities.SaveChanges();
+                    Mouse.OverrideCursor = null;
                     MessageBox.Show("Settlement data deleted successfully!");
                     this.Close(); 
                 }

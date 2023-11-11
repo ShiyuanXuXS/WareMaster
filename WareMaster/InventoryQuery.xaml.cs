@@ -1,6 +1,10 @@
-﻿using System;
+﻿using OfficeOpenXml.Style;
+using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
@@ -12,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace WareMaster
 {
@@ -213,7 +218,10 @@ namespace WareMaster
             txtInputName.Tag = null;
             txtInputName.Text = "";
         }
-
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -224,6 +232,80 @@ namespace WareMaster
             {
                 this.DragMove();
             }
+        }
+
+        private void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Initial Inventory Data");
+
+                // get data from listview
+                var data = DataGridResult.Items;
+                if (data.Count <= 0)
+                {
+                    MessageBox.Show("No data to export");
+                    return;
+                }
+                PropertyInfo[] columnTypes = data[0].GetType().GetProperties();
+
+                // write data to excel
+                for (int col = 1; col <= columnTypes.Length; col++)
+                {
+                    worksheet.Cells[1, col].Value = columnTypes[col - 1].Name;
+                    for (int row = 2; row < data.Count + 2; row++)
+                    {
+                        PropertyInfo property = columnTypes[col - 1];
+                        var value = property.GetValue(data[row - 2], null);
+                        if (property.Name == "Date")
+                        {
+                            //worksheet.Cells[row,col].Value = ((DateTime)value).ToString("yyyy-MM-dd");
+                            worksheet.Cells[row, col].Value = ((DateTime)value);
+                            worksheet.Cells[row, col].Style.Numberformat.Format = "YYYY-MM-DD";
+                        }
+                        else if (property.Name == "Total")
+                        {
+                            worksheet.Cells[row, col].Value = value;
+                            // Set currency format for Total column
+                            worksheet.Cells[row, col].Style.Numberformat.Format = "$#,##0.00";
+                        }
+                        else
+                        {
+                            worksheet.Cells[row, col].Value = value;
+                        }
+                    }
+                }
+                using (var cells = worksheet.Cells[1, 1, 1, columnTypes.Length ])
+                {
+                    cells.Style.Font.Bold = true;
+                    cells.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    cells.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
+                    cells.Style.Border.BorderAround(ExcelBorderStyle.Thin);
+                }
+
+                using (var cells = worksheet.Cells[2, 1, data.Count + 1, columnTypes.Length])
+                {
+                    cells.Style.Border.BorderAround(ExcelBorderStyle.Thin);
+                }
+
+                worksheet.Cells.AutoFitColumns();
+
+                // save Excel file
+                var saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "Excel Files|*.xlsx|All Files|*.*",
+                    DefaultExt = "xlsx"
+                };
+
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    var newFile = new FileInfo(saveFileDialog.FileName);
+                    package.SaveAs(newFile);
+                    MessageBox.Show("Data exported successfully!", "Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+
         }
     }
 }

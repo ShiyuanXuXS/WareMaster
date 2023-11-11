@@ -21,6 +21,10 @@ using System.Windows.Shapes;
 using System.Reflection;
 using System.Printing;
 using System.Windows.Markup;
+using System.Drawing.Printing;
+using System.Drawing;
+using System.Windows.Xps.Packaging;
+using System.Windows.Xps;
 
 namespace WareMaster
 {
@@ -69,8 +73,6 @@ namespace WareMaster
                     InitializeLvInit();
                 };
                 editWindow.Owner = this;
-                editWindow.Left = this.Left + (this.Width - editWindow.Width) / 2;
-                editWindow.Top = this.Top + (this.Height - editWindow.Height) / 2;
                 editWindow.ShowDialog();
 
             }
@@ -120,7 +122,9 @@ namespace WareMaster
             {
                 Globals.wareMasterEntities.Transactions.RemoveRange(Globals.wareMasterEntities.Transactions);
                 Globals.wareMasterEntities.Settlements.RemoveRange(Globals.wareMasterEntities.Settlements);
+                Mouse.OverrideCursor = Cursors.Wait;
                 Globals.wareMasterEntities.SaveChanges();
+                Mouse.OverrideCursor = null;
                 InitializeLvInit();
                 refreshHasTransactions();
                 MessageBox.Show("Inventory Initialized!");
@@ -131,41 +135,37 @@ namespace WareMaster
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //一栏，右半边不显示
         private void PrintButton_Click(object sender, RoutedEventArgs e)
         {
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)
             {
-                // 创建一个FlowDocument来容纳ListView的内容
                 FlowDocument document = new FlowDocument();
 
-                // 创建一个Table用于显示ListView的数据
                 System.Windows.Documents.Table table = new System.Windows.Documents.Table();
-                //document.Blocks.Add(table);
 
-                // Retrieve data from the ListView
                 var data = LvInit.Items;
                 if (data.Count > 0)
                 {
-                    // Retrieve column headers and create table columns
                     PropertyInfo[] columnTypes = data[0].GetType().GetProperties();
                     List<string> columnHeaders = columnTypes.Select(p => p.Name)
                         .Where(name => name != "SettlementId")
                         .ToList();
 
-                    // Add table column headers
                     TableRowGroup headerGroup = new TableRowGroup();
                     System.Windows.Documents.TableRow headerRow = new System.Windows.Documents.TableRow();
                     foreach (string columnHeader in columnHeaders)
                     {
                         table.Columns.Add(new TableColumn());
                         table.Columns[table.Columns.Count - 1].Width = new GridLength(printDialog.PrintableAreaWidth / columnHeaders.Count);
+
                         headerRow.Cells.Add(new System.Windows.Documents.TableCell(new Paragraph(new Run(columnHeader))));
                     }
                     headerGroup.Rows.Add(headerRow);
                     table.RowGroups.Add(headerGroup);
 
-                    // Add data rows
                     foreach (var item in data)
                     {
                         TableRowGroup dataGroup = new TableRowGroup();
@@ -181,17 +181,12 @@ namespace WareMaster
                     }
                     document.Blocks.Add(table);
 
+                    document.PageWidth = printDialog.PrintableAreaWidth;
 
-                    //document.PageWidth = printDialog.PrintableAreaWidth;
-                    //document.PageHeight = printDialog.PrintableAreaHeight;
-
-
-
-                    // Set the print document's page size to fit A4 paper in portrait mode
                     IDocumentPaginatorSource paginator = document;
-                    //paginator.DocumentPaginator.PageSize = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
+                    paginator.DocumentPaginator.PageSize = new System.Windows.Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
 
-                    // Print the document
+
                     printDialog.PrintDocument(paginator.DocumentPaginator, "ListView Printing");
                 }
                 else
@@ -201,7 +196,7 @@ namespace WareMaster
             }
         }
 
-      
+
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
@@ -227,8 +222,16 @@ namespace WareMaster
                     {
                         PropertyInfo property = columnTypes[col - 1];
                         var value = property.GetValue(data[row - 2], null);
-                        if (property.PropertyType == typeof(DateTime)) {
-                            worksheet.Cells[row,col].Value = ((DateTime)value).ToString("yyyy-MM-dd");
+                        if (property.Name == "SettleDate") {
+                            //worksheet.Cells[row,col].Value = ((DateTime)value).ToString("yyyy-MM-dd");
+                            worksheet.Cells[row, col].Value = ((DateTime)value);
+                            worksheet.Cells[row, col].Style.Numberformat.Format = "YYYY-MM-DD";
+                        }
+                        else if (property.Name == "Total")
+                        {
+                            worksheet.Cells[row, col].Value = value;
+                            // Set currency format for Total column
+                            worksheet.Cells[row, col].Style.Numberformat.Format = "$#,##0.00";
                         }
                         else
                         {
@@ -276,6 +279,10 @@ namespace WareMaster
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

@@ -116,7 +116,9 @@ namespace WareMaster
             Globals.wareMasterEntities.Transactions.Add(transaction);
             try
             {
+                Mouse.OverrideCursor = Cursors.Wait;
                 Globals.wareMasterEntities.SaveChanges();
+                Mouse.OverrideCursor = null;
                 MessageBox.Show("Transaction saved successfully.");
                 TransactionInit();
 
@@ -127,7 +129,10 @@ namespace WareMaster
             }
 
         }
-
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
