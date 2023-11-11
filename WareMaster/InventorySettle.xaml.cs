@@ -56,15 +56,29 @@ namespace WareMaster
             if (LVSettle.SelectedItem == null)
             {
                 MessageBox.Show("Please select a settlement date to delete.");
+                Mouse.OverrideCursor = null;
                 return;
             }
             if(MessageBoxResult.No== MessageBox.Show("Are you sure you want to delete the selected settlement date?", "Confirmation", MessageBoxButton.YesNo))
             {
+                Mouse.OverrideCursor = null;
                 return;
             }
             DateTime selectedDate = (DateTime)LVSettle.SelectedItem;
             try
             {
+                DateTime minDate = Globals.wareMasterEntities.Settlements
+                    .Select(s => s.Settle_Date)
+                    .DefaultIfEmpty(DateTime.MaxValue) 
+                    .Min();
+
+                if (selectedDate <= minDate)
+                {
+                    MessageBox.Show("Cannot delete the earlist settlement data.");
+                    Mouse.OverrideCursor = null;
+                    return;
+                }
+
                 var settlementsToDelete = Globals.wareMasterEntities.Settlements
                     .Where(s => s.Settle_Date == selectedDate)
                     .ToList();
