@@ -254,5 +254,14 @@ namespace WareMaster
             }
             DgUsers.ItemsSource = filterUsers;
         }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
     }
 }

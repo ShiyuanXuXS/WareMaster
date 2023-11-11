@@ -63,12 +63,12 @@
                     </Grid.RowDefinitions>
 
                     <!--Menu Icon-->
-                    <Button Margin="20,28,0,35" Style="{StaticResource topButton}">
-                        <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Source="Images/favicon.ico" Width="16" Height="16" Margin="0,0,5,0" />
-            </StackPanel>-->
+                    <!--<Button Margin="20,28,0,35" Style="{StaticResource topButton}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="Images/favicon.ico" Width="16" Height="16" Margin="0,0,5,0" />
+                        </StackPanel>
                         <Icon:PackIconMaterial Kind="Menu"/>
-                    </Button>
+                    </Button>-->
 
                     <Button Visibility="Hidden" Content="Button" HorizontalAlignment="Left" Height="34" Margin="78,26,0,0" VerticalAlignment="Top" Width="93" Click="Button_Click"/>
 
@@ -121,12 +121,12 @@
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
-                            <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
+                            <!--<Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Logout"  Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Logout"></TextBlock>
                                 </StackPanel>
-                            </Button>
+                            </Button>-->
                         </DockPanel>
                     </Border>
                 </Grid>
@@ -143,14 +143,14 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <!--Search Textbox-->
-                    <Grid Width="300" HorizontalAlignment="Left" Margin="0,0,0,63" Grid.RowSpan="2">
+                    <!--<Grid Width="300" HorizontalAlignment="Left" Margin="0,0,0,63" Grid.RowSpan="2">
                         <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Search here..." 
                            Visibility="{Binding ElementName=txtSearch,Path=Text,Converter={StaticResource BoolToVis}}"/>
                         <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}"/>
                         <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
                                        Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-                    </Grid>
+                    </Grid>-->
 
                     <!--Top Buttons-->
                     <Button Style="{StaticResource topButton}" Margin="780,14,0,14" Background="#dcdcdc">
@@ -164,12 +164,12 @@
                     <TextBlock Text="Current Storage" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0,20,0,10"
                        HorizontalAlignment="Left" Foreground="#121518" Grid.RowSpan="3"/>
                     <!--Add Button-->
-                    <Button x:Name="BtnBackup" Click="BtnBackup_Click" Style="{StaticResource addButton}" Background="#FF4158D9" Margin="0,24,0,4" Grid.Row="1">
+                    <!--<Button x:Name="BtnBackup" Click="BtnBackup_Click" Style="{StaticResource addButton}" Background="#FF4158D9" Margin="0,24,0,4" Grid.Row="1">
                         <StackPanel Orientation="Horizontal">
                             <Icon:PackIconMaterial Kind="BackupRestore" VerticalAlignment="Center" Width="14" Height="14" Margin="0 1 8 0"/>
                             <TextBlock Text="Backup database"/>
                         </StackPanel>
-                    </Button>
+                    </Button>-->
 
                     <!--Seprator-->
                     <Separator Grid.Row="3" Height="1" Background="#dae2ea" Margin="0,62,0,10" Grid.RowSpan="3"/>
@@ -198,8 +198,12 @@
 
                     <!--Members Datagrid-->
                     <DataGrid Grid.Row="5" x:Name="DgStorage" AutoGenerateColumns="False" GridLinesVisibility="None"
-                              HorizontalGridLinesBrush="Aqua" CanUserReorderColumns="False" CanUserAddRows="False">
-                        <DataGrid.Columns>
+                              HorizontalGridLinesBrush="Aqua" CanUserReorderColumns="False" CanUserAddRows="False"
+                              Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"
+                              RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                              Margin="0,0,10,10">
+                    
+                            <DataGrid.Columns>
                             <DataGridCheckBoxColumn CanUserResize="False" Width="auto">
                                 <DataGridCheckBoxColumn.HeaderTemplate>
                                     <DataTemplate>
