@@ -59,6 +59,11 @@ namespace WareMaster
         public MainWindow()
         {
             InitializeComponent();
+            initMainWindow();
+        }
+
+        private void initMainWindow()
+        {
             if (Globals.Role==RoleEnum.ADMIN)
             {
                 BtnManagerUser.IsEnabled = true;
@@ -67,9 +72,9 @@ namespace WareMaster
             {
                 BtnManagerUser.IsEnabled=false;
             }
-                //this.DataContext = new ExitCommandContext();
-                //InitializeComponent();
-                //Globals.wareMasterEntities = new WareMasterEntities();
+            //this.DataContext = new ExitCommandContext();
+            //InitializeComponent();
+            //Globals.wareMasterEntities = new WareMasterEntities();
             dbContext = Globals.DbContext;
             InitializeLvInit();
             totalPage = (int)Math.Ceiling((double)allItems.Count / pageSize);
@@ -77,6 +82,7 @@ namespace WareMaster
             {
                 Button newPageButton = new Button()
                 {
+                    Name = "newPageButton"+i,
                     Content = i+1,
                     Width = 15,
                     Height = 15,
@@ -84,8 +90,9 @@ namespace WareMaster
                     VerticalAlignment = VerticalAlignment.Center,
                 };
                 newPageButton.Click += NewPageButton_Click;
-                StackPaging.Children.Insert(i+2,newPageButton);
+                StackPaging.Children.Insert(i+2, newPageButton);
             }
+            TblWelcome.Text = "Welcome: "+Globals.Username;
         }
 
         private void NewPageButton_Click(object sender, RoutedEventArgs e)
@@ -346,7 +353,68 @@ namespace WareMaster
         {
 
         }
+
+        private void BtnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            DisableControls();
+        }
+
+        private void DisableControls()
+        {
+            BtnLogin.Visibility = Visibility.Visible;
+            BtnLogout.Visibility = Visibility.Hidden;
+            MainMenu.IsEnabled = false;
+            BtnManageCategory.IsEnabled = false;
+            BtnManageInventory.IsEnabled = false;
+            BtnManageItem.IsEnabled = false;
+            BtnManagerUser.IsEnabled = false;
+            txtFilter.IsEnabled = false;
+            DgStorage.IsEnabled = false;
+            TblWelcome.Text = "Welcome:";
+            Globals.Username = "";
+            filterItems.Clear();
+
+            StackPaging.Children.RemoveRange(2,totalPage);
+
+            DisplayPage(1);
+            
+        }
+
+        private void EnableControls()
+        {
+            BtnLogin.Visibility = Visibility.Hidden;
+            BtnLogout.Visibility = Visibility.Visible;
+            MainMenu.IsEnabled = true;
+            BtnManageCategory.IsEnabled = true;
+            BtnManageInventory.IsEnabled = true;
+            BtnManageItem.IsEnabled = true;
+            BtnManagerUser.IsEnabled = true;
+            txtFilter.IsEnabled = true;
+            DgStorage.IsEnabled = true;
+            initMainWindow();
+        }
+
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Login loginWindow = new Login();
+                loginWindow.ShowDialog();
+                loginWindow.Owner = this;
+                if (loginWindow.IsAuthenticated)
+                {
+                    EnableControls();
+                }
+                else
+                {
+                    MessageBox.Show("Your are not logged in.");
+                    //Application.Current.Shutdown();
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
     }
+
 
     public class ItemViewModel
     {

@@ -63,16 +63,16 @@
 
                         <!--Menu Buttons-->
                         <StackPanel DockPanel.Dock="Top">
-                            <Button Name="BtnManageItem" Style="{StaticResource menuButton}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="ShapePlus" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Category"></TextBlock>
-                                </StackPanel>
-                            </Button>
                             <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="SwapVerticalBold"  Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Inventory"></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Name="BtnItem" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="Tools" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Items"></TextBlock>
                                 </StackPanel>
                             </Button>
                             <Button Style="{StaticResource menuButton}">
@@ -81,7 +81,12 @@
                                     <TextBlock Text="Analyse"></TextBlock>
                                 </StackPanel>
                             </Button>
-                            
+                            <Button Name="BtnCategory" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="ShapePlus" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Category"></TextBlock>
+                                </StackPanel>
+                            </Button>
                             <Button Style="{StaticResource menuButton}" Click="BtnToHome_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="home" Style="{StaticResource menuButtonIcon}"/>

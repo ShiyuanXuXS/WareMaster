@@ -489,8 +489,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
-
         </Style>
 
         <!--<ResourceDictionary x:Key="metro">

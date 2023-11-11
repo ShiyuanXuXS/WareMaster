@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace WareMaster
 {
     /// <summary>
-    /// Interaction logic for Analize.xaml
+    /// Interaction logic for Analyse.xaml
     /// </summary>
-    public partial class Analize : Window
+    public partial class Analyse : Window
     {
-        public Analize()
+        public Analyse()
         {
             InitializeComponent();
         }

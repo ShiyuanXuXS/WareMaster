@@ -67,8 +67,8 @@
     <Compile Include="AddEditUsersDialog.xaml.cs">
       <DependentUpon>AddEditUsersDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Analize.xaml.cs">
-      <DependentUpon>Analize.xaml</DependentUpon>
+    <Compile Include="Analyse.xaml.cs">
+      <DependentUpon>Analyse.xaml</DependentUpon>
     </Compile>
     <Compile Include="CategoriesManagementDialog.xaml.cs">
       <DependentUpon>CategoriesManagementDialog.xaml</DependentUpon>
@@ -101,9 +101,6 @@
     </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MyTextBox.xaml.cs">
-      <DependentUpon>MyTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Partials\Category.cs" />
     <Compile Include="Partials\CategoryInputValidator.cs" />
@@ -153,7 +150,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Analize.xaml">
+    <Page Include="Analyse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,10 +198,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MyTextBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Query.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
