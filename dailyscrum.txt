@@ -196,9 +196,11 @@ Jing
 
 Shiyuan
 1.  Done / not done since last scrum:
-- 
+- Query Summary data
+- Query Transactions data
 2. To do until next Scrum:
-- 
+- Update interfaces
+- Debug
 3. Need assistance / figure things out
 - 
 Xiaoxing
