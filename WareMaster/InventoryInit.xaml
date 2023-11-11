@@ -19,7 +19,11 @@
                    Foreground="Red"
                    FontWeight="Bold"
                    FontSize="20" Height="68" />
-            <Button Content="Initialize" Click="InitializeButton_Click" Width="90" Height="30" />
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,0,0" Grid.ColumnSpan="2">
+                <Label Content="Initialize date" Margin="20,0,0,0"/>
+                <DatePicker Name="DatePickerInit" Width="200" Margin="20,0,0,0"/>
+                <Button Content="Initialize" Click="InitializeButton_Click" Width="90" Height="30" Margin="20,0,0,0"/>
+            </StackPanel>
         </StackPanel>
 
         <ListView Name="LvInit" 
@@ -36,7 +40,7 @@
                     <GridViewColumn Header="Description" Width="100" DisplayMemberBinding="{Binding Description}" />
                     <GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Quantity}" />
                     <GridViewColumn Header="Total" Width="100" DisplayMemberBinding="{Binding Total}" />
-                    <GridViewColumn Header="Settle Date" Width="100" DisplayMemberBinding="{Binding SettleDate, StringFormat=yyyy-MM-dd}" />
+                    <GridViewColumn Header="Initial Date" Width="100" DisplayMemberBinding="{Binding SettleDate, StringFormat=yyyy-MM-dd}" />
                 </GridView>
             </ListView.View>
         </ListView>

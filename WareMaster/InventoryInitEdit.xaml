@@ -32,7 +32,7 @@
                 <TextBlock x:Name="QuantityErrorTextBlock" Foreground="Red" Text="Quantity error message" Visibility="Collapsed"/>
                 <TextBox x:Name="TotalTextBox"/>
                 <TextBlock x:Name="TotalErrorTextBlock" Foreground="Red" Text="Total error message" Visibility="Collapsed"/>
-                <DatePicker x:Name="SettleDateDatePicker"/>
+                <DatePicker x:Name="SettleDateDatePicker" IsEnabled="False"/>
             </StackPanel>
         </Grid>
 

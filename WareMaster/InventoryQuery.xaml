@@ -5,61 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WareMaster"
         mc:Ignorable="d"
-        Title="InventoryQuery" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="6*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        Title="InventoryQuery" Height="450" Width="800" WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Border  Background="#ccffff" CornerRadius="15" >
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="6*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Query for:" Grid.Row="0" Grid.Column="0" Margin="0,10,0,10" ></Label>
-            <ComboBox x:Name="QueryFor" Grid.Row="0" Grid.Column="1" Margin="0,10,0,10" SelectedIndex="0" SelectionChanged="QueryFor_SelectionChanged">
-                <ComboBoxItem Content="Inventory"/>
-                <ComboBoxItem Content="Summary"/>
-                <ComboBoxItem Content="Details"/>
-            </ComboBox>
+            <Border Name="LeftBorder" Margin="10" Padding="5" Background="#ccffff" CornerRadius="5">
+                <Grid Grid.Column="0" Background="#ccffff" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
 
-            <Label Content="Group by:"  Grid.Row="1" Grid.Column="0" Margin="0,10,0,10" />
-            <ComboBox x:Name="GroupBy"  Grid.Row="1" Grid.Column="1" Margin="0,10,0,10" SelectedIndex="0" SelectionChanged="GroupBy_SelectionChanged">
-                <ComboBoxItem Content=""/>
-                <ComboBoxItem Content="Item"/>
-                <ComboBoxItem Content="Category"/>
-            </ComboBox>
+                    <Label Content="Query for:" Grid.Row="0" Grid.Column="0" Margin="0,10,0,10" ></Label>
+                    <ComboBox x:Name="QueryFor" Grid.Row="0" Grid.Column="1" Margin="0,10,0,10" SelectedIndex="0" SelectionChanged="QueryFor_SelectionChanged">
+                        <ComboBoxItem Content="Inventory"/>
+                        <ComboBoxItem Content="Summary"/>
+                        <ComboBoxItem Content="Details"/>
+                    </ComboBox>
 
-            <Label Content="Input name:" Grid.Row="2" Grid.Column="0" Margin="0,10,0,10" />
-            <TextBox x:Name="txtInputName" Grid.Row="2" Grid.Column="1" Margin="0,10,0,10" TextChanged="txtInputName_TextChanged" />
-            <Popup x:Name="ListPopup" IsOpen="False" StaysOpen="False" PlacementTarget="{Binding ElementName=txtInputName}" Placement="Bottom">
-                <ListBox x:Name="ListBoxNames" Width="200" Height="100" SelectionChanged="ListBoxNames_SelectionChanged"/>
-            </Popup>
+                    <Label Content="Group by:"  Grid.Row="1" Grid.Column="0" Margin="0,10,0,10" />
+                    <ComboBox x:Name="GroupBy"  Grid.Row="1" Grid.Column="1" Margin="0,10,0,10" SelectedIndex="0" SelectionChanged="GroupBy_SelectionChanged">
+                        <ComboBoxItem Content=""/>
+                        <ComboBoxItem Content="Item"/>
+                        <ComboBoxItem Content="Category"/>
+                    </ComboBox>
 
-            <Label Content="Date:" Grid.Row="3" Grid.Column="0" Margin="0,10,0,10" />
-            <DatePicker x:Name="DateBegin" Grid.Row="3" Grid.Column="1" Margin="0,10,0,10" />
+                    <Label Content="Input name:" Grid.Row="2" Grid.Column="0" Margin="0,10,0,10" />
+                    <TextBox x:Name="txtInputName" Grid.Row="2" Grid.Column="1" Margin="0,10,0,10" TextChanged="txtInputName_TextChanged" />
+                    <Popup x:Name="ListPopup" IsOpen="False" StaysOpen="False" PlacementTarget="{Binding ElementName=txtInputName}" Placement="Bottom">
+                        <ListBox x:Name="ListBoxNames" Width="200" Height="100" SelectionChanged="ListBoxNames_SelectionChanged"/>
+                    </Popup>
 
-            <Label x:Name="lblTo" Content="To:" Grid.Row="4" Grid.Column="0" Margin="0,10,0,10" Visibility="Hidden" />
-            <DatePicker x:Name="DateEnd" Grid.Row="4" Grid.Column="1" Margin="0,10,0,10" Visibility="Hidden" />
+                    <Label Content="Date:" Grid.Row="3" Grid.Column="0" Margin="0,10,0,10" />
+                    <DatePicker x:Name="DateBegin" Grid.Row="3" Grid.Column="1" Margin="0,10,0,10" />
 
-            <Button Content="Query" x:Name="QueryButton" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="46,16,0,-4" Width="90" Click="QueryButton_Click" />
+                    <Label x:Name="lblTo" Content="To:" Grid.Row="4" Grid.Column="0" Margin="0,10,0,10" Visibility="Hidden" />
+                    <DatePicker x:Name="DateEnd" Grid.Row="4" Grid.Column="1" Margin="0,10,0,10" Visibility="Hidden" />
 
+                    <Button Content="Query" x:Name="QueryButton"  Style="{StaticResource addButton}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Margin="5,16,0,-4" Width="90" Click="QueryButton_Click" />
+                    <Button Content="Close" x:Name="CloseButton" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="46,16,0,-4" Width="90" Click="CloseButton_Click" />
+
+                </Grid>
+            </Border>
+            <Border Name="RightBorder" Grid.Column="1"  Margin="10" Padding="5" Background="#ccffff" CornerRadius="5">
+                <Grid Grid.Column="1">
+                    <DataGrid x:Name="DataGridResult" AutoGenerateColumns="True" IsReadOnly="True">
+
+                    </DataGrid>
+                </Grid>
+            </Border>
         </Grid>
-
-
-        <Grid Grid.Column="1">
-            <DataGrid x:Name="DataGridResult" AutoGenerateColumns="True" IsReadOnly="True">
-                
-            </DataGrid>
-        </Grid>
-    </Grid>
+    </Border>
+    
 </Window>

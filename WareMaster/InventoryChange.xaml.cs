@@ -88,6 +88,16 @@ namespace WareMaster
             {
                 totalValidation.Text = "";
             }
+            DateTime lastSettleDate=Inventory.GetLastSettleDate();
+            if (transaction.Transaction_Date <= lastSettleDate)
+            {
+                datelValidation.Text = "Transaction date must be later than the latest settle date.";
+                isValid=false;
+            }
+            else
+            {
+                datelValidation.Text = "";
+            }
             if (!isValid)
             {
                 MessageBox.Show("Validation failed!");
