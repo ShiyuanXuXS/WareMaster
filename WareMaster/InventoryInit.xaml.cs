@@ -136,14 +136,12 @@ namespace WareMaster
             }
         }
 
-        //一栏，右半边不显示
         private void PrintButton_Click(object sender, RoutedEventArgs e)
         {
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)
             {
                 FlowDocument document = new FlowDocument();
-
                 System.Windows.Documents.Table table = new System.Windows.Documents.Table();
 
                 var data = LvInit.Items;
@@ -159,8 +157,8 @@ namespace WareMaster
                     foreach (string columnHeader in columnHeaders)
                     {
                         table.Columns.Add(new TableColumn());
-                        table.Columns[table.Columns.Count - 1].Width = new GridLength(printDialog.PrintableAreaWidth / columnHeaders.Count);
-
+                        double contentWidth = printDialog.PrintableAreaWidth * 0.9;
+                        table.Columns[table.Columns.Count - 1].Width = new GridLength(contentWidth / columnHeaders.Count);
                         headerRow.Cells.Add(new System.Windows.Documents.TableCell(new Paragraph(new Run(columnHeader))));
                     }
                     headerGroup.Rows.Add(headerRow);
@@ -174,7 +172,30 @@ namespace WareMaster
                         {
                             PropertyInfo property = item.GetType().GetProperty(columnHeader);
                             object value = property?.GetValue(item, null);
-                            dataRow.Cells.Add(new System.Windows.Documents.TableCell(new Paragraph(new Run(value?.ToString() ?? string.Empty))));
+                            string formatedValue = "";
+                            if (value != null)
+                            {
+                                try
+                                {
+                                    switch (columnHeader)
+                                    {
+                                        case "Total":
+                                            formatedValue = ((decimal)value).ToString("N2");
+                                            break;
+                                        case "SettleDate":
+                                            formatedValue = ((DateTime)value).ToString("yyyy-MM-dd");
+                                            break;
+                                        default:
+                                            formatedValue = value.ToString();
+                                            break;
+                                }
+                                }catch (Exception ex)
+                                {
+                                    formatedValue = "";
+                                }
+                                
+                            }
+                            dataRow.Cells.Add(new System.Windows.Documents.TableCell(new Paragraph(new Run(formatedValue))));
                         }
                         dataGroup.Rows.Add(dataRow);
                         table.RowGroups.Add(dataGroup);
@@ -182,7 +203,7 @@ namespace WareMaster
                     document.Blocks.Add(table);
 
                     document.PageWidth = printDialog.PrintableAreaWidth;
-
+                    document.ColumnWidth = document.PageWidth;
                     IDocumentPaginatorSource paginator = document;
                     paginator.DocumentPaginator.PageSize = new System.Windows.Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
 
@@ -195,8 +216,6 @@ namespace WareMaster
                 }
             }
         }
-
-
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
