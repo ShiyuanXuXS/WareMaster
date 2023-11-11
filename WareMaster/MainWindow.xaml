@@ -104,19 +104,19 @@
                                 </Button>
                                 <Button x:Name="BtnManageInventory" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="OpenInApp" Style="{StaticResource menuButtonIcon}"/>
+                                        <Icon:PackIconMaterial Kind="SwapVerticalBold" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Manage Inventory"></TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button x:Name="BtnManagerUser" Style="{StaticResource menuButton}" Click="BtnManageUser_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
+                                        <Icon:PackIconMaterial Kind="AccountBox" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Manager Users"></TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button x:Name="BtnManageCategory" Style="{StaticResource menuButton}" Click="BtnManageCategory_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="book"  Style="{StaticResource menuButtonIcon}"/>
+                                        <Icon:PackIconMaterial Kind="ShapePlus"  Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Manager Categories"></TextBlock>
                                     </StackPanel>
                                 </Button>
