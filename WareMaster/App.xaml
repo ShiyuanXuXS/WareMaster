@@ -49,7 +49,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="blue"/>
+                    <Setter Property="Background" Value="#FF3E478f"/>
                     <Setter Property="Foreground" Value="#ffffff"/>
                 </Trigger>
             </Style.Triggers>
@@ -626,8 +626,40 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
-        
+
+        <Style x:Key="textHint" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Panel.ZIndex" Value="1"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="Foreground" Value="#acb0af"/>
+        </Style>
+        <Style x:Key="textUserInput" TargetType="Control">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="Foreground" Value="#878787" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Control">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" SnapsToDevicePixels="True"
+                                BorderThickness="1" BorderBrush="Transparent">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden"
+                                        VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="Transparent" TargetName="border"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
         <!--analyse-->
         <Style x:Key="whiteBorder" TargetType="Border">
             <Setter Property="Background" Value="#ffffff" />

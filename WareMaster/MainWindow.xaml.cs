@@ -464,7 +464,10 @@ namespace WareMaster
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
 
-        
+        private void BtnResetPwd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 

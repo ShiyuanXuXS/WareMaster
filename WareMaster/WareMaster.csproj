@@ -112,6 +112,9 @@
     <Compile Include="Query.xaml.cs">
       <DependentUpon>Query.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ResetPassword.xaml.cs">
+      <DependentUpon>ResetPassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RoleEnum.cs">
       <DependentUpon>WareMasterDbContext.tt</DependentUpon>
     </Compile>
@@ -199,6 +202,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Query.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResetPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -97,6 +97,7 @@ namespace WareMaster
                             TblPasswordeErr.Visibility = Visibility.Visible;
                             return;
                         }
+                        Globals.Id = id;
                         Globals.Username = username;
                         Globals.Role = (RoleEnum)role;
                         IsAuthenticated = true;
@@ -135,10 +136,5 @@ namespace WareMaster
             Application.Current.Shutdown();
         }
 
-        private void addBUtton_Click(object sender, RoutedEventArgs e)
-        {
-            AddEditUsersDialog adduser = new AddEditUsersDialog();
-            adduser.ShowDialog();
-        }
     }
 }

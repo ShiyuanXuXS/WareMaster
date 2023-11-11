@@ -8,6 +8,7 @@ namespace WareMaster
 {
     internal class Globals
     {
+        public static int Id { get; set; }
         public static string Username {  get; set; }
         
         public static RoleEnum Role { get; set; }

@@ -37,7 +37,7 @@ namespace WareMaster
             {
                 // If authentication fails or the user cancels the login, you can handle it here.
                 // For example, you can exit the application or display a message.
-                Application.Current.Shutdown();
+                //Application.Current.Shutdown();
             }
         }
     }

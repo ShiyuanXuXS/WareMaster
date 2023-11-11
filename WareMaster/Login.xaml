@@ -9,10 +9,10 @@
         Title="Login" Height="450" Width="600">
     <Grid>
 
-        <!--<Button Name="BtnClose" Grid.Column="1" Panel.ZIndex="1" Click="BtnClose_Click"  Style="{StaticResource topButton}" 
+        <Button Name="BtnClose" Grid.Column="1" Panel.ZIndex="1" Click="BtnClose_Click"  Style="{StaticResource topButton}" 
                 Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right">
             <Icon:PackIconMaterial Kind="Close"/>
-        </Button>-->
+        </Button>
         <Border CornerRadius="10 10 10 10" >
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -42,13 +42,13 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock  x:Name="TblName" MouseDown="TblName_MouseDown" Text="User name" FontSize="14" Grid.Column="1" Panel.ZIndex="1" Margin="10 0 0 0" Foreground="#acb0af" />
-                                    <TextBox x:Name="TxtName" TextChanged="TxtName_TextChanged" FontSize="14" Grid.Column="1" Margin="10 0 0 0" Foreground="#878787" BorderBrush="Transparent" BorderThickness="1"/>
+                                    <TextBlock  x:Name="TblName" MouseDown="TblName_MouseDown" Text="User name" Style="{StaticResource textHint}" />
+                                    <TextBox x:Name="TxtName" TextChanged="TxtName_TextChanged" Style="{StaticResource textUserInput}"/>
                                     <Icon:PackIconMaterial Kind="Account" Width="15" Height="15" VerticalAlignment="Center"
-                               Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Left"/>
+                                                    Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Left"/>
                                 </Grid>
                             </Border>
-                            <TextBlock x:Name="TblUsernameErr" Text="User Name not right" Foreground="red" Width="281" Margin="70 0 0 10" Visibility="Hidden"/>
+                            <TextBlock x:Name="TblUsernameErr" Text="User Name not exist" Foreground="red" Width="281" Margin="70 0 0 10" Visibility="Hidden"/>
 
                             <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7 75 0" CornerRadius="5">
                                 <Grid Margin="7 9">
@@ -57,15 +57,14 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock  x:Name="TblPassword" MouseDown="TblPassword_MouseDown"  Text="Password" FontSize="14" Grid.Column="1" Panel.ZIndex="1" Margin="10 0 0 0" Foreground="#acb0af" />
-                                    <PasswordBox x:Name="TxtPassword" PasswordChanged="TxtPassword_PasswordChanged" FontSize="14" Grid.Column="1" Margin="10 0 0 0" Foreground="#878787" BorderBrush="Transparent" BorderThickness="1"/>
+                                    <TextBlock  x:Name="TblPassword" MouseDown="TblPassword_MouseDown" Text="Password" Style="{StaticResource textHint}"/>
+                                    <PasswordBox x:Name="TxtPassword" PasswordChanged="TxtPassword_PasswordChanged" Style="{StaticResource textUserInput}"/>
                                     <Icon:PackIconMaterial Kind="Lock" Width="15" Height="15" VerticalAlignment="Center"
                                                 Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Left"/>
                                 </Grid>
                             </Border>
-                            <TextBlock x:Name="TblPasswordeErr" Text="Password not right" Foreground="red" Width="281" Margin="70 0 0 10" Visibility="Hidden"/>
+                            <TextBlock x:Name="TblPasswordeErr" Text="Password not match, please try again." Foreground="red" Width="281" Margin="70 0 0 10" Visibility="Hidden"/>
                             <Button Content="Sign in" Click="Button_Click" Style="{StaticResource loginButton}"/>
-                            <!--<Button Content="add" x:Name="addBUtton" Click="addBUtton_Click" Height="20"/>-->
                         </StackPanel>
                     </Border>
                 </Canvas>

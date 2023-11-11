@@ -160,13 +160,19 @@
                     </Grid>-->
 
                     <!--Top Buttons-->
-                    <Button Style="{StaticResource topButton}" Margin="780,14,0,14" Background="#dcdcdc" Width="30">
-                        <Icon:PackIconMaterial Kind="Cog"/>
-                    </Button>
-                    <Button Style="{StaticResource topButton}" Margin="745,14,0,14" Width="30">
-                        <Icon:PackIconMaterial Kind="Bell"/>
-                    </Button>
+                    <Grid HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
 
+                        <Button ToolTip="Reset Password" Name="BtnResetPwd" Click="BtnResetPwd_Click" Grid.Column="0" Style="{StaticResource topButton}" Background="#dcdcdc" Width="30">
+                            <Icon:PackIconMaterial Kind="LockReset" Width="25" Height="25"/>
+                        </Button>
+                        <Button Grid.Column="1" Style="{StaticResource topButton}">
+                            <Icon:PackIconMaterial Kind="Bell"/>
+                        </Button>
+                    </Grid>
                     <!--Page Title-->
                     <TextBlock Text="Current Storage" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0,0,0,10"
                        HorizontalAlignment="Left" Foreground="#121518" Width="230"/>
@@ -191,8 +197,8 @@
                     <!--Counter Title-->
                     <TextBlock Grid.Row="3"  Name="TxblItemCount" Text="68 Items" FontSize="18" FontWeight="SemiBold"
                        Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="170"/>
-                    <TextBlock Grid.Row="3"  Text="Filter by Name" FontSize="13" FontWeight="SemiBold" Margin="524,0,0,0"
-                        Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center" Height="18" Width="91"/>
+                    <TextBlock Grid.Row="3"  Text="Filter by Name" FontSize="13" FontWeight="SemiBold" Margin="519,0,0,0"
+                        Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center" Height="18" Width="96"/>
 
                     <!--Filter Textbox-->
                     <Grid Grid.Row="3" Width="200" HorizontalAlignment="Left" Margin="630,0,0,0">
@@ -258,7 +264,7 @@
 
                     <!--Pagination Section-->
                     <Border Grid.Row="5" HorizontalAlignment="Left" BorderBrush="#dee4ec" BorderThickness="1"
-                    CornerRadius="5" Padding="5" Background="White" Margin="730,10,0,10" Width="250" >
+                    CornerRadius="5" Padding="5" Background="White" Margin="600,10,0,10" Width="auto" >
                         <StackPanel x:Name="StackPaging" Orientation="Horizontal">
                             <Button Name="BtnPrevPage" Click="BtnPrevPage_Click" Style="{StaticResource pagingButton}">
                                 <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource pagingButtonIcon}" />
