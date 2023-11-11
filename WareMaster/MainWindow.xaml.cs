@@ -253,6 +253,56 @@ namespace WareMaster
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
+
+        private void MenuItemNewItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AddEditItemsDialog dialog = new AddEditItemsDialog();
+                dialog.Owner = this;
+                dialog.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+
+        private void MenuItemUpdateItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            ItemViewModel selectedItem = DgStorage.SelectedItem as ItemViewModel;
+            if (selectedItem == null) return;
+            Item currItem = new Item();
+            currItem.id = selectedItem.ItemId;
+            currItem.Itemname = selectedItem.ItemName;
+            currItem.Description = selectedItem.Description;
+            currItem.Unit = selectedItem.Unit;
+            currItem.Location = selectedItem.Location;
+            currItem.Category_Id = Globals.wareMasterEntities.Items.Where(item => item.id == selectedItem.ItemId).Select(item => item.Category_Id).SingleOrDefault();
+
+            AddEditItemsDialog dialog = new AddEditItemsDialog(currItem);
+            dialog.Owner = this;
+                dialog.ShowDialog();
+        }
+
+        private void MenuItemAnalyse_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Analyse dialog = new Analyse();
+                dialog.Owner = this;
+                dialog.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+
+        private void MenuItemUsers_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                UsersManagementDialog dialog = new UsersManagementDialog();
+                dialog.Owner = this;
+                dialog.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -413,6 +463,8 @@ namespace WareMaster
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
+
+        
     }
 
 
