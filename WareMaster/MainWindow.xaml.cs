@@ -178,7 +178,14 @@ namespace WareMaster
             }
 
         }
+        private void MenuItemDataBackup_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+        private void MenuItemDataRecory_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
         private void MenuItemInventoryInit_Click(object sender, RoutedEventArgs e)
         {
             try

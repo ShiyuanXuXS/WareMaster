@@ -27,6 +27,10 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Menu VerticalAlignment="Center" HorizontalAlignment="Center" Background="#eff2f7" Foreground="#121518">
+					<MenuItem Header="Data" Height="25" Width="100" FontSize="16">
+						<MenuItem Header="Backup" Click="MenuItemDataBackup_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+						<MenuItem Header="Recovery" Click="MenuItemDataRecory_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+					</MenuItem>
                     <MenuItem Header="Items" Height="25" Width="100" FontSize="16">
                         <MenuItem Command="New" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
                         <MenuItem Header="Update" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
