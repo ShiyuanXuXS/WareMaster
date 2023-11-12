@@ -64,7 +64,7 @@ namespace WareMaster
 
         }
 
-        private void BtnToHome_Click(object sender, RoutedEventArgs e)
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             try
             {
