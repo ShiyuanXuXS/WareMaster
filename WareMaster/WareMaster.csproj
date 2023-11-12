@@ -145,6 +145,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WareMasterDbContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="WMLogger.cs" />
     <Page Include="AddEditItemsDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

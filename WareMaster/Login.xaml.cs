@@ -103,6 +103,7 @@ namespace WareMaster
                         Globals.Username = username;
                         Globals.Role = (RoleEnum)role;
                         IsAuthenticated = true;
+                        WMLogger.WriteLog("User ID:"+ id+ " logged in");
                         Close();
                     }
                     
@@ -111,6 +112,7 @@ namespace WareMaster
             catch(SystemException ex)
             {
                 Console.WriteLine(ex.ToString());
+                WMLogger.WriteLog(ex.ToString());
             }
             
         }
