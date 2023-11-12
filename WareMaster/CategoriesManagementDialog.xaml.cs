@@ -103,17 +103,21 @@ namespace WareMaster
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-        }
-
-        private void BtnToHome_Click(object sender, RoutedEventArgs e)
-        {
             try
             {
                 this.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
+
+        //private void BtnToHome_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        this.Close();
+        //    }
+        //    catch (Exception ex) { MessageBox.Show(ex.Message); };
+        //}
 
         private void BtnExport_Click(object sender, RoutedEventArgs e)
         {
@@ -183,10 +187,13 @@ namespace WareMaster
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            User selectedUser = DgCategories.SelectedItem as User;
-            if (selectedUser == null) return;
+            ViewCategory selectedCategory = DgCategories.SelectedItem as ViewCategory;
+            if (selectedCategory == null) return;
+            Category currCategory = new Category();
+            currCategory.id = selectedCategory.CategoryId;
+            currCategory.Category_Name = selectedCategory.CategoryName;
+            AddEditCategoryDialog dialog = new AddEditCategoryDialog(currCategory);
 
-            AddEditUsersDialog dialog = new AddEditUsersDialog(selectedUser);
             dialog.Owner = this;
             if (dialog.ShowDialog() == true)
             {
@@ -220,7 +227,7 @@ namespace WareMaster
         {
             try
             {
-                AddEditUsersDialog dialog = new AddEditUsersDialog();
+                AddEditCategoryDialog dialog = new AddEditCategoryDialog();
                 dialog.Owner = this;
                 if (dialog.ShowDialog() == true)
                 {
@@ -250,5 +257,6 @@ namespace WareMaster
             }
             DgCategories.ItemsSource = filterCategories;
         }
+
     }
 }
