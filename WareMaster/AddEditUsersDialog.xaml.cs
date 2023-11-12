@@ -36,9 +36,9 @@ namespace WareMaster
             if (currUser != null) // update, load select values
             {
                 index = 1;
-                Lblpassword.Visibility = Visibility.Collapsed;
+                TbPassowrd.Visibility = Visibility.Collapsed;
                 PasswordInput.Visibility = Visibility.Collapsed;
-                UserId.Content = currUser.id;
+                UserId.Text = currUser.id.ToString();
                 UsernameInput.Text = currUser.Username;
                 EmailInput.Text = currUser.Email;
                 PasswordInput.Text = currUser.Password;
@@ -48,10 +48,11 @@ namespace WareMaster
 
         private void UsernameInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (!User.IsUserNameValid(UsernameInput.Text, index, currUser.id, out errorMessage))
+            int userIdToCheck = (currUser != null) ? currUser.id : 0;
+            if (!User.IsUserNameValid(UsernameInput.Text, index, userIdToCheck, out errorMessage))
             {
                 LblErrUsername.Visibility = Visibility.Visible;
-                LblErrUsername.Content = errorMessage;
+                LblErrUsername.Text = errorMessage;
             }
             else
             {
@@ -64,7 +65,7 @@ namespace WareMaster
             if (!User.IsEmailValid(EmailInput.Text, out errorMessage))
             {
                 LblErrEmail.Visibility = Visibility.Visible;
-                LblErrEmail.Content = errorMessage;
+                LblErrEmail.Text = errorMessage;
             }
             else
             {
@@ -77,7 +78,7 @@ namespace WareMaster
             if (!User.IsRoleValid(RoleComboBox.SelectedItem.ToString(), out errorMessage))
             {
                 LblErrRole.Visibility = Visibility.Visible;
-                LblErrRole.Content = errorMessage;
+                LblErrRole.Text = errorMessage;
             }
             else
             {
@@ -90,7 +91,7 @@ namespace WareMaster
             if (!User.IsPasswordValid(PasswordInput.Text, out errorMessage))
             {
                 LblErrPassword.Visibility = Visibility.Visible;
-                LblErrPassword.Content = errorMessage;
+                LblErrPassword.Text = errorMessage;
                 Console.WriteLine(PasswordInput.Text);
             }
             else
@@ -154,7 +155,7 @@ namespace WareMaster
                     {
                         throw new ArgumentException("Role error");
                     }
-                    var validator = new UserInputValidator(index, currUser.id);
+                    var validator = new UserInputValidator(index, 0);
                     var result = validator.Validate(newUser);
                     if (!result.IsValid)
                     {
@@ -176,7 +177,13 @@ namespace WareMaster
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
 
-       
     }
 }

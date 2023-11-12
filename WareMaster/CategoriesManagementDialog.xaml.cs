@@ -31,7 +31,7 @@ namespace WareMaster
         {
             InitializeComponent();
             InitializeDgCategories();
-            TbUserName.Text = loginUser;
+            //TbUserName.Text = loginUser;
         }
 
 
@@ -100,6 +100,12 @@ namespace WareMaster
                 }
             }
         }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void BtnToHome_Click(object sender, RoutedEventArgs e)
         {
             try

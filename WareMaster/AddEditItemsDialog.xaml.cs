@@ -31,7 +31,6 @@ namespace WareMaster
         public AddEditItemsDialog(Item currItem = null)
         {
             this.currItem = currItem;
-            Console.WriteLine(currItem);
             InitializeComponent();
             InitializeCategory();
             if (currItem != null) // update, load select values
@@ -121,7 +120,7 @@ namespace WareMaster
                         Unit = (UnitComboBox.SelectedItem as ComboBoxItem)?.Tag as string
 
                     };
-                    var validator = new ItemInputValidator(index, currItem.id);
+                    var validator = new ItemInputValidator(index, 0);
                     var result = validator.Validate(newItem);
                     if (!result.IsValid)
                     {
@@ -147,8 +146,9 @@ namespace WareMaster
 
         private void ItemNameInput_LostFocus(object sender, RoutedEventArgs e)
         {
-           
-            if (!Item.IsItemNameValid(ItemNameInput.Text, index, currItem.id, out errorMessage))
+            int itemIdToCheck = (currItem != null) ? currItem.id : 0;
+
+            if (!Item.IsItemNameValid(ItemNameInput.Text, index, itemIdToCheck, out errorMessage))
             {
                 LblErrItemName.Visibility = Visibility.Visible;
                 LblErrItemName.Text = errorMessage;
