@@ -26,7 +26,7 @@ namespace WareMaster
         }
         public override string ToString()
         {
-            return $"id: {id}, Name: {Name}, Quantity: {Quantity}, Total: {Total}, Date: {Date}";
+            return $"id: {id}, Name: {Name}, Quantity: {Quantity}, Total: {Total:N2}, Date: {Date:yyyy-mm-dd}";
         }
     }
     internal class Inventory

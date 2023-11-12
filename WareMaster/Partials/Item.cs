@@ -78,9 +78,9 @@ namespace WareMaster
 
         public static bool IsLocationValid(int location, out string error)
         {
-            if (location < 0 || location > 50)
+            if (location < 0 || location > 60)
             {
-                error = "Ailse number must be between 1 ~ 50";
+                error = "Ailse number must be between 1 ~ 60";
                 return false;
             }
             error = null;

@@ -61,6 +61,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddEditCategoryDialog.xaml.cs">
+      <DependentUpon>AddEditCategoryDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddEditItemsDialog.xaml.cs">
       <DependentUpon>AddEditItemsDialog.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WareMasterDbContext.edmx</DependentUpon>
     </Compile>
+    <Page Include="AddEditCategoryDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="WMLogger.cs" />
     <Page Include="AddEditItemsDialog.xaml">
       <SubType>Designer</SubType>

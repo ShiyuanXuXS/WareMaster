@@ -59,7 +59,10 @@ namespace WareMaster
         private void showEdit()
         {
             if (hasTransactions) {
-                MessageBox.Show("Inventory change records existing, no longer to initialize the inventory!");
+                MessageBox.Show("Inventory change records existing, no longer to initialize the inventory!",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 return; 
             }
 
@@ -108,7 +111,10 @@ namespace WareMaster
 
                 //LvInit.ItemsSource=Inventory.GetFirstInventories();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message,
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error); }
 
         }
         private void InitializeButton_Click(object sender, RoutedEventArgs e)
@@ -127,7 +133,10 @@ namespace WareMaster
                 Mouse.OverrideCursor = null;
                 InitializeLvInit();
                 refreshHasTransactions();
-                MessageBox.Show("Inventory Initialized!");
+                MessageBox.Show("Inventory Initialized.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
 
             }
             catch (Exception ex)
@@ -209,10 +218,17 @@ namespace WareMaster
 
 
                     printDialog.PrintDocument(paginator.DocumentPaginator, "ListView Printing");
+                    MessageBox.Show("Print successfully.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show("No Data to print");
+                    MessageBox.Show("No Data to print",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 }
             }
         }
