@@ -23,6 +23,7 @@ namespace WareMaster
         {
             InitializeComponent();
             ShowSettletDates(5);
+            RemoveOld.Visibility =(Globals.Role != RoleEnum.ADMIN)?Visibility.Collapsed:Visibility.Visible;
         }
         private void ShowSettletDates(int numOfRecords)
         {
