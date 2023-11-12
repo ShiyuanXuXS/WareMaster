@@ -102,7 +102,10 @@ namespace WareMaster
             }
             if (!isValid)
             {
-                MessageBox.Show("Validation failed!");
+                MessageBox.Show("Validation failed!",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 return;
             }
             //For outbound, Set Quantity and Total to their negative values
@@ -120,7 +123,10 @@ namespace WareMaster
                 Mouse.OverrideCursor = Cursors.Wait;
                 Globals.wareMasterEntities.SaveChanges();
                 Mouse.OverrideCursor = null;
-                MessageBox.Show("Transaction saved successfully.");
+                MessageBox.Show("Transaction saved successfully.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 TransactionInit();
 
             }

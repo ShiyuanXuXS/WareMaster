@@ -103,12 +103,15 @@ namespace WareMaster
                 try
                 {
                     InsertNewSettlementData();
-                    MessageBox.Show("New settlement data inserted successfully.");
+                    MessageBox.Show("New settlement data inserted successfully.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                     this.Close();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error inserting new settlement data: " + ex.StackTrace, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error inserting new settlement data: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
@@ -117,12 +120,15 @@ namespace WareMaster
                 try
                 {
                     UpdateSettlementData(idToSave);
-                    MessageBox.Show("Settlement data updated successfully.");
+                    MessageBox.Show("Settlement data updated successfully.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                     this.Close();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error updating settlement data: " + ex.StackTrace, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error updating settlement data: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
 
@@ -180,7 +186,10 @@ namespace WareMaster
         {
             int idToDelete = initRecord.SettlementId;
             if (idToDelete == -1) {
-                MessageBox.Show("No settlement data could be deleted!");
+                MessageBox.Show("No settlement data could be deleted!",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 return; 
             }
             //confirm
@@ -197,17 +206,26 @@ namespace WareMaster
                     Mouse.OverrideCursor = Cursors.Wait;
                     Globals.wareMasterEntities.SaveChanges();
                     Mouse.OverrideCursor = null;
-                    MessageBox.Show("Settlement data deleted successfully!");
+                    MessageBox.Show("Settlement data deleted successfully.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                     this.Close(); 
                 }
                 else
                 {
-                    MessageBox.Show("Settlement data not found. Deletion failed.");
+                    MessageBox.Show("Settlement data not found. Deletion failed.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred while deleting settlement data: " + ex.Message);
+                MessageBox.Show("An error occurred while deleting settlement data: " + ex.Message,
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
         }
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

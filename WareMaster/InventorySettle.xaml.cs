@@ -28,9 +28,9 @@ namespace WareMaster
         {
             List<DateTime> recentSettlementDates = Globals.wareMasterEntities
                 .Settlements
-                .OrderByDescending(s => s.Settle_Date)
                 .Select(s => s.Settle_Date)
                 .Distinct()
+                .OrderByDescending(date=>date)
                 .Take(numOfRecords)
                 .ToList();
             LVSettle.ItemsSource = recentSettlementDates;
@@ -45,7 +45,10 @@ namespace WareMaster
             }
             else
             {
-                MessageBox.Show("Please enter a valid number of records.");
+                MessageBox.Show("Please enter a valid number of records.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
             }
             Mouse.OverrideCursor = null;
         }
@@ -55,11 +58,14 @@ namespace WareMaster
             Mouse.OverrideCursor = Cursors.Wait;
             if (LVSettle.SelectedItem == null)
             {
-                MessageBox.Show("Please select a settlement date to delete.");
+                MessageBox.Show("Please select a settlement date to delete.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 Mouse.OverrideCursor = null;
                 return;
             }
-            if(MessageBoxResult.No== MessageBox.Show("Are you sure you want to delete the selected settlement date?", "Confirmation", MessageBoxButton.YesNo))
+            if(MessageBoxResult.No== MessageBox.Show("Are you sure you want to delete the selected settlement date?", "Confirmation", MessageBoxButton.YesNo,MessageBoxImage.Question))
             {
                 Mouse.OverrideCursor = null;
                 return;
@@ -74,7 +80,10 @@ namespace WareMaster
 
                 if (selectedDate <= minDate)
                 {
-                    MessageBox.Show("Cannot delete the earlist settlement data.");
+                    MessageBox.Show("Cannot delete the earlist settlement data.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                     Mouse.OverrideCursor = null;
                     return;
                 }
@@ -93,7 +102,10 @@ namespace WareMaster
                 {
                     ShowSettletDates(5);
                 }
-                MessageBox.Show("Settlement deleted successfully.");
+                MessageBox.Show("Settlement deleted successfully.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
             }
             catch(Exception ex)
             {
@@ -113,10 +125,12 @@ namespace WareMaster
             if ( dpSettleDate.SelectedDate <= lastSettleDate)
             {
                 MessageBox.Show("Cannot settle on or before the last settlement date.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Mouse.OverrideCursor = null; 
                 return;
             }
-            if (MessageBoxResult.No==MessageBox.Show("Do you want to settle inventories?", "Confirmation", MessageBoxButton.YesNo))
+            if (MessageBoxResult.No==MessageBox.Show("Do you want to settle inventories?", "Confirmation", MessageBoxButton.YesNo,MessageBoxImage.Question))
             {
+                Mouse.OverrideCursor = null; 
                 return;
             }
             
@@ -203,6 +217,54 @@ namespace WareMaster
             if (e.ChangedButton == MouseButton.Left)
             {
                 this.DragMove();
+            }
+        }
+
+        private void RemoveOld_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (LVSettle.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a settle date",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                return;
+            }
+            DateTime settleDate = (DateTime)LVSettle.SelectedItem;
+            if (MessageBoxResult.No == MessageBox.Show($"Are you sure to remove all settlement and transaction data before {settleDate.Date:yyyy-MM-dd}?",
+                "Confirm",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning))
+            {
+                return;
+            }
+            try
+            {
+                Globals.wareMasterEntities.Transactions.RemoveRange(
+                    Globals.wareMasterEntities.Transactions.Where(t => t.Transaction_Date <= settleDate));
+                Globals.wareMasterEntities.Settlements.RemoveRange(
+                    Globals.wareMasterEntities.Settlements.Where(s => s.Settle_Date < settleDate));
+                Globals.wareMasterEntities.SaveChanges();
+                if (int.TryParse(txtNumber.Text, out int numOfRecords) && numOfRecords > 0)
+                {
+                    ShowSettletDates(numOfRecords);
+                }
+                else
+                {
+                    ShowSettletDates(5);
+                }
+                MessageBox.Show("Data removed successfully.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
         }
     }

@@ -253,7 +253,10 @@ namespace WareMaster
                 var data = DataGridResult.Items;
                 if (data.Count <= 0)
                 {
-                    MessageBox.Show("No data to export");
+                    MessageBox.Show("No data to export",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                     return;
                 }
                 PropertyInfo[] columnTypes = data[0].GetType().GetProperties();
@@ -388,10 +391,17 @@ namespace WareMaster
 
 
                     printDialog.PrintDocument(paginator.DocumentPaginator, "Data Printing");
+                    MessageBox.Show("Print successfully",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show("No Data to print");
+                    MessageBox.Show("No Data to print",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 }
             }
         }
@@ -409,7 +419,7 @@ namespace WareMaster
             //MessageBox.Show(DataGridResult.SelectedIndex.ToString());
             InventoryData inventoryData=DataGridResult.SelectedItem as InventoryData;
             if (inventoryData == null || 
-                MessageBoxResult.Cancel == MessageBox.Show("Delete inventory change data " + inventoryData.ToString(), "Confirm", MessageBoxButton.OKCancel)) 
+                MessageBoxResult.Cancel == MessageBox.Show("Delete inventory change data " + inventoryData.ToString(), "Confirm", MessageBoxButton.OKCancel,MessageBoxImage.Warning)) 
             {
                 return;
             }
@@ -422,7 +432,10 @@ namespace WareMaster
                     DateTime lastSettleDate=Inventory.GetLastSettleDate();
                     if (lastSettleDate>=transaction.Transaction_Date)
                     {
-                        MessageBox.Show("Cannot remove transaction record after settle date!");
+                        MessageBox.Show("Cannot remove transaction record after settle date.",
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
                         return;
                     }
                     //DataGridResult.Items.Remove(inventoryData);
@@ -434,11 +447,17 @@ namespace WareMaster
                     DataGridResult.ItemsSource = null;
                     list.Remove(inventoryData);
                     DataGridResult.ItemsSource = list;
-                    MessageBox.Show("Record removed!");
+                    MessageBox.Show("Record removed.",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message,
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
                 }
                 
 
