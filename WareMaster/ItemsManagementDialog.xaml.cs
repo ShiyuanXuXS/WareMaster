@@ -38,12 +38,22 @@ namespace WareMaster
         {
             InitializeComponent();
             InitializeLvItems();
-            totalPage = (int)Math.Ceiling((double)allItems.Count / pageSize);
+            AddPagingButton();
+            //TbUserName.Text = loginUser;
+        }
+        private void AddPagingButton()
+        {
+            if (StackPaging.Children.Count > totalPage + 2)
+            {
+                StackPaging.Children.RemoveRange(2, totalPage);
+            }
+
+            totalPage = (int)Math.Ceiling((double)filterItems.Count / pageSize);
             for (int i = 0; i < totalPage; i++)
             {
                 Button newPageButton = new Button()
                 {
-                    Name = "newPageButton" + i,
+                    Name = "newPageButton" + i + 1,
                     Content = i + 1,
                     Width = 15,
                     Height = 15,
@@ -53,14 +63,15 @@ namespace WareMaster
                 newPageButton.Click += NewPageButton_Click;
                 StackPaging.Children.Insert(i + 2, newPageButton);
             }
-            //TbUserName.Text = loginUser;
         }
 
         private void NewPageButton_Click(object sender, RoutedEventArgs e)
         {
             Button clickedButton = (Button)sender;
+            SetColor();
+            clickedButton.Background = new SolidColorBrush(Colors.LightSkyBlue);
             String page = clickedButton.Content.ToString();
-            if (int.TryParse(page, out int currentPage))
+            if (int.TryParse(page, out currentPage))
             {
                 DisplayPage(currentPage);
             }
@@ -71,12 +82,40 @@ namespace WareMaster
             }
         }
 
+        private void SetColor()
+        {
+            try
+            {
+                for (int i = 2; i < StackPaging.Children.Count - 2; i++)
+                {
+                    ((Button)StackPaging.Children[i]).Background = new SolidColorBrush(Colors.Transparent);
+                }
+            }
+            catch (SystemException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+
+        }
+
         private void BtnPrevPage_Click(object sender, RoutedEventArgs e)
         {
             if (currentPage > 1)
             {
-                currentPage--;
-                DisplayPage(currentPage);
+                try
+                {
+                    currentPage--;
+                    Button clickedButton = (Button)StackPaging.Children[currentPage + 1];
+                    SetColor();
+                    clickedButton.Background = new SolidColorBrush(Colors.LightSkyBlue);
+                    DisplayPage(currentPage);
+                }
+                catch (SystemException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
             }
         }
 
@@ -84,8 +123,19 @@ namespace WareMaster
         {
             if (currentPage < totalPage)
             {
-                currentPage++;
-                DisplayPage(currentPage);
+                try
+                {
+                    currentPage++;
+                    //Button clickedButton = (Button)StackPaging.FindName("newPageButton3");
+                    Button clickedButton = (Button)StackPaging.Children[currentPage + 1];
+                    SetColor();
+                    clickedButton.Background = new SolidColorBrush(Colors.LightSkyBlue);
+                    DisplayPage(currentPage);
+                }
+                catch (SystemException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
@@ -112,7 +162,8 @@ namespace WareMaster
                                 Location = item.Location != null ? item.Location : string.Empty
                             };
                 allItems = query.ToList();
-                LvItems.ItemsSource= allItems;
+                filterItems = allItems;
+                DisplayPage(currentPage);
                 TxblItemCount.Text = "Total " + query.Count().ToString() + " Items";
             }
             catch (SystemException ex)
@@ -281,9 +332,9 @@ namespace WareMaster
                                                       where item.ItemName.ToLower().Contains(txtFilter.Text.Trim().ToLower())
                                                  select item);
                 currentPage = 1;
+                AddPagingButton();
                 DisplayPage(currentPage);
             }
-            LvItems.ItemsSource = filterItems;
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

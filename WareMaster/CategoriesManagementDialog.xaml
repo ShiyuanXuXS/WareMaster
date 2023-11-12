@@ -171,9 +171,9 @@
 
             <!--Filter Textbox-->
             <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
-                <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                <!--<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                             Panel.ZIndex="1" Text="Search in Item Name..." 
-                            Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
+                            Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>-->
                 <TextBox x:Name="txtFilter" TextChanged="txtFilter_TextChanged" Style="{StaticResource textboxFilter}"/>
 
             </Grid>
