@@ -53,8 +53,10 @@ namespace WareMaster
         private int pageSize = 10;
         private int totalPage = 0;
         private RoleEnum role;
-        private List<ItemViewModel> allItems = new List<ItemViewModel>() ;
-        private List<ItemViewModel> filterItems = new List<ItemViewModel>();
+        //private List<ItemViewModel> allItems = new List<ItemViewModel>() ;
+        //private List<ItemViewModel> filterItems = new List<ItemViewModel>();
+        private List<InventoryData> allItems=new List<InventoryData>();
+        private List<InventoryData> filterItems=new List<InventoryData>();
         private WareMasterEntities dbContext;
         public MainWindow()
         {
@@ -146,27 +148,29 @@ namespace WareMaster
         {
             try
             {
-                var query = from item in dbContext.Items
-                            join settlement in dbContext.Settlements on item.id equals settlement.Item_Id into gj
-                            from sub in gj.DefaultIfEmpty()
-                            select new ItemViewModel
-                            {
-                                ItemId = item.id,
-                                ItemName = item.Itemname,
-                                CategoryName = item.Category.Category_Name,
-                                Unit = item.Unit != null ? item.Unit : string.Empty,
-                                Location = item.Location != null ? item.Location : string.Empty,
-                                Description = item.Description != null ? item.Description : string.Empty,
-                                Quantity = sub != null ? sub.Quantity : 0,
-                                Total = sub != null ? sub.Total : 0,
-                                SettleDate = sub != null ? sub.Settle_Date : DateTime.Now,
-                                SettlementId = sub != null ? sub.id : -1
-                            };
+                //var query = from item in dbContext.Items
+                //            join settlement in dbContext.Settlements on item.id equals settlement.Item_Id into gj
+                //            from sub in gj.DefaultIfEmpty()
+                //            select new ItemViewModel
+                //            {
+                //                ItemId = item.id,
+                //                ItemName = item.Itemname,
+                //                CategoryName = item.Category.Category_Name,
+                //                Unit = item.Unit != null ? item.Unit : string.Empty,
+                //                Location = item.Location != null ? item.Location : string.Empty,
+                //                Description = item.Description != null ? item.Description : string.Empty,
+                //                Quantity = sub != null ? sub.Quantity : 0,
+                //                Total = sub != null ? sub.Total : 0,
+                //                SettleDate = sub != null ? sub.Settle_Date : DateTime.Now,
+                //                SettlementId = sub != null ? sub.id : -1
+                //            };
 
-                allItems = query.ToList();
+                //allItems = query.ToList();
+                allItems = Inventory.GetAllInventoriesByItem(DateTime.Now.Date);
                 filterItems = allItems;
                 DisplayPage(currentPage);
-                TxblItemCount.Text = "Total " + query.Count().ToString() + " Items";
+                //TxblItemCount.Text = "Total " + query.Count().ToString() + " Items";
+                TxblItemCount.Text = "Total " + allItems.Count().ToString() + " Items";
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -294,16 +298,19 @@ namespace WareMaster
 
         private void MenuItemUpdateItem_Click(object sender, RoutedEventArgs e)
         {
-            ItemViewModel selectedItem = DgStorage.SelectedItem as ItemViewModel;
+            //ItemViewModel selectedItem = DgStorage.SelectedItem as ItemViewModel;
+            //if (selectedItem == null) return;
+            //Item currItem = new Item();
+            //currItem.id = selectedItem.ItemId;
+            //currItem.Itemname = selectedItem.ItemName;
+            //currItem.Description = selectedItem.Description;
+            //currItem.Unit = selectedItem.Unit;
+            //currItem.Location = selectedItem.Location;
+            //currItem.Category_Id = Globals.wareMasterEntities.Items.Where(item => item.id == selectedItem.ItemId).Select(item => item.Category_Id).SingleOrDefault();
+            InventoryData selectedItem=DgStorage.SelectedItem as InventoryData;
             if (selectedItem == null) return;
-            Item currItem = new Item();
-            currItem.id = selectedItem.ItemId;
-            currItem.Itemname = selectedItem.ItemName;
-            currItem.Description = selectedItem.Description;
-            currItem.Unit = selectedItem.Unit;
-            currItem.Location = selectedItem.Location;
-            currItem.Category_Id = Globals.wareMasterEntities.Items.Where(item => item.id == selectedItem.ItemId).Select(item => item.Category_Id).SingleOrDefault();
 
+            Item currItem = Globals.wareMasterEntities.Items.FirstOrDefault(item => item.id == selectedItem.id);
             AddEditItemsDialog dialog = new AddEditItemsDialog(currItem);
             dialog.Owner = this;
                 dialog.ShowDialog();
@@ -421,7 +428,7 @@ namespace WareMaster
 
         private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            MessageBox.Show("3 currentPage="+currentPage);
+            //MessageBox.Show("3 currentPage="+currentPage);
             if (txtFilter.Text=="")
             {
                 filterItems = allItems;
@@ -430,9 +437,12 @@ namespace WareMaster
             }
             else
             {
-                filterItems = new List<ItemViewModel>(from item in allItems
-                              where item.ItemName.ToLower().Contains(txtFilter.Text.ToLower().Trim())
-                              select item);
+                //filterItems = new List<ItemViewModel>(from item in allItems
+                //              where item.ItemName.ToLower().Contains(txtFilter.Text.ToLower().Trim())
+                //              select item);
+                filterItems=new List<InventoryData>(from item in allItems
+                                                    where item.Name.ToLower().Contains(txtFilter.Text.ToLower().Trim())
+                                                    select item);
                 currentPage = 1;
                 AddPagingButton();
                 DisplayPage(currentPage);
@@ -527,17 +537,17 @@ namespace WareMaster
     }
 
 
-    public class ItemViewModel
-    {
-        public int ItemId { get; set; }
-        public string ItemName { get; set; }
-        public string CategoryName { get; set; }
-        public string Unit { get; set; }
-        public string Location { get; set; }
-        public string Description { get; set; }
-        public int Quantity { get; set; }
-        public decimal Total { get; set; }
-        public DateTime SettleDate { get; set; }
-        public int SettlementId { get; set; }
-    }
+    //public class ItemViewModel
+    //{
+    //    public int ItemId { get; set; }
+    //    public string ItemName { get; set; }
+    //    public string CategoryName { get; set; }
+    //    public string Unit { get; set; }
+    //    public string Location { get; set; }
+    //    public string Description { get; set; }
+    //    public int Quantity { get; set; }
+    //    public decimal Total { get; set; }
+    //    public DateTime SettleDate { get; set; }
+    //    public int SettlementId { get; set; }
+    //}
 }

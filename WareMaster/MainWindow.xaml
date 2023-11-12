@@ -175,7 +175,7 @@
                     </Grid>
                     <!--Page Title-->
                     <TextBlock Text="Current Storage" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0,0,0,10"
-                       HorizontalAlignment="Left" Foreground="#121518" Width="230"/>
+                       HorizontalAlignment="Left" Foreground="#121518" Width="274"/>
                     <!--Add Button-->
                     <!--<Button x:Name="BtnBackup" Click="BtnBackup_Click" Style="{StaticResource addButton}" Background="#FF4158D9" Margin="0,24,0,4" Grid.Row="1">
                         <StackPanel Orientation="Horizontal">
@@ -224,7 +224,8 @@
                                     </DataTemplate>
                                 </DataGridCheckBoxColumn.HeaderTemplate>
                             </DataGridCheckBoxColumn>
-                            <DataGridTextColumn Header="ID" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding ItemId}"/>
+                            <!--<DataGridTextColumn Header="ID" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding ItemId}"/>-->
+                            <DataGridTextColumn Header="ID" IsReadOnly="True" CanUserResize="False" MinWidth="50" Width="auto" Binding="{Binding id}"/>
                             <!--<DataGridTemplateColumn Header="ID" IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -237,12 +238,16 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>-->
-                            <DataGridTextColumn Header="Item Name" IsReadOnly="True" MinWidth="50" Width="*" Binding="{Binding ItemName}"/>
+                            <!--<DataGridTextColumn Header="Item Name" IsReadOnly="True" MinWidth="50" Width="*" Binding="{Binding ItemName}"/>
                             <DataGridTextColumn Header="Description" IsReadOnly="True" MinWidth="150" Width="*" Binding="{Binding Description}"/>
                             <DataGridTextColumn Header="Category" IsReadOnly="True" Width="*" Binding="{Binding CategoryName}"/>
                             <DataGridTextColumn Header="Unit" IsReadOnly="True" Width="*" Binding="{Binding Unit}"/>
+                            <DataGridTextColumn Header="Quantity" IsReadOnly="True" Width="*" Binding="{Binding Quantity}"/>-->
+                            <!--<DataGridTextColumn Header="Location" IsReadOnly="True" Width="*" Binding="{Binding Location}"/>-->
+                            <DataGridTextColumn Header="Item Name" IsReadOnly="True" MinWidth="50" Width="*" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Quantity" IsReadOnly="True" Width="*" Binding="{Binding Quantity}"/>
-                            <DataGridTextColumn Header="Location" IsReadOnly="True" Width="*" Binding="{Binding Location}"/>
+                            <DataGridTextColumn Header="Total" IsReadOnly="True" Width="*" Binding="{Binding Total}"/>
+                            <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Date, StringFormat=yyyy-MM-dd}" />
 
                             <!--<DataGridTemplateColumn Header="Unit" IsReadOnly="True" Width="auto">-->
                             <!--<DataGridTemplateColumn.CellTemplate>
