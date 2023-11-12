@@ -8,12 +8,12 @@
         mc:Ignorable="d"
         Title="UsersManagementDialog" Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent">
-    <Window.Resources>
+    <!--<Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-    </Window.Resources>
-    
-    <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-            <Grid>
+    </Window.Resources>-->
+
+    <Border Background="#87C4FF" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <!--<Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="*" />
@@ -22,19 +22,19 @@
                 Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right">
                 <Icon:PackIconMaterial Kind="Close"/>
             </Button>
-            <!-- Left Menu-->
+            --><!-- Left Menu--><!--
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
-                    <!--<RowDefinition Height="100"/>-->
+                    --><!--<RowDefinition Height="100"/>--><!--
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!--Menu Icon-->
+                --><!--Menu Icon--><!--
                 <Button Margin="20,28,0,35" Style="{StaticResource topButton}">
-                    <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    --><!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Source="Images/favicon.ico" Width="16" Height="16" Margin="0,0,5,0" />
-            </StackPanel>-->
+            </StackPanel>--><!--
                     <Icon:PackIconMaterial Kind="Menu"/>
                 </Button>
 
@@ -42,7 +42,7 @@
 
                 <Border Grid.Row="1" Background="#FF3E47D0" CornerRadius="0 50 0 30">
                     <DockPanel>
-                        <!--Menu Logo-->
+                        --><!--Menu Logo--><!--
                         <Border Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
                         DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
                             <Ellipse>
@@ -52,16 +52,16 @@
                             </Ellipse>
                         </Border>
 
-                        <!--Menu Titles-->
+                        --><!--Menu Titles--><!--
                         <TextBlock Text="WareMaster" Foreground="White" FontSize="22" FontWeight="SemiBold"
                            DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
                         <TextBlock Name="TbUserName" Text="" Foreground="#d0bfff" FontSize="14" FontWeight="SemiBold"
                              DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
 
-                        <!--Menu Seprator-->
+                        --><!--Menu Seprator--><!--
                         <Separator Margin="25" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc"/>
 
-                        <!--Menu Buttons-->
+                        --><!--Menu Buttons--><!--
                         <StackPanel DockPanel.Dock="Top">
                             <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
@@ -102,7 +102,8 @@
                         </Button>
                     </DockPanel>
                 </Border>
-            </Grid>
+            </Grid>-->
+        
 
             <!--Main Section-->
                 <Grid Grid.Column="1" Margin="30,0,20,20" Height="680" VerticalAlignment="Bottom">
@@ -116,17 +117,34 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                <!--Top Buttons-->
+            <Grid Grid.Row="0">
+                <Border Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
+                        DockPanel.Dock="Bottom" HorizontalAlignment="Left" Margin="20 0 0 0">
+                    <Ellipse>
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/Images/WMLetter.jpg"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Border>
+                <TextBlock Text="Users Management" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0,0,0,10"
+                           HorizontalAlignment="Center" Foreground="#121518" Width="350"/>
+                <Button Name="BtnClose" Grid.Column="1" Panel.ZIndex="1" Click="BtnClose_Click"  Style="{StaticResource topButton}" 
+                        Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Icon:PackIconMaterial Kind="Close"/>
+                </Button>
+            </Grid>
+
+            <!--Top Buttons--><!--
                 <Button Grid.Row="0" Style="{StaticResource topButton}" Margin="780,14,0,14" Background="#dcdcdc">
                     <Icon:PackIconMaterial Kind="Cog"/>
                 </Button>
                 <Button Grid.Row="0" Style="{StaticResource topButton}" Margin="745,14,0,14">
                     <Icon:PackIconMaterial Kind="Bell"/>
-                </Button>
+                </Button>-->
 
                 <!--Page Title-->
-                <TextBlock Text="Users Management" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
-                       HorizontalAlignment="Left" Foreground="#121518"/>
+                <!--<TextBlock Text="Users Management" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                       HorizontalAlignment="Left" Foreground="#121518"/>-->
                     
                 <!--Add Button-->
                 <Button Style="{StaticResource addButton}"  Click="BtnAddItems_Click">
@@ -147,9 +165,9 @@
 
                     <!--Filter Textbox-->
                     <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
-                        <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                        <!--<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                             Panel.ZIndex="1" Text="Search in User Name..." 
-                            Visibility="{Binding ElementName=txtFilter.IsEmpty,Path=Text,Converter={StaticResource BoolToVis}}"/>
+                            Visibility="{Binding ElementName=txtFilter.IsEmpty,Path=Text,Converter={StaticResource BoolToVis}}"/>-->
                         <TextBox x:Name="txtFilter" TextChanged="txtFilter_TextChanged" Style="{StaticResource textboxFilter}"/>
 
                     </Grid>
@@ -186,8 +204,8 @@
 
 
                 <!--Pagination Section-->
-                    <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
-                    CornerRadius="5" Padding="5" Background="White" Margin="0 10 10 10">
+                    <!--<Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
+                    CornerRadius="5" Padding="5" Background="White" Margin="0 10 10 10">-->
                         <!--<StackPanel x:Name="StackPaging" Orientation="Horizontal">
                             <Button Name="BtnPrevPage" Click="BtnPrevPage_Click" Style="{StaticResource pagingButton}">
                                 <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource pagingButtonIcon}" />
@@ -198,7 +216,7 @@
                                 <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource pagingButtonIcon}" />
                             </Button>
                         </StackPanel>-->
-                    </Border>
+                    <!--</Border>-->
 
                     <!--<StatusBar Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <StatusBarItem >
@@ -207,7 +225,7 @@
                     </StatusBar>-->
                 </Grid>
 
-            </Grid>
+            <!--</Grid>-->
         
     </Border>
 </Window>

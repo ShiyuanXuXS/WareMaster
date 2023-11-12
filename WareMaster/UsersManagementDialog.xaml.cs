@@ -26,9 +26,7 @@ namespace WareMaster
     /// </summary>
     public partial class UsersManagementDialog : Window
     {
-        private int currentPage = 1;
-        private int pageSize = 10;
-        private int totalPage = 0;
+       
         private List<User> filterUsers = new List<User>();
         private List<User> allUsers = new List<User>();
         private string loginUser = Globals.Username;
@@ -36,7 +34,7 @@ namespace WareMaster
         {
             InitializeComponent();
             InitializeDgUsers();
-            TbUserName.Text = loginUser;
+            //TbUserName.Text = loginUser;
         }
 
         private void InitializeDgUsers()

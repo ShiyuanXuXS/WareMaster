@@ -43,6 +43,7 @@ namespace WareMaster
             {
                 Button newPageButton = new Button()
                 {
+                    Name = "newPageButton" + i,
                     Content = i + 1,
                     Width = 15,
                     Height = 15,
@@ -52,7 +53,7 @@ namespace WareMaster
                 newPageButton.Click += NewPageButton_Click;
                 StackPaging.Children.Insert(i + 2, newPageButton);
             }
-            TbUserName.Text = loginUser;
+            //TbUserName.Text = loginUser;
         }
 
         private void NewPageButton_Click(object sender, RoutedEventArgs e)
@@ -134,6 +135,11 @@ namespace WareMaster
             {
                 return $"ItemId: {ItemId}, ItemName: {ItemName}, CategoryName: {CategoryName}, Unit: {Unit}, Location: {Location}, Description: {Description}";
             }
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
         private void BtnAddItems_Click(object sender, RoutedEventArgs e)
@@ -266,16 +272,16 @@ namespace WareMaster
             if (txtFilter.Text == "")
             {
                 filterItems = allItems;
-                //currentPage = 1;
-                //DisplayPage(currentPage);
+                currentPage = 1;
+                DisplayPage(currentPage);
             }
             else
             {
                 filterItems = new List<ViewItem>(from item in allItems
                                                       where item.ItemName.ToLower().Contains(txtFilter.Text.Trim().ToLower())
                                                  select item);
-                //currentPage = 1;
-                //DisplayPage(currentPage);
+                currentPage = 1;
+                DisplayPage(currentPage);
             }
             LvItems.ItemsSource = filterItems;
         }
@@ -319,14 +325,7 @@ namespace WareMaster
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
 
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                this.Close();
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); };
-        }
+     
     }
 
 }
