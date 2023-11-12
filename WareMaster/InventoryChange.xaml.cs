@@ -28,16 +28,17 @@ namespace WareMaster
             this.option = option;
             InitializeComponent();
             Title = option;
+            txtTitle.Text = option;
             ConfirmButton.Content = option;
 
-            user = new User
-            {
-                id = 1,
-                Username = "testUser",
-                Role = 0,
-                Password = "password",
-                Email = "test@email.com"
-            };//for test only, to be switched to logged user
+            //user = new User
+            //{
+            //    id = 1,
+            //    Username = "testUser",
+            //    Role = 0,
+            //    Password = "password",
+            //    Email = "test@email.com"
+            //};//for test only, to be switched to logged user
             user = Globals.wareMasterEntities.Users.FirstOrDefault(u => u.Username == Globals.Username);
 
             TransactionInit();
