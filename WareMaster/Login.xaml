@@ -6,7 +6,7 @@
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:WareMaster"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
-        Title="Login" Height="450" Width="600">
+        Title="Login" Height="450" Width="420">
     <Grid>
 
         <Button Name="BtnClose" Grid.Column="1" Panel.ZIndex="1" Click="BtnClose_Click"  Style="{StaticResource topButton}" 
@@ -24,11 +24,11 @@
                 <Canvas>
                     <Polygon Points="0,20 230,140 0,270" Fill="#4ebe"/>
                     <Polygon Points="80,400 170,340 180,430" Fill="#4ebe"/>
-                    <Polygon Points="450,260 580,340 580,220" Fill="#4ebe"/>
+                    <Polygon Points="350,260 420,300 420,220" Fill="#4ebe"/>
                     <Ellipse Margin="205 410 20 0" Width="40" Height="40" Fill="#4ebe"/>
                     <Ellipse Margin="50 380 0 0" Width="20" Height="20" Fill="#4ebe"/>
-                    <Ellipse Margin="500 110 20 0" Width="40" Height="40" Fill="#4ebe"/>
-                    <Border Background="#ffffff" CornerRadius="10 10 10 10" MouseDown="Border_MouseDown" Height="400" Margin="125 25">
+                    <Ellipse Margin="380 110 20 0" Width="40" Height="40" Fill="#4ebe"/>
+                    <Border Background="#ffffff" CornerRadius="10 10 10 10" MouseDown="Border_MouseDown" Height="400" Margin="35 25">
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock Text="Sign in" Style="{StaticResource titleText}" Foreground="#3ab1eb"/>
                             <StackPanel Orientation="Horizontal" Margin="0 20" HorizontalAlignment="Center">

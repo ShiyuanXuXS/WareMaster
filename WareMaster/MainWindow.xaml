@@ -213,7 +213,7 @@
                     <DataGrid Grid.Row="4" x:Name="DgStorage" AutoGenerateColumns="False" GridLinesVisibility="None"
                               HorizontalGridLinesBrush="Aqua" CanUserReorderColumns="False" CanUserAddRows="False"
                               Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"
-                              RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                              RowStyle="{DynamicResource DataGridRowStyle1}"
                               Margin="0,10,10,10" BorderThickness="1">
 
                         <DataGrid.Columns>

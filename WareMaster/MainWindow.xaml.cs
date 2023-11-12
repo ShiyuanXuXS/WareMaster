@@ -77,12 +77,23 @@ namespace WareMaster
             //Globals.wareMasterEntities = new WareMasterEntities();
             dbContext = Globals.DbContext;
             InitializeLvInit();
-            totalPage = (int)Math.Ceiling((double)allItems.Count / pageSize);
+            AddPagingButton();
+            TblWelcome.Text = "Welcome: "+Globals.Username;
+        }
+
+        private void AddPagingButton()
+        {
+            if (StackPaging.Children.Count> totalPage+2)
+            {
+                StackPaging.Children.RemoveRange(2, totalPage);
+            }
+            
+            totalPage = (int)Math.Ceiling((double)filterItems.Count / pageSize);
             for (int i = 0; i < totalPage; i++)
             {
                 Button newPageButton = new Button()
                 {
-                    Name = "newPageButton"+i,
+                    Name = "newPageButton"+i+1,
                     Content = i+1,
                     Width = 15,
                     Height = 15,
@@ -92,14 +103,14 @@ namespace WareMaster
                 newPageButton.Click += NewPageButton_Click;
                 StackPaging.Children.Insert(i+2, newPageButton);
             }
-            TblWelcome.Text = "Welcome: "+Globals.Username;
         }
-
         private void NewPageButton_Click(object sender, RoutedEventArgs e)
         {
             Button clickedButton =(Button)sender;
+            SetColor();
+            clickedButton.Background = new SolidColorBrush(Colors.LightSkyBlue);
             String page = clickedButton.Content.ToString();
-            if (int.TryParse(page, out int currentPage))
+            if (int.TryParse(page, out currentPage))
             {
                 DisplayPage(currentPage);
             }
@@ -110,6 +121,21 @@ namespace WareMaster
             }
         }
 
+        private void SetColor()
+        {
+            try
+            {
+                for (int i = 2; i<StackPaging.Children.Count -2; i++)
+                {
+                    ((Button)StackPaging.Children[i]).Background = new SolidColorBrush(Colors.Transparent);
+                }
+            }catch (SystemException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            
+            
+        }
         private void DisplayPage(int page)
         {
             var itemsToDisplay = filterItems.Skip((page-1)*pageSize).Take(pageSize).ToList();
@@ -136,7 +162,7 @@ namespace WareMaster
                                 SettleDate = sub != null ? sub.Settle_Date : DateTime.Now,
                                 SettlementId = sub != null ? sub.id : -1
                             };
-                
+
                 allItems = query.ToList();
                 filterItems = allItems;
                 DisplayPage(currentPage);
@@ -355,8 +381,19 @@ namespace WareMaster
         {
             if (currentPage > 1)
             {
-                currentPage--;
-                DisplayPage(currentPage);
+                try
+                {
+                    currentPage--;
+                    Button clickedButton = (Button)StackPaging.Children[currentPage+1];
+                    SetColor();
+                    clickedButton.Background = new SolidColorBrush(Colors.LightSkyBlue);
+                    DisplayPage(currentPage);
+                }
+                catch (SystemException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                
             }
         }
 
@@ -364,8 +401,19 @@ namespace WareMaster
         {
             if (currentPage < totalPage)
             {
-                currentPage++;
-                DisplayPage(currentPage);
+                try
+                {
+                    currentPage++;
+                    //Button clickedButton = (Button)StackPaging.FindName("newPageButton3");
+                    Button clickedButton = (Button)StackPaging.Children[currentPage+1];
+                    SetColor();
+                    clickedButton.Background = new SolidColorBrush(Colors.LightSkyBlue);
+                    DisplayPage(currentPage);
+                }
+                catch (SystemException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
@@ -373,6 +421,7 @@ namespace WareMaster
 
         private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
+            MessageBox.Show("3 currentPage="+currentPage);
             if (txtFilter.Text=="")
             {
                 filterItems = allItems;
@@ -385,6 +434,7 @@ namespace WareMaster
                               where item.ItemName.ToLower().Contains(txtFilter.Text.ToLower().Trim())
                               select item);
                 currentPage = 1;
+                AddPagingButton();
                 DisplayPage(currentPage);
             }
         }
