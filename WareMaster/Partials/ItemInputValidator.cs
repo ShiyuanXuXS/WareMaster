@@ -17,7 +17,7 @@ namespace WareMaster
             RuleFor(Item => Item.Description).NotNull().NotEmpty().Length(1, 500).Matches("^[a-zA-Z\\s]+$");  // only contains letters and/or space
             RuleFor(Item => Item.Category_Id).NotNull().NotEmpty().Must((item, Category_Id) => IsCategoryIdExist(Category_Id)).WithMessage("Category does not exist.");
             RuleFor(Item => Item.Unit).NotNull().NotEmpty();
-            RuleFor(Item => Item.Location).NotNull().NotEmpty().Matches("^A([1-9]|[1-4][0-9]|50)$");  // A1 
+            RuleFor(Item => Item.Location).NotNull().NotEmpty().Matches("^A([1-9]|[1-4][0-9]|60)$");  // A1 
         }
 
         private bool IsItemnameUnique(string itemname, int index, int itemid)

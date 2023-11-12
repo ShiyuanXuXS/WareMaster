@@ -95,7 +95,7 @@ namespace WareMaster
                         string hashPassword = SetHashedPassword(password);
                         if (hashPassword!=passwordSaved)
                         {
-                            TblPasswordeErr.Text = "Password is no correct!";
+                            TblPasswordeErr.Text = "Password is not correct!";
                             TblPasswordeErr.Visibility = Visibility.Visible;
                             return;
                         }
