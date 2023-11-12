@@ -106,8 +106,13 @@
 
                 <Border Name="RightBorder" Grid.Column="1"  Margin="10" Padding="5"  CornerRadius="5">
                     <Grid Grid.Column="1">
-                        <DataGrid x:Name="DataGridResult" AutoGenerateColumns="True" IsReadOnly="True">
-
+                        <DataGrid x:Name="DataGridResult" AutoGenerateColumns="True" IsReadOnly="True" >
+                           
+                            <DataGrid.ContextMenu>
+                                <ContextMenu Name="DeleteMenu" Visibility="Collapsed">
+                                    <MenuItem Header="Delete" Click="DeleteMenuItem_Click"/>
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
                         </DataGrid>
                     </Grid>
                 </Border>

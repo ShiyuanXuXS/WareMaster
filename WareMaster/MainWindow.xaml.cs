@@ -433,6 +433,7 @@ namespace WareMaster
             {
                 filterItems = allItems;
                 currentPage = 1;
+                AddPagingButton();
                 DisplayPage(currentPage);
             }
             else

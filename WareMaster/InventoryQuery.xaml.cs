@@ -35,7 +35,7 @@ namespace WareMaster
         private void QueryButton_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-
+            disableDeleteMenu();
             DataGridResult.Tag = "";
             switch (QueryFor.Text)
             {
@@ -99,25 +99,33 @@ namespace WareMaster
                         //Details By Item
                         if (txtInputName.Tag == null)
                         {
+                            //query details of all items
                             DataGridResult.ItemsSource = Inventory.GetAllInventoryChangeDetailsByItem((DateTime)DateBegin.SelectedDate, (DateTime)DateEnd.SelectedDate);
                         }
                         else
                         {
+                            //query details of specified item
                             DataGridResult.ItemsSource = Inventory.GetInventoryChangeDetailsByItem((Item)(txtInputName.Tag), (DateTime)DateBegin.SelectedDate, (DateTime)DateEnd.SelectedDate);
                         }
                     }
                     else
                     {
-                        //Details By Item
+                        //Details By Category
                         if (txtInputName.Tag == null)
                         {
+                            //no specified category, query details of all items
                             DataGridResult.ItemsSource = Inventory.GetAllInventoryChangeDetailsByItem((DateTime)DateBegin.SelectedDate, (DateTime)DateEnd.SelectedDate);
                         }
                         else
                         {
+                            //query details of specified category
                             DataGridResult.ItemsSource = Inventory.GetInventoryChangeDetailsByCategory((Category)(txtInputName.Tag), (DateTime)DateBegin.SelectedDate, (DateTime)DateEnd.SelectedDate);
                         }
                     };
+                    if (DataGridResult.Items.Count > 0)
+                    {
+                        enableDeleteMenu();
+                    }
                     break;
                 default: break;
             }
@@ -387,6 +395,57 @@ namespace WareMaster
                 }
             }
         }
+        private void enableDeleteMenu()
+        {
+            DeleteMenu.Visibility = Visibility.Visible;
+        }
+        private void disableDeleteMenu()
+        {
+            DeleteMenu.Visibility = Visibility.Collapsed;
+        }
+ 
+        private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show(DataGridResult.SelectedIndex.ToString());
+            InventoryData inventoryData=DataGridResult.SelectedItem as InventoryData;
+            if (inventoryData == null || 
+                MessageBoxResult.Cancel == MessageBox.Show("Delete inventory change data " + inventoryData.ToString(), "Confirm", MessageBoxButton.OKCancel)) 
+            {
+                return;
+            }
+            
+            Transaction transaction=Globals.wareMasterEntities.Transactions.FirstOrDefault(t=>t.id==inventoryData.id);
+            if (transaction != null)
+            {
+                try
+                {
+                    DateTime lastSettleDate=Inventory.GetLastSettleDate();
+                    if (lastSettleDate>=transaction.Transaction_Date)
+                    {
+                        MessageBox.Show("Cannot remove transaction record after settle date!");
+                        return;
+                    }
+                    //DataGridResult.Items.Remove(inventoryData);
+                   
+                    Globals.wareMasterEntities.Transactions.Remove(transaction);
+                    Globals.wareMasterEntities.SaveChanges(); 
+                    List<InventoryData> list = (List<InventoryData>)DataGridResult.ItemsSource;
+                    
+                    DataGridResult.ItemsSource = null;
+                    list.Remove(inventoryData);
+                    DataGridResult.ItemsSource = list;
+                    MessageBox.Show("Record removed!");
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
 
+            }
+        }
+
+
+       
     }
 }
