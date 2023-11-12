@@ -6,7 +6,7 @@
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:WareMaster"
         mc:Ignorable="d"
-        Title="InventoryQuery" Height="450" Width="800" WindowStyle="None" WindowStartupLocation="CenterOwner"
+        Title="InventoryQuery" Height="472" Width="804" WindowStyle="None" WindowStartupLocation="CenterOwner"
         AllowsTransparency="True" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Border  Background="#87C4FF" CornerRadius="15" >
         <Grid>
@@ -44,51 +44,51 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid  Grid.Row="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <!--<RowDefinition Height="Auto"/>-->
-                            <!--<RowDefinition Height="Auto"/>-->
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="6*"/>
-                        </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <!--<RowDefinition Height="Auto"/>-->
+                                <!--<RowDefinition Height="Auto"/>-->
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="6*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Content="Query for:" Grid.Row="0" Grid.Column="0" Margin="0,10,0,10" ></Label>
-                        <ComboBox x:Name="QueryFor" Grid.Row="0" Grid.Column="1" Margin="0,10,0,10" SelectedIndex="0" SelectionChanged="QueryFor_SelectionChanged">
-                            <ComboBoxItem Content="Inventory"/>
-                            <ComboBoxItem Content="Summary"/>
-                            <ComboBoxItem Content="Details"/>
-                        </ComboBox>
+                            <Label Content="Query for:" Grid.Row="0" Grid.Column="0" Margin="0,10,0,10" ></Label>
+                            <ComboBox x:Name="QueryFor" Grid.Row="0" Grid.Column="1" Margin="0,10,0,10" SelectedIndex="0" SelectionChanged="QueryFor_SelectionChanged">
+                                <ComboBoxItem Content="Inventory"/>
+                                <ComboBoxItem Content="Summary"/>
+                                <ComboBoxItem Content="Details"/>
+                            </ComboBox>
 
-                        <Label Content="Group by:"  Grid.Row="1" Grid.Column="0" Margin="0,10,0,10" />
-                        <ComboBox x:Name="GroupBy"  Grid.Row="1" Grid.Column="1" Margin="0,10,0,10" SelectedIndex="0" SelectionChanged="GroupBy_SelectionChanged">
-                            <ComboBoxItem Content=""/>
-                            <ComboBoxItem Content="Item"/>
-                            <ComboBoxItem Content="Category"/>
-                        </ComboBox>
+                            <Label Content="Group by:"  Grid.Row="1" Grid.Column="0" Margin="0,10,0,10" />
+                            <ComboBox x:Name="GroupBy"  Grid.Row="1" Grid.Column="1" Margin="0,10,0,10" SelectedIndex="0" SelectionChanged="GroupBy_SelectionChanged">
+                                <ComboBoxItem Content=""/>
+                                <ComboBoxItem Content="Item"/>
+                                <ComboBoxItem Content="Category"/>
+                            </ComboBox>
 
-                        <Label Content="Input name:" Grid.Row="2" Grid.Column="0" Margin="0,10,0,10" />
-                        <TextBox x:Name="txtInputName" Grid.Row="2" Grid.Column="1" Margin="0,10,0,10" TextChanged="txtInputName_TextChanged" />
-                        <Popup x:Name="ListPopup" IsOpen="False" StaysOpen="False" PlacementTarget="{Binding ElementName=txtInputName}" Placement="Bottom">
-                            <ListBox x:Name="ListBoxNames" Width="200" Height="100" SelectionChanged="ListBoxNames_SelectionChanged"/>
-                        </Popup>
+                            <Label Content="Input name:" Grid.Row="2" Grid.Column="0" Margin="0,10,0,10" />
+                            <TextBox x:Name="txtInputName" Grid.Row="2" Grid.Column="1" Margin="0,10,0,10" TextChanged="txtInputName_TextChanged" />
+                            <Popup x:Name="ListPopup" IsOpen="False" StaysOpen="False" PlacementTarget="{Binding ElementName=txtInputName}" Placement="Bottom">
+                                <ListBox x:Name="ListBoxNames" Width="200" Height="100" SelectionChanged="ListBoxNames_SelectionChanged"/>
+                            </Popup>
 
-                        <Label Content="Date:" Grid.Row="3" Grid.Column="0" Margin="0,10,0,10" />
-                        <DatePicker x:Name="DateBegin" Grid.Row="3" Grid.Column="1" Margin="0,10,0,10" />
+                            <Label Content="Date:" Grid.Row="3" Grid.Column="0" Margin="0,10,0,10" />
+                            <DatePicker x:Name="DateBegin" Grid.Row="3" Grid.Column="1" Margin="0,10,0,10" />
 
-                        <Label x:Name="lblTo" Content="To:" Grid.Row="4" Grid.Column="0" Margin="0,10,0,10" Visibility="Hidden" />
-                        <DatePicker x:Name="DateEnd" Grid.Row="4" Grid.Column="1" Margin="0,10,0,10" Visibility="Hidden" />
+                            <Label x:Name="lblTo" Content="To:" Grid.Row="4" Grid.Column="0" Margin="0,10,0,10" Visibility="Hidden" />
+                            <DatePicker x:Name="DateEnd" Grid.Row="4" Grid.Column="1" Margin="0,10,0,10" Visibility="Hidden" />
 
-                        <!--<Button Content="Query" x:Name="QueryButton"  Style="{StaticResource addButton}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"  Width="90" Click="QueryButton_Click" />
+                            <!--<Button Content="Query" x:Name="QueryButton"  Style="{StaticResource addButton}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"  Width="90" Click="QueryButton_Click" />
                         <Button Content="Export" x:Name="ExportButton"  Style="{StaticResource addButton}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left"  Width="90" Click="ExportButton_Click" Height="35" VerticalAlignment="Top" />
                         <Button Content="Close" x:Name="CloseButton" Style="{StaticResource addButton}" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right"  Width="90" Click="CloseButton_Click" VerticalAlignment="Center" VerticalContentAlignment="Center" />-->
 
-                    </Grid>
+                        </Grid>
                         <Grid Grid.Row="1">
                             <Button Content="Query" x:Name="QueryButton"  Style="{StaticResource addButton}"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Click="QueryButton_Click" />
                             <Button Content="Export" x:Name="ExportButton"  Style="{StaticResource addButton}"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="90" Click="ExportButton_Click" Height="35"  />
@@ -100,10 +100,10 @@
 
                         </Grid>
                     </Grid>
-                    
+
                 </Border>
-                
-                
+
+
                 <Border Name="RightBorder" Grid.Column="1"  Margin="10" Padding="5"  CornerRadius="5">
                     <Grid Grid.Column="1">
                         <DataGrid x:Name="DataGridResult" AutoGenerateColumns="True" IsReadOnly="True">
@@ -114,5 +114,5 @@
             </Grid>
         </Grid>
     </Border>
-    
+
 </Window>
