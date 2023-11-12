@@ -33,7 +33,8 @@ namespace WareMaster
         {
             if (!string.IsNullOrEmpty(TxtName.Text) && TxtName.Text.Length > 0)
             {
-                TblName.Visibility = Visibility.Collapsed;
+                TblName.Visibility = Visibility.Hidden;
+                TblUsernameErr.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -51,7 +52,8 @@ namespace WareMaster
         {
             if (!string.IsNullOrEmpty(TxtPassword.Password) && TxtPassword.Password.Length > 0)
             {
-                TblPassword.Visibility = Visibility.Collapsed;
+                TblPassword.Visibility = Visibility.Hidden;
+                TblPasswordeErr.Visibility = Visibility.Hidden;
             }
             else
             {

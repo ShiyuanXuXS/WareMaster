@@ -136,6 +136,7 @@ namespace WareMaster
                                 SettleDate = sub != null ? sub.Settle_Date : DateTime.Now,
                                 SettlementId = sub != null ? sub.id : -1
                             };
+                
                 allItems = query.ToList();
                 filterItems = allItems;
                 DisplayPage(currentPage);
@@ -381,7 +382,7 @@ namespace WareMaster
             else
             {
                 filterItems = new List<ItemViewModel>(from item in allItems
-                              where item.ItemName.Contains(txtFilter.Text.Trim())
+                              where item.ItemName.ToLower().Contains(txtFilter.Text.ToLower().Trim())
                               select item);
                 currentPage = 1;
                 DisplayPage(currentPage);
@@ -397,11 +398,6 @@ namespace WareMaster
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }
-
-        private void BtnBackup_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
@@ -466,7 +462,17 @@ namespace WareMaster
 
         private void BtnResetPwd_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                ResetPassword resetPwd = new ResetPassword();
+                resetPwd.ShowDialog();
+                resetPwd.Owner = this;
+            }
+            catch (SystemException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
     }
 

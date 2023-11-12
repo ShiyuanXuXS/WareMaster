@@ -40,9 +40,18 @@ namespace WareMaster
             TxtOldPwd.Focus();
         }
 
-        private void TxtOldPwd_TextChanged(object sender, TextChangedEventArgs e)
+        private void TxtOldPwd_PasswordChanged(object sender, RoutedEventArgs e)
         {
-
+            if (!string.IsNullOrEmpty(TxtOldPwd.Password) && TxtOldPwd.Password.Length > 0)
+            {
+                TblOldPwd.Visibility = Visibility.Hidden;
+                TblAllInputErr.Visibility = Visibility.Hidden;
+                TblOldPwdErr.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                TblOldPwd.Visibility = Visibility.Visible;
+            }
         }
 
         private void TblNewPwd_MouseDown(object sender, MouseButtonEventArgs e)
@@ -52,7 +61,16 @@ namespace WareMaster
 
         private void TxtNewPwd_PasswordChanged(object sender, RoutedEventArgs e)
         {
-
+            if (!string.IsNullOrEmpty(TxtNewPwd.Password) && TxtNewPwd.Password.Length > 0)
+            {
+                TblNewPwd.Visibility = Visibility.Collapsed;
+                TblAllInputErr.Visibility = Visibility.Hidden;
+                TblNewPwdErr.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                TblNewPwd.Visibility = Visibility.Visible;
+            }
         }
 
         private void TblRepeatPwd_MouseDown(object sender, MouseButtonEventArgs e)
@@ -62,7 +80,16 @@ namespace WareMaster
 
         private void TxtRepeatPwd_PasswordChanged(object sender, RoutedEventArgs e)
         {
-
+            if (!string.IsNullOrEmpty(TxtRepeatPwd.Password) && TxtRepeatPwd.Password.Length > 0)
+            {
+                TblRepeatPwd.Visibility = Visibility.Hidden;
+                TblAllInputErr.Visibility = Visibility.Hidden;
+                TblResetPwdErr.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                TblRepeatPwd.Visibility = Visibility.Visible;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -98,8 +125,10 @@ namespace WareMaster
                             }
                             else
                             {
-                                user.Password = newPwd;
+                                user.Password = SetHashedPassword(newPwd);
                                 dbContext.SaveChanges();
+                                MessageBox.Show(this,"Your password succesfully reseted.","Message",MessageBoxButton.OK,MessageBoxImage.Information);
+                                this.Close();
                             }
                         }
 
@@ -129,5 +158,7 @@ namespace WareMaster
                 this.DragMove();
             }
         }
+
+        
     }
 }
