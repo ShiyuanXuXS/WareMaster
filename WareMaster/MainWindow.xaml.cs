@@ -61,7 +61,9 @@ namespace WareMaster
         public MainWindow()
         {
             InitializeComponent();
+            SwitchLanguage("En");
             initMainWindow();
+            Cmbxlanguage.SelectedIndex=0;
         }
 
         private void initMainWindow()
@@ -80,7 +82,7 @@ namespace WareMaster
             dbContext = Globals.DbContext;
             InitializeLvInit();
             AddPagingButton();
-            TblWelcome.Text = "Welcome: "+Globals.Username;
+            TblWelcome.Text = TblWelcome.Text + " "+Globals.Username;
         }
 
         private void AddPagingButton()
@@ -170,7 +172,7 @@ namespace WareMaster
                 filterItems = allItems;
                 DisplayPage(currentPage);
                 //TxblItemCount.Text = "Total " + query.Count().ToString() + " Items";
-                TxblItemCount.Text = "Total " + allItems.Count().ToString() + " Items";
+                TxblItemCount.Text = (string)this.FindResource("totalItems")  + " "+ allItems.Count().ToString();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -477,7 +479,7 @@ namespace WareMaster
             BtnManagerUser.IsEnabled = false;
             txtFilter.IsEnabled = false;
             DgStorage.IsEnabled = false;
-            TblWelcome.Text = "Welcome:";
+            TblWelcome.Text = (string)this.FindResource("Welcome");
             Globals.Username = "";
             filterItems.Clear();
 
@@ -534,6 +536,32 @@ namespace WareMaster
                 Console.WriteLine(ex.Message);
             }
             
+        }
+
+        private void Cmbxlanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string lang = (String)((ComboBoxItem)Cmbxlanguage.SelectedItem).Tag;
+            SwitchLanguage(lang);
+            TxblItemCount.Text = (string)this.FindResource("totalItems")  + " "+ allItems.Count().ToString();
+            TblWelcome.Text = (string)this.FindResource("Welcome") +" "+Globals.Username;
+        }
+
+        private void SwitchLanguage(string lang)
+        {
+            ResourceDictionary dict = new ResourceDictionary();
+            switch (lang)
+            {
+                case "En":
+                    dict.Source = new Uri("..\\StringResource.en.xaml", UriKind.Relative);
+                    break;
+                case "Fr":
+                    dict.Source = new Uri("..\\StringResource.fr.xaml", UriKind.Relative);
+                    break;
+                default:
+                    dict.Source = new Uri("..\\StringResource.en.xaml", UriKind.Relative);
+                    break;
+            }
+            this.Resources.MergedDictionaries.Add(dict);
         }
     }
 

@@ -12,14 +12,11 @@ namespace WareMaster
             try
             {
                 string logPath = ConfigurationManager.AppSettings["logPath"];
-                
                 string logfile = Path.Combine(logPath, "log.txt"); // Combine with file name
-
                 if (!Directory.Exists(logPath))
                 {
                     Directory.CreateDirectory(logPath);
                 }
-
                 if (!File.Exists(logfile))
                 {
                     File.WriteAllText(logfile, $"{DateTime.Now} : {message}{Environment.NewLine}");
@@ -32,7 +29,6 @@ namespace WareMaster
             {
                 Console.WriteLine(ex.ToString());
             }
-            
         }
     }
 }
