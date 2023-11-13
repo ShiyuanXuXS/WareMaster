@@ -236,9 +236,10 @@ Shiyuan
 - N/A
 Xiaoxing
 1.  Done / not done since last scrum:
-- 
+- Add/Edit Ui
+- analyse page
 2. To do until next Scrum:
-- 
+- test and debug
 3. Need assistance / figure things out
 -
 
