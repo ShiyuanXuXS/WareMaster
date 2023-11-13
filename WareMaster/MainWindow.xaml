@@ -27,21 +27,21 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Menu x:Name="MainMenu" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#eff2f7" Foreground="#121518">
-                    <MenuItem Header="Items" Height="25" Width="100" FontSize="16">
-                        <MenuItem Header="New" Click="MenuItemNewItem_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                        <MenuItem Header="Update" Click="MenuItemUpdateItem_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                    <MenuItem Header="{DynamicResource menu-Items}" Height="25" Width="100" FontSize="16">
+                        <MenuItem Header="{DynamicResource menu-New}" Click="MenuItemNewItem_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                        <MenuItem Header="{DynamicResource menu-Update}" Click="MenuItemUpdateItem_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
                     </MenuItem>
 
-                    <MenuItem Header="Inventory" Height="25" Width="100" FontSize="16">
-                        <MenuItem Header="Initialize" Click="MenuItemInventoryInit_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                        <MenuItem Header="Inbound" Click="MenuItemInventoryInbound_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                        <MenuItem Header="Outbound" Click="MenuItemInventoryOutbound_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
-                        <MenuItem Header="Settle" Click="MenuItemInventorySettle_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                    <MenuItem Header="{DynamicResource menu-Inventory}" Height="25" Width="100" FontSize="16">
+                        <MenuItem Header="{DynamicResource menu-Initialize}" Click="MenuItemInventoryInit_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                        <MenuItem Header="{DynamicResource menu-Inbound}" Click="MenuItemInventoryInbound_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                        <MenuItem Header="{DynamicResource menu-Outbound}" Click="MenuItemInventoryOutbound_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
+                        <MenuItem Header="{DynamicResource menu-Settle}" Click="MenuItemInventorySettle_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
                     </MenuItem>
-                    <MenuItem Header="Query" Height="25" Width="100" FontSize="16" Click="MenuItemQuery_Click"/>
-                    <MenuItem Header="Analyse" Click="MenuItemAnalyse_Click" Height="25" Width="100" FontSize="16"/>
-                    <MenuItem Header="Users" Click="MenuItemUsers_Click" Height="25" Width="100" FontSize="16"/>
-                    <MenuItem Name="Exit" InputGestureText="Ctrl+X" Click="Exit_Click" Header="Exit" Height="25" Width="100" FontSize="16"/>
+                    <MenuItem Header="{DynamicResource menu-Query}" Height="25" Width="100" FontSize="16" Click="MenuItemQuery_Click"/>
+                    <MenuItem Header="{DynamicResource menu-Analyse}" Click="MenuItemAnalyse_Click" Height="25" Width="100" FontSize="16"/>
+                    <MenuItem Header="{DynamicResource menu-Users}" Click="MenuItemUsers_Click" Height="25" Width="100" FontSize="16"/>
+                    <MenuItem Header="{DynamicResource menu-Exit}" Name="Exit" InputGestureText="Ctrl+X" Click="Exit_Click" Height="25" Width="100" FontSize="16"/>
                 </Menu>
                 <Button Name="BtnClose" Grid.Column="1" Panel.ZIndex="1" Click="BtnClose_Click"  Style="{StaticResource topButton}" 
                         Margin="0 13 13 0" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right">
@@ -88,7 +88,7 @@
                             <!--Menu Titles-->
                             <TextBlock Text="WareMaster" Foreground="White" FontSize="22" FontWeight="SemiBold"
                                         DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
-                            <TextBlock x:Name="TblWelcome" Text="Welcome" Foreground="#d0bfff" FontSize="14" FontWeight="SemiBold"
+                            <TextBlock x:Name="TblWelcome" Text="{DynamicResource Welcome}" Foreground="#d0bfff" FontSize="14" FontWeight="SemiBold"
                                         DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
 
                             <!--Menu Seprator-->
@@ -99,25 +99,25 @@
                                 <Button Name="BtnManageItem" Click="BtnManageItem_Click" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <Icon:PackIconMaterial Kind="Tools"  Style="{StaticResource menuButtonIcon}"/>
-                                        <TextBlock Text="Manage Items"></TextBlock>
+                                        <TextBlock Text="{DynamicResource ManageItems}"></TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button x:Name="BtnManageInventory" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <Icon:PackIconMaterial Kind="SwapVerticalBold" Style="{StaticResource menuButtonIcon}"/>
-                                        <TextBlock Text="Manage Inventory"></TextBlock>
+                                        <TextBlock Text="{DynamicResource ManageInventorys}"></TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button x:Name="BtnManagerUser" Style="{StaticResource menuButton}" Click="BtnManageUser_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Icon:PackIconMaterial Kind="AccountBox" Style="{StaticResource menuButtonIcon}"/>
-                                        <TextBlock Text="Manager Users"></TextBlock>
+                                        <TextBlock Text="{DynamicResource ManageUsers}"></TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button x:Name="BtnManageCategory" Style="{StaticResource menuButton}" Click="BtnManageCategory_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Icon:PackIconMaterial Kind="ShapePlus"  Style="{StaticResource menuButtonIcon}"/>
-                                        <TextBlock Text="Manager Categories"></TextBlock>
+                                        <TextBlock Text="{DynamicResource ManageCategories}"></TextBlock>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
@@ -125,13 +125,13 @@
                                 <Button x:Name="BtnLogout" Click="BtnLogout_Click" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
                                     <StackPanel Orientation="Horizontal">
                                         <Icon:PackIconMaterial Kind="Logout"  Style="{StaticResource menuButtonIcon}"/>
-                                        <TextBlock Text="Logout"></TextBlock>
+                                        <TextBlock Text="{DynamicResource Logout}"></TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button x:Name="BtnLogin" Visibility="Hidden" Click="BtnLogin_Click"  Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
                                     <StackPanel Orientation="Horizontal">
                                         <Icon:PackIconMaterial Kind="Logout"  Style="{StaticResource menuButtonIcon}"/>
-                                        <TextBlock Text="Login"></TextBlock>
+                                        <TextBlock Text="{DynamicResource Login}"></TextBlock>
                                     </StackPanel>
                                 </Button>
                             </Grid>
@@ -149,15 +149,6 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <!--Search Textbox-->
-                    <!--<Grid Width="300" HorizontalAlignment="Left" Margin="0,0,0,63" >
-                        <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                           Panel.ZIndex="1" Text="Search here..." 
-                           Visibility="{Binding ElementName=txtSearch,Path=Text,Converter={StaticResource BoolToVis}}"/>
-                        <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}"/>
-                        <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                                       Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-                    </Grid>-->
 
                     <!--Top Buttons-->
                     <Grid HorizontalAlignment="Right">
@@ -167,14 +158,18 @@
                         </Grid.ColumnDefinitions>
 
                         <Button ToolTip="Reset Password" Name="BtnResetPwd" Click="BtnResetPwd_Click" Grid.Column="0" Style="{StaticResource topButton}" Background="#dcdcdc" Width="30">
-                            <Icon:PackIconMaterial Kind="LockReset" Width="25" Height="25"/>
+                            <Icon:PackIconMaterial Kind="LockReset" Width="22" Height="22"/>
                         </Button>
-                        <Button Grid.Column="1" Style="{StaticResource topButton}">
+                        <!--<Button Grid.Column="1" Style="{StaticResource topButton}">
                             <Icon:PackIconMaterial Kind="Bell"/>
-                        </Button>
+                        </Button>-->
+                        <ComboBox Name="Cmbxlanguage" SelectionChanged="Cmbxlanguage_SelectionChanged" Margin="35 0 0 0">
+                            <ComboBoxItem Tag="En" Name="CmbxItemEN" Content="En"/>
+                            <ComboBoxItem Tag="Fr" Name="CmbxItemFr" Content="Fr"/>
+                        </ComboBox>
                     </Grid>
                     <!--Page Title-->
-                    <TextBlock Text="Current Storage" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0,0,0,10"
+                    <TextBlock Text="{DynamicResource current-storage}" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0,0,0,10"
                        HorizontalAlignment="Left" Foreground="#121518" Width="274"/>
                     <!--Add Button-->
                     <!--<Button x:Name="BtnBackup" Click="BtnBackup_Click" Style="{StaticResource addButton}" Background="#FF4158D9" Margin="0,24,0,4" Grid.Row="1">
@@ -193,11 +188,11 @@
                 <Button Content="Players" Style="{StaticResource tabButton}"/>
                 <Button Content="Archived" Style="{StaticResource tabButton}"/>
             </StackPanel>-->
-
+                    
                     <!--Counter Title-->
-                    <TextBlock Grid.Row="3"  Name="TxblItemCount" Text="68 Items" FontSize="18" FontWeight="SemiBold"
+                    <TextBlock Grid.Row="3"  Name="TxblItemCount" Text="{DynamicResource totalItems}" FontSize="18" FontWeight="SemiBold"
                        Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="170"/>
-                    <TextBlock Grid.Row="3"  Text="Filter by Name" FontSize="13" FontWeight="SemiBold" Margin="519,0,0,0"
+                    <TextBlock Grid.Row="3"  Text="{DynamicResource filter-by-name}" FontSize="13" FontWeight="SemiBold" Margin="519,0,0,0"
                         Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center" Height="18" Width="96"/>
 
                     <!--Filter Textbox-->
