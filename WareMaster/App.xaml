@@ -166,7 +166,8 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-<!--#region slider-->
+        
+        <!--#region slider-->
         <Style x:Key="RepeatButtonTransparent" TargetType="{x:Type RepeatButton}">
             <Setter Property="OverridesDefaultStyle" Value="true"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -193,9 +194,9 @@
         <SolidColorBrush x:Key="SliderThumb.Track.Border" Color="#FFD6D6D6"/>
         <ControlTemplate x:Key="SliderThumbHorizontalDefault" TargetType="{x:Type Thumb}">
             <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
-                <Ellipse Fill="#7d5cd6" Width="30" Height="30" StrokeThickness="20">
+                <Ellipse Fill="#fa5454" Width="30" Height="30" StrokeThickness="20">
                     <Ellipse.Stroke>
-                        <SolidColorBrush Color="#7d5cd6" Opacity="0.1" />
+                        <SolidColorBrush Color="#fa5454" Opacity="0.1" />
                     </Ellipse.Stroke></Ellipse>
             </Grid>
              
@@ -252,9 +253,11 @@
                         <Border x:Name="PART_SelectionRange" CornerRadius="3 0 0 3" HorizontalAlignment="Left" Height="6">
                             <Border.Background>
                                 <LinearGradientBrush>
-                                    <GradientStop Color="#fea15c" Offset="0" /><GradientStop Color="#f95355" Offset="1" />
-                                </LinearGradientBrush></Border.Background></Border>
-                            
+                                    <GradientStop Color="#fea15c" Offset="0" />
+                                    <GradientStop Color="#f95355" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
                     </Border>
                     <Track x:Name="PART_Track" Grid.Row="1">
                         <Track.DecreaseRepeatButton>
@@ -300,9 +303,9 @@
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="Foreground" Value="{StaticResource SliderThumb.Static.Foreground}"/>
             <Setter Property="Template" Value="{StaticResource SliderHorizontal}"/>
-             
         </Style>
         <!--endRegion-->
+        
         <Style x:Key="textboxFilter" TargetType="TextBox" BasedOn="{StaticResource textboxSearch}">
             <Setter Property="Padding" Value="10 7"/>
             <Setter Property="Template">

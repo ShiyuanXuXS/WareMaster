@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
@@ -29,10 +31,11 @@ namespace WareMaster
         {
             InitializeComponent();
             InitailizeInventoryChart();
-            CategoryItems = new ObservableCollection<CategoryItem>();
             InitializeCategoryPie();
+           
 
         }
+
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -143,10 +146,24 @@ namespace WareMaster
                         };
 
             var categoryItems = query.ToList();
-            CategoryItems = new ObservableCollection<CategoryItem>(categoryItems);
+            PieSeriesCollection = new SeriesCollection(); 
+
+            foreach (var categoryItem in categoryItems)
+            {
+                PieSeriesCollection.Add(new PieSeries
+                {
+                    Title = categoryItem.CategoryName,
+                    Values = new ChartValues<double> { categoryItem.TotalItems },
+                    DataLabels = true
+                });
+            }
+
+            DataContext = this;
+           
         }
 
-        public ObservableCollection<CategoryItem> CategoryItems { get; set; }
+        public SeriesCollection PieSeriesCollection { get; set; }
+
     }
-   
+
 }

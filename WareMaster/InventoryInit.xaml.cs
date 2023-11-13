@@ -89,7 +89,8 @@ namespace WareMaster
             try
             {
                 var query = from item in Globals.wareMasterEntities.Items
-                            join settlement in Globals.wareMasterEntities.Settlements on item.id equals settlement.Item_Id into gj
+                            join settlement in Globals.wareMasterEntities.Settlements 
+                            on item.id equals settlement.Item_Id into gj
                             from sub in gj.DefaultIfEmpty()
                             where sub == null || sub.Settle_Date == DatePickerInit.SelectedDate
                             select new
@@ -104,7 +105,6 @@ namespace WareMaster
                                 Total = sub != null ? sub.Total : 0,
                                 SettleDate = DatePickerInit.SelectedDate,
                                 SettlementId = sub != null ? sub.id : -1
-
 
                             };
                 LvInit.ItemsSource = query.ToList();
@@ -218,7 +218,7 @@ namespace WareMaster
 
 
                     printDialog.PrintDocument(paginator.DocumentPaginator, "ListView Printing");
-                    MessageBox.Show("Print successfully.",
+                    MessageBox.Show("Print finished.",
                     "Information",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
