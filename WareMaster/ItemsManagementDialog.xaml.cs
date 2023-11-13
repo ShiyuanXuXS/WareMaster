@@ -360,7 +360,6 @@ namespace WareMaster
                 else
                 {
                     this.WindowState = WindowState.Maximized;
-                    //GridContent.Height = 920;
                     IsMaximized = true;
                 }
             }
