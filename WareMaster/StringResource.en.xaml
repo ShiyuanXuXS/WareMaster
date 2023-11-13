@@ -15,7 +15,8 @@
     <system:String x:Key="menu-Outbound">Outbound</system:String>
     <system:String x:Key="menu-Settle">Settle</system:String>
     <system:String x:Key="ManageItems">Manage Items</system:String>
-    <system:String x:Key="ManageInventorys">Manage Inventorys</system:String>
+    <system:String x:Key="ManageInbound">Inventory Inbound</system:String>
+    <system:String x:Key="ManageOutbound">Inventory Outbound</system:String>
     <system:String x:Key="ManageUsers">Manage Users</system:String>
     <system:String x:Key="ManageCategories">Manage Categories</system:String>
     <system:String x:Key="Logout">Logout</system:String>

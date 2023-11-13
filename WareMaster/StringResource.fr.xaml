@@ -15,7 +15,8 @@
     <system:String x:Key="menu-Outbound">Sortante</system:String>
     <system:String x:Key="menu-Settle">Régler</system:String>
     <system:String x:Key="ManageItems">Gérer les articles</system:String>
-    <system:String x:Key="ManageInventorys">Gérer les stocks</system:String>
+    <system:String x:Key="ManageInbound">Gérer les appels entrants</system:String>
+    <system:String x:Key="ManageOutbound">Gérer les sorties</system:String>
     <system:String x:Key="ManageUsers">Gérer les utilisateurs</system:String>
     <system:String x:Key="ManageCategories">Gérer les catégories</system:String>
     <system:String x:Key="Logout">Se déconnecter</system:String>

@@ -19,7 +19,7 @@
         <KeyBinding Key="X" Modifiers="Ctrl" Command="{Binding ExitCommand}"/>
     </Window.InputBindings>
 
-    <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+    <Border Background="#eff2f7" CornerRadius="0" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -28,6 +28,7 @@
             <Grid Grid.Row="0">
                 <Menu x:Name="MainMenu" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#eff2f7" Foreground="#121518">
                     <MenuItem Header="{DynamicResource menu-Items}" Height="25" Width="100" FontSize="16">
+                        <MenuItem Header="{DynamicResource ManageItems}" Click="MenuManageItem_Click"  HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
                         <MenuItem Header="{DynamicResource menu-New}" Click="MenuItemNewItem_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
                         <MenuItem Header="{DynamicResource menu-Update}" Click="MenuItemUpdateItem_Click" HorizontalAlignment="Left" Height="25" Width="180" FontSize="13"/>
                     </MenuItem>
@@ -58,23 +59,17 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
-                        <!--<RowDefinition Height="100"/>-->
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <!--Menu Icon-->
-                    <!--<Button Margin="20,28,0,35" Style="{StaticResource topButton}">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Image Source="Images/favicon.ico" Width="16" Height="16" Margin="0,0,5,0" />
-                        </StackPanel>
-                        <Icon:PackIconMaterial Kind="Menu"/>
-                    </Button>-->
 
                     <Button Visibility="Hidden" Content="Button" HorizontalAlignment="Left" Height="34" Margin="78,26,0,0" VerticalAlignment="Top" Width="93" Click="Button_Click"/>
+                    
 
 
 
-                    <Border Grid.Row="1" Background="#FF3E47D0" CornerRadius="0 50 0 30">
+                    <Border Grid.Row="1" Background="#FF3E47D0" CornerRadius="0 60 60 0">
                         <DockPanel>
                             <Border Width="60" Height="60" Padding="3" Background="White" CornerRadius="100"
                                     DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
@@ -85,9 +80,9 @@
                                 </Ellipse>
                             </Border>
 
+                            <TextBlock Text="WareMaster" Foreground="#d0bfff" FontSize="22" FontWeight="SemiBold"
+                                    DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
                             <!--Menu Titles-->
-                            <TextBlock Text="WareMaster" Foreground="White" FontSize="22" FontWeight="SemiBold"
-                                        DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
                             <TextBlock x:Name="TblWelcome" Text="{DynamicResource Welcome}" Foreground="#d0bfff" FontSize="14" FontWeight="SemiBold"
                                         DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
 
@@ -102,10 +97,16 @@
                                         <TextBlock Text="{DynamicResource ManageItems}"></TextBlock>
                                     </StackPanel>
                                 </Button>
-                                <Button x:Name="BtnManageInventory" Style="{StaticResource menuButton}">
+                                <Button x:Name="BtnInbound" Click="BtnInboud_Click" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <Icon:PackIconMaterial Kind="SwapVerticalBold" Style="{StaticResource menuButtonIcon}"/>
-                                        <TextBlock Text="{DynamicResource ManageInventorys}"></TextBlock>
+                                        <TextBlock Text="{DynamicResource ManageInbound}"></TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button x:Name="BtnOutbound" Click="BtnOutboud_Click" Style="{StaticResource menuButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Icon:PackIconMaterial Kind="SwapVerticalBold" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock Text="{DynamicResource ManageOutbound}"></TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button x:Name="BtnManagerUser" Style="{StaticResource menuButton}" Click="BtnManageUser_Click">
@@ -121,22 +122,23 @@
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
-                            <Grid>
-                                <Button x:Name="BtnLogout" Click="BtnLogout_Click" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="Logout"  Style="{StaticResource menuButtonIcon}"/>
-                                        <TextBlock Text="{DynamicResource Logout}"></TextBlock>
-                                    </StackPanel>
-                                </Button>
-                                <Button x:Name="BtnLogin" Visibility="Hidden" Click="BtnLogin_Click"  Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="Logout"  Style="{StaticResource menuButtonIcon}"/>
-                                        <TextBlock Text="{DynamicResource Login}"></TextBlock>
-                                    </StackPanel>
-                                </Button>
-                            </Grid>
+                            
                         </DockPanel>
                     </Border>
+                    <Grid Grid.Row="2">
+                        <Button x:Name="BtnLogout" Click="BtnLogout_Click" Style="{StaticResource logButton}" VerticalAlignment="Bottom" Margin="15 0 15 20">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="Logout"  Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="{DynamicResource Logout}"></TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="BtnLogin" Visibility="Hidden" Click="BtnLogin_Click"  Style="{StaticResource logButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="Logout"  Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="{DynamicResource Login}"></TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
                 </Grid>
 
                 <!--Main Section-->

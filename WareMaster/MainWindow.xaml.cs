@@ -287,6 +287,17 @@ namespace WareMaster
             catch (Exception ex) { MessageBox.Show(ex.Message); };
         }
 
+        private void MenuManageItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ItemsManagementDialog itemDialog = new ItemsManagementDialog();
+                itemDialog.Owner = this;
+                itemDialog.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+
         private void MenuItemNewItem_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -474,7 +485,8 @@ namespace WareMaster
             BtnLogout.Visibility = Visibility.Hidden;
             MainMenu.IsEnabled = false;
             BtnManageCategory.IsEnabled = false;
-            BtnManageInventory.IsEnabled = false;
+            BtnInbound.IsEnabled = false;
+            BtnOutbound.IsEnabled = false;
             BtnManageItem.IsEnabled = false;
             BtnManagerUser.IsEnabled = false;
             txtFilter.IsEnabled = false;
@@ -495,7 +507,8 @@ namespace WareMaster
             BtnLogout.Visibility = Visibility.Visible;
             MainMenu.IsEnabled = true;
             BtnManageCategory.IsEnabled = true;
-            BtnManageInventory.IsEnabled = true;
+            BtnInbound.IsEnabled = true;
+            BtnOutbound.IsEnabled = true;
             BtnManageItem.IsEnabled = true;
             BtnManagerUser.IsEnabled = true;
             txtFilter.IsEnabled = true;
@@ -563,6 +576,37 @@ namespace WareMaster
             }
             this.Resources.MergedDictionaries.Add(dict);
         }
+
+        private void BtnInboud_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InventoryChange inventoryInbound = new InventoryChange("Inbound");
+                inventoryInbound.Owner = this;
+                //inventoryInbound.Left = this.Left + (this.Width - inventoryInbound.Width) / 2;
+                //inventoryInbound.Top = this.Top + (this.Height - inventoryInbound.Height) / 2;
+                inventoryInbound.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+
+        private void BtnOutboud_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InventoryChange inventoryOutbound = new InventoryChange("Outbound");
+                inventoryOutbound.Owner = this;
+                //inventoryOutbound.Left = this.Left + (this.Width - inventoryOutbound.Width) / 2;
+                //inventoryOutbound.Top = this.Top + (this.Height - inventoryOutbound.Height) / 2;
+                inventoryOutbound.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+        }
+
+        //private void MenuItem_Click(object sender, RoutedEventArgs e)
+        //{
+
+        //}
     }
 
 
