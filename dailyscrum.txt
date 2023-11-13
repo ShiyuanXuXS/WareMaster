@@ -223,5 +223,30 @@ Jing
 3. Need assistance / figure things out
 - NA
 
+2023-11-12
 
+Shiyuan
+1.  Done / not done since last scrum:
+- Delete old data
+- Update interfaces
+- Debug
+2. To do until next Scrum:
+- Unit tests
+3. Need assistance / figure things out
+- N/A
+Xiaoxing
+1.  Done / not done since last scrum:
+- 
+2. To do until next Scrum:
+- 
+3. Need assistance / figure things out
+-
+
+Jing
+1. Done since last scrum
+
+2. Plan until next Scrum
+-
+3. Need assistance / figure things out
+- NA
 
