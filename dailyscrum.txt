@@ -246,9 +246,10 @@ Xiaoxing
 
 Jing
 1. Done since last scrum
-
+- add reset password window
 2. Plan until next Scrum
--
+- add logging
+- add localazaion
 3. Need assistance / figure things out
 - NA
 
