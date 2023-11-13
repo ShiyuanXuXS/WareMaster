@@ -8,7 +8,7 @@
         Title="AddEditCategoryDialog" Height="400" Width="600" WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent">
 
-    <Border Background="#ffffff" Padding="20" CornerRadius="30" MouseDown="Border_MouseDown">
+    <Border Background="#ccffff" Padding="20" CornerRadius="30" MouseDown="Border_MouseDown">
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 10 0 0">
             <Grid>
                 <Grid.ColumnDefinitions>

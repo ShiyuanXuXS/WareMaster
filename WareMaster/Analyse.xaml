@@ -161,6 +161,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                
                 <Border Margin="10 0"  Grid.Column="0" Style="{StaticResource whiteBorder}">
                     <StackPanel>
                         <StackPanel>
@@ -170,10 +171,10 @@
                             </StackPanel>
                             <TextBlock Text="Compare To ( 200 Last Month)" Style="{StaticResource secondaryText}" />
                         </StackPanel>
-                        <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider" Margin="0 5 0 0" IsSelectionRangeEnabled="True" Value="130" SelectionEnd="200"/>
+                        <Slider  x:Name="slider" Style="{DynamicResource SliderStyle1}" Margin="0 5 0 0" IsSelectionRangeEnabled="True" Value="130"  SelectionEnd="{Binding ElementName=slider, Path=Value}" Maximum="200"/>
                     </StackPanel>
-
                 </Border>
+                
                 <Border Margin="10 0"  Grid.Column="1" Style="{StaticResource whiteBorder}">
                     <StackPanel>
                         <StackPanel>
@@ -183,7 +184,7 @@
                             </StackPanel>
                             <TextBlock Text="Compare To ( 350 Last Month)" Style="{StaticResource secondaryText}" />
                         </StackPanel>
-                        <Slider Style="{DynamicResource SliderStyle1}" x:Name="sliderInbounce" Margin="0 5 0 0" IsSelectionRangeEnabled="True" Value="268" SelectionEnd="350"/>
+                        <Slider Style="{DynamicResource SliderStyle1}" x:Name="sliderInbounce" Margin="0 5 0 0"  IsSelectionRangeEnabled="True" Value="268" SelectionEnd="{Binding ElementName=sliderInbounce, Path=Value}" Maximum="350"/>
                     </StackPanel>
 
                 </Border>
@@ -196,7 +197,7 @@
                             </StackPanel>
                             <TextBlock Text="Compare To ( 220 Last Month)" Style="{StaticResource secondaryText}" />
                         </StackPanel>
-                        <Slider Style="{DynamicResource SliderStyle1}" x:Name="sliderOutbounce" Margin="0 5 0 0" IsSelectionRangeEnabled="True" Value="180" SelectionEnd="220"/>
+                        <Slider Style="{DynamicResource SliderStyle1}" x:Name="sliderOutbounce" Margin="0 5 0 0" IsSelectionRangeEnabled="True" Value="180" SelectionEnd="{Binding ElementName=sliderOutbounce, Path=Value}" Maximum="220"/>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -271,17 +272,24 @@
                         <!--Title-->
                         <TextBlock Text="Category" Style="{StaticResource titleTextA}" />
                         <!--chart-->
-                        <lvc:PieChart LegendLocation="Bottom" Hoverable="True" Grid.Row="1" Margin="5 60 0 10">
-                            <lvc:PieChart.Series>
-                                <lvc:PieSeries Title="Textile" Values="5"/>
-                                <lvc:PieSeries Title="Appliance" Values="6"/>
-                                <lvc:PieSeries Title="Furniture" Values="5"/>
-                                <lvc:PieSeries Title="Sports Outdoor" Values="4"/>
-                                <lvc:PieSeries Title="Food Beverage" Values="4"/>
-                            </lvc:PieChart.Series>
+                        <lvc:PieChart LegendLocation="Bottom" Hoverable="True" Grid.Row="1" Margin="5 60 0 10" Series="{Binding PieSeriesCollection}">
+                            <lvc:PieChart.ChartLegend>
+    <lvc:DefaultLegend BulletSize="15" TextBlock.FontSize="8"></lvc:DefaultLegend>
+</lvc:PieChart.ChartLegend>
+<lvc:PieChart.DataTooltip>
+    <lvc:DefaultTooltip BulletSize="20">
+    </lvc:DefaultTooltip>
+</lvc:PieChart.DataTooltip>
                         </lvc:PieChart>
                     </Grid>
                 </Border>
+                <!--<lvc:PieChart.Series>
+    <lvc:PieSeries Title="Textile" Values="5"/>
+    <lvc:PieSeries Title="Appliance" Values="6"/>
+    <lvc:PieSeries Title="Furniture" Values="5"/>
+    <lvc:PieSeries Title="Sports Outdoor" Values="4"/>
+    <lvc:PieSeries Title="Food Beverage" Values="4"/>
+</lvc:PieChart.Series>-->
 
             </Grid>
 
