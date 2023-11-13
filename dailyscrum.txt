@@ -217,9 +217,10 @@ Xiaoxing
 
 Jing
 1. Done since last scrum
-
+- fix bugs in mainwindow and login window
+- find solution of installation or backup database.
 2. Plan until next Scrum
--
+- add reset password window
 3. Need assistance / figure things out
 - NA
 
