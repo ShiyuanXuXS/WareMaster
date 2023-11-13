@@ -123,7 +123,8 @@ namespace WareMaster
                 .Select(s => s.Settle_Date)
                 .DefaultIfEmpty(DateTime.MinValue)
                 .Max();
-            if ( dpSettleDate.SelectedDate <= lastSettleDate)
+            DateTime settleDate = (DateTime)dpSettleDate.SelectedDate;
+            if (settleDate <= lastSettleDate)
             {
                 MessageBox.Show("Cannot settle on or before the last settlement date.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Mouse.OverrideCursor = null; 
@@ -134,61 +135,75 @@ namespace WareMaster
                 Mouse.OverrideCursor = null; 
                 return;
             }
-            
-            foreach (var item in Globals.wareMasterEntities.Items)
+
+            //foreach (var item in Globals.wareMasterEntities.Items)
+            //{
+            //// find last settlement of the item
+            //Settlement lastSettlement = Globals.wareMasterEntities.Settlements
+            //    .Where(s => s.Item_Id == item.id)
+            //    .OrderByDescending(s => s.Settle_Date)
+            //    .FirstOrDefault();
+
+            //if (lastSettlement != null)
+            //{
+            //    // get sum of transactions
+            //    List<Transaction> transactionsAfterLastSettle = Globals.wareMasterEntities.Transactions
+            //        .Where(t => t.Item_Id == item.id && t.Transaction_Date > lastSettlement.Settle_Date)
+            //        .ToList();
+
+            //    int totalQuantity = transactionsAfterLastSettle.Sum(transaction => transaction.Quantity);
+            //    decimal totalTotal = transactionsAfterLastSettle.Sum(transaction => transaction.Total);
+
+
+            //    // new settlement
+            //    Settlement newSettlement = new Settlement
+            //    {
+            //        Item_Id = item.id,
+            //        Settle_Date = dpSettleDate.SelectedDate.Value,
+            //        Quantity = lastSettlement.Quantity + totalQuantity,
+            //        Total = lastSettlement.Total + totalTotal
+            //    };
+            //    Globals.wareMasterEntities.Settlements.Add(newSettlement);
+            //}
+            //else
+            //{
+            //    //get sum of transactions
+            //    List<Transaction> transactionsAfterLastSettle = Globals.wareMasterEntities.Transactions
+            //        .Where(t => t.Item_Id == item.id )
+            //        .ToList();
+
+            //    int totalQuantity = transactionsAfterLastSettle.Sum(transaction => transaction.Quantity);
+            //    decimal totalTotal = transactionsAfterLastSettle.Sum(transaction => transaction.Total);
+            //    // new settlement
+            //    Settlement newSettlement = new Settlement
+            //    {
+            //        Item_Id = item.id,
+            //        Settle_Date = dpSettleDate.SelectedDate.Value,
+            //        Quantity = totalQuantity, 
+            //        Total = totalTotal 
+            //    };
+            //    Globals.wareMasterEntities.Settlements.Add(newSettlement);
+            //}
+
+            //}
+            //add settlements
+            List<InventoryData> inventorys = Inventory.GetAllInventoriesByItem(settleDate);
+            foreach (InventoryData inventory in inventorys)
             {
-                // find last settlement of the item
-                Settlement lastSettlement = Globals.wareMasterEntities.Settlements
-                    .Where(s => s.Item_Id == item.id)
-                    .OrderByDescending(s => s.Settle_Date)
-                    .FirstOrDefault();
-
-                if (lastSettlement != null)
+                Settlement newSettlement = new Settlement
                 {
-                    // get sum of transactions
-                    List<Transaction> transactionsAfterLastSettle = Globals.wareMasterEntities.Transactions
-                        .Where(t => t.Item_Id == item.id && t.Transaction_Date > lastSettlement.Settle_Date)
-                        .ToList();
-
-                    int totalQuantity = transactionsAfterLastSettle.Sum(transaction => transaction.Quantity);
-                    decimal totalTotal = transactionsAfterLastSettle.Sum(transaction => transaction.Total);
-
-
-                    // new settlement
-                    Settlement newSettlement = new Settlement
-                    {
-                        Item_Id = item.id,
-                        Settle_Date = dpSettleDate.SelectedDate.Value,
-                        Quantity = lastSettlement.Quantity + totalQuantity,
-                        Total = lastSettlement.Total + totalTotal
-                    };
-                    Globals.wareMasterEntities.Settlements.Add(newSettlement);
-                }
-                else
-                {
-                    //get sum of transactions
-                    List<Transaction> transactionsAfterLastSettle = Globals.wareMasterEntities.Transactions
-                        .Where(t => t.Item_Id == item.id )
-                        .ToList();
-
-                    int totalQuantity = transactionsAfterLastSettle.Sum(transaction => transaction.Quantity);
-                    decimal totalTotal = transactionsAfterLastSettle.Sum(transaction => transaction.Total);
-                    // new settlement
-                    Settlement newSettlement = new Settlement
-                    {
-                        Item_Id = item.id,
-                        Settle_Date = dpSettleDate.SelectedDate.Value,
-                        Quantity = totalQuantity, 
-                        Total = totalTotal 
-                    };
-                    Globals.wareMasterEntities.Settlements.Add(newSettlement);
-                }
+                    Item_Id = inventory.id,
+                    Settle_Date = settleDate,
+                    Quantity = inventory.Quantity,
+                    Total = inventory.Total,
+                };
+                Globals.wareMasterEntities.Settlements.Add(newSettlement);
             }
-
             // save changes
             try
             {
                 Globals.wareMasterEntities.SaveChanges();
+
                 if (int.TryParse(txtNumber.Text, out int numOfRecords) && numOfRecords > 0)
                 {
                     ShowSettletDates(numOfRecords);

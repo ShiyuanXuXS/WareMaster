@@ -53,7 +53,7 @@
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,0,0" Grid.ColumnSpan="2">
 					<Label Content="Initialize date" Margin="20,0,0,0"/>
 					<DatePicker Name="DatePickerInit" Width="200" Margin="20,0,0,0"/>
-					<Button Content="Initialize" Style="{StaticResource addButton}" Click="InitializeButton_Click" Width="90" Height="30" Margin="20,0,0,0"/>
+                        <Button Content="Initialize" Style="{StaticResource addButton}" Background="#bf3030" Click="InitializeButton_Click" Width="90" Height="30" Margin="20,0,0,0"/>
 				</StackPanel>
 			</StackPanel>
 
